@@ -222,11 +222,8 @@ tr:last-child td { border-bottom: none; }
 .legal-content h2 { color: var(--cyan); margin-top: 40px; font-size: 1.3rem; }
 .legal-content h2:first-child { margin-top: 0; }
 .fill-in {
-  color: #f59e0b;
-  font-weight: 600;
-  background: rgba(245, 158, 11, 0.1);
-  padding: 2px 6px;
-  border-radius: 4px;
+  color: var(--text-muted);
+  font-style: italic;
 }
 
 .site-footer { margin-top: auto; border-top: 1px solid var(--card-border); padding: 32px 0; }
