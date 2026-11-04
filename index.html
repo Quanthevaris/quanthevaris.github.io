@@ -3,36 +3,90 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quanthevaris — Guides pédagogiques gratuits</title>
-<meta name="description" content="Quanthevaris propose des guides pédagogiques gratuits, sans publicité ni collecte de données, pour apprendre à créer des jeux vidéo simples.">
-<link rel="stylesheet" href="css/style.css">
+<title>Quanthevaris — Guides gratuits pour coder des jeux vidéo</title>
+<meta name="description" content="Des guides pédagogiques gratuits, sans publicité ni collecte de données, pour apprendre à créer des jeux vidéo simples en Python, pas à pas et dès zéro.">
+<link rel="canonical" href="https://quanthevaris.github.io/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Quanthevaris">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Quanthevaris — Guides gratuits pour coder des jeux vidéo">
+<meta property="og:description" content="Pas de publicité, pas de compte, pas de collecte de données. Juste des guides pédagogiques gratuits pour apprendre à coder des jeux vidéo.">
+<meta property="og:url" content="https://quanthevaris.github.io/">
+<meta property="og:image" content="https://quanthevaris.github.io/assets/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Quanthevaris — apprends à coder ton premier jeu vidéo, guide gratuit de 25 pages.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Quanthevaris — Guides gratuits pour coder des jeux vidéo">
+<meta name="twitter:description" content="Pas de publicité, pas de compte, pas de collecte de données. Juste des guides gratuits pour apprendre à coder.">
+<meta name="twitter:image" content="https://quanthevaris.github.io/assets/img/og-image.png">
+<meta name="theme-color" content="#070d19">
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-256.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/css/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://quanthevaris.github.io/#site",
+      "url": "https://quanthevaris.github.io/",
+      "name": "Quanthevaris",
+      "inLanguage": "fr",
+      "description": "Guides pédagogiques gratuits pour apprendre à coder des jeux vidéo en Python, sans publicité ni collecte de données."
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://quanthevaris.github.io/#editeur",
+      "name": "Quanthevaris",
+      "url": "https://quanthevaris.github.io/",
+      "email": "contact.quanthevaris@gmail.com",
+      "description": "Éditeur non professionnel de guides pédagogiques gratuits, sans but commercial.",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://quanthevaris.github.io/assets/img/og-image.png",
+        "width": 1200,
+        "height": 630
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
+<a class="skip-link" href="#contenu">Aller au contenu principal</a>
+
 <header class="site-header">
   <div class="container header-inner">
-    <a href="index.html" class="logo">Quanthevaris</a>
+    <a href="/index.html" class="logo">Quanthevaris</a>
     <nav>
       <ul class="nav-links">
-        <li><a href="index.html" class="active">Accueil</a></li>
-        <li><a href="guides.html">Guides</a></li>
-        <li><a href="mentions-legales.html">Mentions légales</a></li>
-        <li><a href="confidentialite.html">Confidentialité</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="/index.html" class="active" aria-current="page">Accueil</a></li>
+        <li><a href="/guides.html">Guides</a></li>
+        <li><a href="/mentions-legales.html">Mentions légales</a></li>
+        <li><a href="/confidentialite.html">Confidentialité</a></li>
+        <li><a href="/contact.html">Contact</a></li>
       </ul>
     </nav>
-    <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+    <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-principal">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<main>
+<main id="contenu">
   <section class="hero">
     <div class="container">
       <h1>Des guides gratuits pour apprendre à coder des jeux vidéo</h1>
       <p class="hero-subtitle">Pas de publicité. Pas de compte. Pas de collecte de données. Juste des guides pédagogiques, gratuits et accessibles à tous.</p>
-      <a href="guides.html" class="btn btn-primary">Voir les guides</a>
+      <a href="/guides.html" class="btn btn-primary">Voir les guides</a>
+      <p style="margin-top:20px; font-size:0.9rem;">Aucune inscription · PDF de 25 pages · Code source sous licence MIT</p>
     </div>
   </section>
 
@@ -70,7 +124,8 @@
         <div>
           <h3>Esquive en Pixels — Guide Pratique Débutant</h3>
           <p>Apprends à créer ton premier jeu vidéo en Python avec Pygame : esquive les obstacles, code tes propres règles, comprends chaque ligne grâce à un guide de 25 pages pensé pour les débutants complets sous Windows.</p>
-          <a href="esquive-en-pixels.html" class="btn btn-secondary">Découvrir le guide</a>
+          <p style="font-size:0.9rem;">25 pages · Windows 10 / 11 · Python + Pygame · Gratuit</p>
+          <a href="/esquive-en-pixels.html" class="btn btn-secondary">Découvrir le guide</a>
         </div>
       </div>
     </div>
@@ -81,13 +136,16 @@
   <div class="container footer-inner">
     <p>&copy; <span id="year"></span> Quanthevaris — Publication non professionnelle, gratuite et sans but commercial.</p>
     <ul class="footer-links">
-      <li><a href="mentions-legales.html">Mentions légales</a></li>
-      <li><a href="confidentialite.html">Confidentialité</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="/mentions-legales.html">Mentions légales</a></li>
+      <li><a href="/confidentialite.html">Confidentialité</a></li>
+      <!-- À activer quand annexes-conformite.html sera publiée :
+      <li><a href="/annexes-conformite.html">Annexes &amp; conformité</a></li>
+      -->
+      <li><a href="/contact.html">Contact</a></li>
     </ul>
   </div>
 </footer>
 
-<script src="js/script.js"></script>
+<script src="/js/script.js"></script>
 </body>
 </html>
