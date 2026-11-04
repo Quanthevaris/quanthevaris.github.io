@@ -3,45 +3,77 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Page introuvable — Quanthevaris</title>
-<link rel="stylesheet" href="css/style.css">
+<title>Page introuvable (404) — Quanthevaris</title>
+<meta name="description" content="Cette page n'existe pas ou a été déplacée. Retrouve les guides pédagogiques gratuits de Quanthevaris depuis l'accueil ou la liste des guides.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://quanthevaris.github.io/404.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Quanthevaris">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Page introuvable (404) — Quanthevaris">
+<meta property="og:description" content="Cette page n'existe pas ou a été déplacée.">
+<meta property="og:url" content="https://quanthevaris.github.io/404.html">
+<meta property="og:image" content="https://quanthevaris.github.io/assets/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Page introuvable (404) — Quanthevaris">
+<meta name="twitter:description" content="Cette page n'existe pas ou a été déplacée.">
+<meta name="twitter:image" content="https://quanthevaris.github.io/assets/img/og-image.png">
+<meta name="theme-color" content="#070d19">
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-256.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
+<a class="skip-link" href="#contenu">Aller au contenu principal</a>
+
 <header class="site-header">
   <div class="container header-inner">
-    <a href="index.html" class="logo">Quanthevaris</a>
+    <a href="/index.html" class="logo">Quanthevaris</a>
     <nav>
       <ul class="nav-links">
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="guides.html">Guides</a></li>
-        <li><a href="mentions-legales.html">Mentions légales</a></li>
-        <li><a href="confidentialite.html">Confidentialité</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="/index.html">Accueil</a></li>
+        <li><a href="/guides.html">Guides</a></li>
+        <li><a href="/mentions-legales.html">Mentions légales</a></li>
+        <li><a href="/confidentialite.html">Confidentialité</a></li>
+        <li><a href="/contact.html">Contact</a></li>
       </ul>
     </nav>
-    <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+    <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-principal">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<main>
+<main id="contenu">
   <section class="error-page">
     <div class="container">
       <h1>404</h1>
       <p>Cette page n'existe pas ou a été déplacée.</p>
-      <a href="index.html" class="btn btn-primary">Retour à l'accueil</a>
+      <p>
+        <a href="/guides.html" class="btn btn-primary">Voir les guides</a>
+        <a href="/index.html" class="btn btn-secondary">Retour à l'accueil</a>
+      </p>
     </div>
   </section>
 </main>
 
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p>&copy; <span id="year"></span> Quanthevaris</p>
+    <p>&copy; <span id="year"></span> Quanthevaris — Publication non professionnelle, gratuite et sans but commercial.</p>
+    <ul class="footer-links">
+      <li><a href="/mentions-legales.html">Mentions légales</a></li>
+      <li><a href="/confidentialite.html">Confidentialité</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
   </div>
 </footer>
 
-<script src="js/script.js"></script>
+<script src="/js/script.js"></script>
 </body>
 </html>
