@@ -17,6 +17,20 @@
 
 html { scroll-behavior: smooth; }
 
+/* Élément lisible par les lecteurs d'écran uniquement */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
 /* Lien d'évitement clavier (RGAA 12.7 / WCAG 2.4.1) */
 .skip-link {
   position: absolute;
@@ -315,3 +329,4 @@ tr:last-child td { border-bottom: none; }
     transition-duration: .01ms !important;
   }
 }
+
