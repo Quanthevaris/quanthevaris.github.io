@@ -3,31 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Guides — Quanthevaris</title>
-<meta name="description" content="Tous les guides pédagogiques gratuits de Quanthevaris.">
-<link rel="stylesheet" href="css/style.css">
+<title>Tous les guides gratuits — Quanthevaris</title>
+<meta name="description" content="Les guides pédagogiques gratuits de Quanthevaris : apprends à créer un jeu vidéo en Python avec Pygame, sans compte, sans publicité et sans prérequis.">
+<link rel="canonical" href="https://quanthevaris.github.io/guides.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Quanthevaris">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Tous les guides gratuits — Quanthevaris">
+<meta property="og:description" content="Des guides gratuits, sans compte ni publicité, pour apprendre à coder des jeux vidéo à ton rythme.">
+<meta property="og:url" content="https://quanthevaris.github.io/guides.html">
+<meta property="og:image" content="https://quanthevaris.github.io/assets/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tous les guides gratuits — Quanthevaris">
+<meta name="twitter:description" content="Des guides gratuits, sans compte ni publicité, pour apprendre à coder des jeux vidéo à ton rythme.">
+<meta name="twitter:image" content="https://quanthevaris.github.io/assets/img/og-image.png">
+<meta name="theme-color" content="#070d19">
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-256.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
+<a class="skip-link" href="#contenu">Aller au contenu principal</a>
+
 <header class="site-header">
   <div class="container header-inner">
-    <a href="index.html" class="logo">Quanthevaris</a>
+    <a href="/index.html" class="logo">Quanthevaris</a>
     <nav>
       <ul class="nav-links">
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="guides.html" class="active">Guides</a></li>
-        <li><a href="mentions-legales.html">Mentions légales</a></li>
-        <li><a href="confidentialite.html">Confidentialité</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="/index.html">Accueil</a></li>
+        <li><a href="/guides.html" class="active" aria-current="page">Guides</a></li>
+        <li><a href="/mentions-legales.html">Mentions légales</a></li>
+        <li><a href="/confidentialite.html">Confidentialité</a></li>
+        <li><a href="/contact.html">Contact</a></li>
       </ul>
     </nav>
-    <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+    <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-principal">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<main>
+<main id="contenu">
   <section class="hero hero-small">
     <div class="container">
       <h1>Tous les guides</h1>
@@ -38,15 +60,24 @@
   <section class="section">
     <div class="container">
       <div class="grid grid-2">
+
         <div class="card">
-          <h3>Esquive en Pixels — Guide Pratique Débutant</h3>
+          <h2 class="card-title">Esquive en Pixels — Guide Pratique Débutant</h2>
           <p>Un guide de 25 pages pour créer ton premier jeu vidéo en Python avec Pygame, sous Windows, sans aucune connaissance préalable.</p>
-          <a href="esquive-en-pixels.html" class="btn btn-secondary">Voir le guide</a>
+          <p style="font-size:0.9rem;">25 pages · PDF · Windows 10 / 11 · Python + Pygame · Gratuit</p>
+          <a href="/esquive-en-pixels.html" class="btn btn-secondary">Voir le guide</a>
         </div>
+
         <div class="card">
-          <h3>Prochain guide — à venir</h3>
+          <h2 class="card-title">Prochain guide — à venir</h2>
           <p>D'autres guides pédagogiques gratuits sont en préparation. Reviens bientôt pour découvrir la suite.</p>
+          <p style="font-size:0.9rem;">Aucune inscription : la publication est annoncée directement sur cette page.</p>
         </div>
+
+      </div>
+
+      <div class="alert" style="margin-top:32px;">
+        <strong>Comment ça marche&nbsp;:</strong> chaque guide est un PDF téléchargeable librement, sans compte, sans email et sans contrepartie. Le code source des programmes est sous licence MIT, le texte des guides reste sous copyright — les détails sont dans les <a href="/mentions-legales.html">mentions légales</a>.
       </div>
     </div>
   </section>
@@ -56,13 +87,16 @@
   <div class="container footer-inner">
     <p>&copy; <span id="year"></span> Quanthevaris — Publication non professionnelle, gratuite et sans but commercial.</p>
     <ul class="footer-links">
-      <li><a href="mentions-legales.html">Mentions légales</a></li>
-      <li><a href="confidentialite.html">Confidentialité</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="/mentions-legales.html">Mentions légales</a></li>
+      <li><a href="/confidentialite.html">Confidentialité</a></li>
+      <!-- À activer quand annexes-conformite.html sera publiée :
+      <li><a href="/annexes-conformite.html">Annexes &amp; conformité</a></li>
+      -->
+      <li><a href="/contact.html">Contact</a></li>
     </ul>
   </div>
 </footer>
 
-<script src="js/script.js"></script>
+<script src="/js/script.js"></script>
 </body>
 </html>
