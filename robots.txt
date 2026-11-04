@@ -1,4 +1,8 @@
+# robots.txt - quanthevaris.github.io
+# Tout le site est public et indexable : aucune page a exclure.
+
 User-agent: *
 Allow: /
 
+# Sitemap declare (6 pages publiques)
 Sitemap: https://quanthevaris.github.io/sitemap.xml
