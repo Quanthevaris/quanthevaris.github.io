@@ -3,30 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact — Quanthevaris</title>
-<link rel="stylesheet" href="css/style.css">
+<title>Contact — Quanthevaris | Guides gratuits</title>
+<meta name="description" content="Contacte l'éditeur de Quanthevaris par email pour une question, une remarque ou une erreur repérée dans un guide : aucun formulaire, aucune donnée collectée.">
+<link rel="canonical" href="https://quanthevaris.github.io/contact.html">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Quanthevaris">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Contact — Quanthevaris">
+<meta property="og:description" content="Une question, une remarque, une erreur repérée dans un guide ? Écris directement par email : aucun formulaire, aucune donnée collectée.">
+<meta property="og:url" content="https://quanthevaris.github.io/contact.html">
+<meta property="og:image" content="https://quanthevaris.github.io/assets/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contact — Quanthevaris">
+<meta name="twitter:description" content="Une question, une remarque, une erreur repérée dans un guide ? Écris directement par email.">
+<meta name="twitter:image" content="https://quanthevaris.github.io/assets/img/og-image.png">
+<meta name="theme-color" content="#070d19">
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-256.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
+<a class="skip-link" href="#contenu">Aller au contenu principal</a>
+
 <header class="site-header">
   <div class="container header-inner">
-    <a href="index.html" class="logo">Quanthevaris</a>
+    <a href="/index.html" class="logo">Quanthevaris</a>
     <nav>
       <ul class="nav-links">
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="guides.html">Guides</a></li>
-        <li><a href="mentions-legales.html">Mentions légales</a></li>
-        <li><a href="confidentialite.html">Confidentialité</a></li>
-        <li><a href="contact.html" class="active">Contact</a></li>
+        <li><a href="/index.html">Accueil</a></li>
+        <li><a href="/guides.html">Guides</a></li>
+        <li><a href="/mentions-legales.html">Mentions légales</a></li>
+        <li><a href="/confidentialite.html">Confidentialité</a></li>
+        <li><a href="/contact.html" class="active" aria-current="page">Contact</a></li>
       </ul>
     </nav>
-    <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+    <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-principal">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<main>
+<main id="contenu">
   <section class="hero hero-small">
     <div class="container">
       <h1>Contact</h1>
@@ -37,10 +60,11 @@
   <section class="section">
     <div class="container" style="text-align:center;">
       <div class="card" style="max-width:500px; margin:0 auto;">
-        <h3>Nous contacter par email</h3>
-        <p>Aucun formulaire n'est utilisé sur ce site afin de ne collecter aucune donnée inutile. Le plus simple est de nous écrire directement :</p>
+        <h2 class="card-title">Contacter l'éditeur par email</h2>
+        <p>Aucun formulaire n'est utilisé sur ce site, afin de ne collecter aucune donnée inutile. Le plus simple est de nous écrire directement :</p>
         <a href="mailto:contact.quanthevaris@gmail.com" class="btn btn-primary">contact.quanthevaris@gmail.com</a>
-        <p style="margin-top:20px; font-size:0.9rem;">Nous essayons de répondre dans un délai raisonnable, sans garantie de délai fixe (projet non professionnel).</p>
+        <p style="margin-top:20px; font-size:0.9rem;">Nous répondons dans un délai raisonnable, sans garantie de délai fixe (projet non professionnel).</p>
+        <p style="margin-top:16px; font-size:0.9rem;">Pour un lien mort ou une coquille, précise l'adresse de la page concernée : c'est plus rapide à corriger. Voir aussi les <a href="/annexes-conformite.html">annexes &amp; conformité</a>.</p>
       </div>
     </div>
   </section>
@@ -50,13 +74,16 @@
   <div class="container footer-inner">
     <p>&copy; <span id="year"></span> Quanthevaris — Publication non professionnelle, gratuite et sans but commercial.</p>
     <ul class="footer-links">
-      <li><a href="mentions-legales.html">Mentions légales</a></li>
-      <li><a href="confidentialite.html">Confidentialité</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="/mentions-legales.html">Mentions légales</a></li>
+      <li><a href="/confidentialite.html">Confidentialité</a></li>
+      <!-- À activer quand annexes-conformite.html sera publiée :
+      <li><a href="/annexes-conformite.html">Annexes &amp; conformité</a></li>
+      -->
+      <li><a href="/contact.html">Contact</a></li>
     </ul>
   </div>
 </footer>
 
-<script src="js/script.js"></script>
+<script src="/js/script.js"></script>
 </body>
 </html>
