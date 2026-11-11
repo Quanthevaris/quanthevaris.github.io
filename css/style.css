@@ -511,6 +511,12 @@ nav {
   padding: 72px 0 64px;
 }
 
+/* Après un hero compact, on resserre l'espacement vers la section suivante :
+   le contenu (cartes, formulaires…) doit rester visible sans défilement excessif. */
+.hero-small + .section {
+  padding-top: 32px;
+}
+
 .hero-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
