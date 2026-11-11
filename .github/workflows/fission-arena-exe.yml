@@ -1,0 +1,150 @@
+# FISSION ARENA : fabrique FISSION_ARENA.exe sur une machine Windows de GitHub,
+# le teste, puis le range dans assets/jeux/ quand le code du jeu a changé.
+#
+# Se lance tout seul dès que assets/jeux/FISSION_ARENA.py est modifié
+# (ou à la main : onglet Actions > ce workflow > « Run workflow »).
+# Mode d'emploi complet : _exe/README.md
+
+name: FISSION ARENA - fabriquer le .exe
+
+on:
+  push:
+    branches: [main, "arena/**"]
+    paths:
+      - "assets/jeux/FISSION_ARENA.py"
+      - "_exe/**"
+      - ".github/workflows/fission-arena-exe.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fission-arena-exe-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  code:
+    name: Code du jeu (Python ${{ matrix.python }}, ${{ matrix.moteur }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - python: "3.13"
+            moteur: "pygame==2.6.1"
+          - python: "3.14"
+            moteur: "pygame-ce==2.5.8"
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Installer le moteur de jeu
+        run: python -m pip install "${{ matrix.moteur }}"
+      - name: Le jeu démarre et joue tout seul 10 secondes (sans écran)
+        env:
+          SDL_VIDEODRIVER: dummy
+          SDL_AUDIODRIVER: dummy
+          FISSION_ARENA_AUTOTEST: ${{ runner.temp }}/rapport.json
+          XDG_DATA_HOME: ${{ runner.temp }}/profil
+        run: |
+          python assets/jeux/FISSION_ARENA.py
+          python - <<'PY'
+          import json, os
+          r = json.load(open(os.environ["FISSION_ARENA_AUTOTEST"], encoding="utf-8"))
+          assert r["ok"] and r["save_existed"] is False and r["start"]["coins"] == 0 and r["start"]["best"] == 0, r
+          assert r["notice_seen"] is False and r["states"][:2] == ["notice", "menu"], "notice de santé absente au premier lancement"
+          print(f"::notice title=FISSION ARENA (code)::Python {r['python']}, pygame {r['pygame']}, SDL {r['sdl']} : "
+                f"OK, {r['frames']} images, {r['kills']} éliminés, score {r['score']}, {r['sfx']} sons.")
+          PY
+
+  exe:
+    name: Fabriquer et tester le .exe (Windows)
+    needs: code
+    runs-on: windows-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write        # pour ranger le .exe fabriqué dans le dépôt
+      pages: write           # pour demander la mise à jour du site après ce rangement
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - name: Installer pygame et PyInstaller
+        run: python -m pip install pygame==2.6.1 pyinstaller==6.22.3
+      - name: Fabriquer puis tester le .exe
+        env:
+          FISSION_ARENA_GARDER_RAPPORTS: "1"
+        run: python _exe/fabriquer_exe.py --source assets/jeux/FISSION_ARENA.py --sortie "$env:RUNNER_TEMP\exe"
+      - name: Garder le .exe en pièce jointe de cette exécution
+        uses: actions/upload-artifact@v7
+        with:
+          name: FISSION_ARENA-exe
+          path: ${{ runner.temp }}/exe/
+          retention-days: 30
+      - name: Ranger le .exe dans le site si le code du jeu a changé
+        id: ranger
+        shell: bash
+        run: |
+          set -euo pipefail
+          nouveau="$RUNNER_TEMP/exe"
+          lire_empreinte() { sed -n 's/^SHA-256 du code source : //p' "$1" 2>/dev/null | tr -d '\r' || true; }
+          empreinte_nouvelle="$(lire_empreinte "$nouveau/FISSION_ARENA-fiche.txt")"
+          empreinte_publiee="$(lire_empreinte assets/jeux/FISSION_ARENA-fiche.txt)"
+          message="$(git log -1 --pretty=%B)"
+          if [[ "$message" == *"[test]"* ]]; then
+            echo "::notice title=FISSION ARENA::Essai seulement ([test] dans le message du commit) : le .exe n'est pas rangé dans le site."
+            exit 0
+          fi
+          if [ -f assets/jeux/FISSION_ARENA.exe ] && [ -n "$empreinte_nouvelle" ] && [ "$empreinte_nouvelle" = "$empreinte_publiee" ]; then
+            echo "::notice title=FISSION ARENA::Le .exe du site correspond déjà à ce code : rien à changer."
+            exit 0
+          fi
+          cp "$nouveau/FISSION_ARENA.exe" assets/jeux/FISSION_ARENA.exe
+          cp "$nouveau/FISSION_ARENA-fiche.txt" assets/jeux/FISSION_ARENA-fiche.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/jeux/FISSION_ARENA.exe assets/jeux/FISSION_ARENA-fiche.txt
+          git commit -m "FISSION ARENA : .exe fabriqué et testé automatiquement" -m "$(head -n 5 assets/jeux/FISSION_ARENA-fiche.txt)"
+          for essai in 1 2 3; do
+            if git push origin "HEAD:${GITHUB_REF_NAME}"; then
+              echo "::notice title=FISSION ARENA::Nouveau .exe rangé dans assets/jeux/ (branche ${GITHUB_REF_NAME})."
+              echo "range=oui" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+          done
+          echo "::error title=FISSION ARENA::Impossible d'enregistrer le .exe dans le dépôt."
+          exit 1
+      # Un fichier rangé par le robot ne relance pas toujours la publication du site : on la demande.
+      - name: Demander la mise à jour du site
+        if: steps.ranger.outputs.range == 'oui'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh api -X POST "repos/${GITHUB_REPOSITORY}/pages/builds" > /dev/null; then
+            echo "::notice title=FISSION ARENA (site)::Mise à jour du site demandée : le nouveau .exe est en ligne dans une à deux minutes."
+          else
+            echo "::warning title=FISSION ARENA (site)::Le .exe est rangé dans le dépôt, mais la mise à jour du site n'a pas pu être demandée automatiquement. Pour la déclencher, modifie n'importe quel fichier du site (par exemple README.md) et valide."
+          fi
+
+  # Facultatif : essai de construire_exe.bat tel qu'on le lance sur un PC.
+  # Ne tourne que si le message du commit contient [kit].
+  kit:
+    name: Essai de construire_exe.bat (Windows)
+    if: contains(github.event.head_commit.message, '[kit]')
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - name: Lancer construire_exe.bat comme sur un PC
+        shell: cmd
+        run: |
+          py -0p
+          call _exe\construire_exe.bat < nul
+          if not exist assets\jeux\FISSION_ARENA.exe exit /b 1
+          type assets\jeux\FISSION_ARENA-fiche.txt

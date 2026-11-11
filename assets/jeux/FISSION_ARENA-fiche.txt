@@ -1,0 +1,28 @@
+FISSION ARENA 1.0 — fichier FISSION_ARENA.exe
+
+Taille : 15283778 octets (15,3 Mo)
+SHA-256 du programme : 315581c48cc623481127bab22e45f54eea7cc217868cf5335245042ce3e3c6a4
+SHA-256 du code source : 0b967592e4189850ca4f8d82a45ff64ba86a1d67f4e4dff9408919ef102d00e6
+
+Fabriqué le 2026-11-11 à 21:31 UTC sur GitHub Actions (Windows 2025Server, AMD64)
+à partir de FISSION_ARENA.py (commit 41b18fb650).
+Outils : Python 3.13.17, pygame 2.6.1, SDL 2.28.4, PyInstaller 6.22.3.
+
+Vérifications automatiques faites sur ce fichier avant sa publication :
+  - lancé dans un profil vide : progression à zéro, équipement de base uniquement ;
+  - notice de santé affichée d'office au premier lancement, plus imposée ensuite ;
+  - partie jouée par le programme (692 images, 6 ennemis éliminés), image non vide ;
+  - second lancement : sauvegarde et record retrouvés ;
+  - 15 sons et la musique fabriqués correctement.
+
+Vérifier le fichier téléchargé sous Windows (PowerShell) :
+    Get-FileHash FISSION_ARENA.exe -Algorithm SHA256
+Le résultat doit être identique à la ligne « SHA-256 du programme » ci-dessus.
+
+Bibliothèques contenues dans le programme (auteurs et licences : LICENCES-TIERS.txt) :
+    _bz2.pyd, _ctypes.pyd, _decimal.pyd, _hashlib.pyd, _lzma.pyd, _queue.pyd, _socket.pyd,
+    _wmi.pyd, freesansbold.ttf, freetype.dll, libcrypto-3.dll, libffi-8.dll, libjpeg-9.dll,
+    libmodplug-1.dll, libogg-0.dll, libopus-0.dll, libopusfile-0.dll, libpng16-16.dll,
+    libtiff-5.dll, libwebp-7.dll, portmidi.dll, python313.dll, sdl2.dll, sdl2_image.dll,
+    sdl2_mixer.dll, sdl2_ttf.dll, select.pyd, ucrtbase.dll, unicodedata.pyd, vcruntime140.dll,
+    vcruntime140_1.dll, zlib1.dll
