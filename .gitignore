@@ -1,0 +1,8 @@
+# Fichiers temporaires de Python (créés quand on lance les scripts de _exe/)
+__pycache__/
+*.pyc
+
+# Dossiers de travail de PyInstaller
+build/
+dist/
+*.spec
