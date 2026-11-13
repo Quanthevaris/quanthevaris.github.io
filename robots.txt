@@ -4,5 +4,5 @@
 User-agent: *
 Allow: /
 
-# Sitemap déclaré (7 pages publiques)
+# Sitemap déclaré (8 pages publiques)
 Sitemap: https://quanthevaris.github.io/sitemap.xml
