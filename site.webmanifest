@@ -1,7 +1,7 @@
 {
-  "name": "Quanthevaris — Guides gratuits pour coder des jeux vidéo",
+  "name": "Quanthevaris — Guides et jeux gratuits",
   "short_name": "Quanthevaris",
-  "description": "Des guides pédagogiques gratuits, sans publicité ni collecte de données, pour apprendre à créer des jeux vidéo en Python.",
+  "description": "Des guides pour apprendre à coder et des jeux gratuits à télécharger, sans publicité ni compte.",
   "lang": "fr",
   "dir": "ltr",
   "start_url": "/index.html",
