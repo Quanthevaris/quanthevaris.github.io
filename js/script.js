@@ -1,6 +1,6 @@
 /* Quanthevaris — interactions du site
    - menu mobile (ouverture, fermeture au clic, à Échap, au clic extérieur,
-     au redimensionnement) avec piège de focus pendant l'ouverture
+     au redimensionnement)
    - année dynamique dans le pied de page
    Aucun traceur, aucune dépendance, aucun cookie. */
 (function () {

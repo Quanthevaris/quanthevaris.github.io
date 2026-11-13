@@ -1,7 +1,7 @@
 FISSION ARENA - LOGICIELS TIERS CONTENUS DANS FISSION_ARENA.exe
 ================================================================
 
-Document établi le 11 novembre 2026 pour FISSION ARENA 1.0.
+Document établi le 11 novembre 2026 et complété le 13 novembre 2026 pour FISSION ARENA 1.0.
 Adresse de ce document : https://quanthevaris.github.io/assets/jeux/LICENCES-TIERS.txt
 
 
@@ -102,7 +102,7 @@ SDL_image 2.0.5, SDL_mixer 2.6.2, SDL_ttf 2.20.1 - images, mixage du son, texte
     Licence  : licence zlib - section D
     SDL2_ttf.dll contient FreeType (section E) et HarfBuzz (section F).
     SDL2_mixer.dll contient TiMidity (section D.5) ainsi que dr_flac, dr_mp3 et stb_vorbis
-    (domaine public).
+    (licence MIT choisie parmi leurs licences alternatives - sections D.7 et D.8).
 
 FreeType 2.11.1 - affichage des polices d'écriture
     Fichiers : freetype.dll (et dans SDL2_ttf.dll)
@@ -179,9 +179,9 @@ PyInstaller 6 - outil qui a assemblé le .exe
                modules pyi_rth_* - section O
     Site     : https://pyinstaller.org
 
-SDL, SDL_image et SDL_mixer incorporent en outre quelques petits composants sous licences
-permissives (hidapi, yuv2rgb, dr_libs, stb...). Leurs mentions figurent dans le code source de
-ces bibliothèques : https://github.com/libsdl-org
+SDL et SDL_mixer incorporent en outre des composants sous licences permissives : HIDAPI
+(licence BSD choisie - section D.6), yuv2rgb (D.6), dr_libs (D.7) et stb_vorbis (D.8).
+Leurs notices sont reproduites ci-dessous, en plus des textes des licences principales.
 
 
 3. pygame ET LA LICENCE GNU LGPL : TES DROITS
@@ -198,7 +198,7 @@ une version que tu aurais modifiée. Deux moyens sont fournis pour cela :
     https://quanthevaris.github.io/assets/jeux/FISSION_ARENA.py
     La commande « python FISSION_ARENA.py » utilise le pygame installé sur ton ordinateur ;
   - le kit qui fabrique le .exe à partir de ce code source et du pygame de ton choix :
-    https://github.com/Quanthevaris/quanthevaris.github.io/tree/main/_exe
+    https://quanthevaris.github.io/assets/jeux/FISSION_ARENA-kit.zip
 
 Les conditions d'utilisation du jeu autorisent ces modifications pour ton usage personnel, ainsi
 que l'analyse du programme nécessaire pour les mettre au point.
@@ -209,9 +209,10 @@ Code source de pygame 2.6.1 :
 
 OFFRE ÉCRITE. Si ces adresses ne sont plus accessibles, ou si tu le préfères, écris à
 contact.quanthevaris@gmail.com : le code source complet de la version de pygame contenue dans
-le .exe (et de la police FreeSansBold, voir le point 4) te sera fourni gratuitement, par voie
-électronique. Cette offre est valable trois ans à compter de la dernière mise à disposition,
-sur quanthevaris.github.io, du .exe concerné.
+le .exe (et le fichier exact de la police FreeSansBold, voir le point 4) te sera fourni
+gratuitement, par voie électronique. Cette offre est faite à toute personne qui en fait la
+demande et reste valable trois ans à compter de la dernière mise à disposition, sur
+quanthevaris.github.io, du .exe concerné. Elle ne se limite pas aux utilisateurs du jeu.
 
 
 4. LA POLICE D'ÉCRITURE FreeSansBold
@@ -224,10 +225,12 @@ Le fichier est inclus tel quel, sans modification, comme une simple donnée lue 
 Le texte de la licence GPL est reproduit en section B (version 2 ; la police peut aussi être
 utilisée selon toute version ultérieure de cette licence).
 
-Ce fichier, qui est sa propre forme modifiable, est disponible dans le code source de pygame
-(src_py/freesansbold.ttf, adresses au point 3) ; le projet d'origine et ses versions récentes
-sont sur https://www.gnu.org/software/freefont/ . L'offre écrite du point 3 s'applique aussi à
-cette police.
+Le fichier TTF exact distribué dans le .exe est inclus sans modification dans le code source
+de pygame 2.6.1 (src_py/freesansbold.ttf, adresses au point 3). Il peut être ouvert avec un
+éditeur de polices ; le projet GNU FreeFont publie aussi ses sources d'édition sur
+https://www.gnu.org/software/freefont/ et https://ftp.gnu.org/gnu/freefont/ . Ces sources
+amont plus récentes ne doivent pas être présentées comme une version identique à ce vieux
+fichier. L'offre écrite du point 3 porte sur le fichier exact inclus dans cette distribution.
 
 
 5. TEXTES DES LICENCES
@@ -243,6 +246,7 @@ cette police.
         C.5  XZ Utils
         C.6  Microsoft Distributable Code
     D.  SDL, SDL_image, SDL_mixer, SDL_ttf (licence zlib) ; D.5 TiMidity (Artistic License)
+        D.6 HIDAPI et yuv2rgb ; D.7 dr_libs ; D.8 stb_vorbis
     E.  FreeType
     F.  HarfBuzz
     G.  libjpeg (Independent JPEG Group)
@@ -2528,6 +2532,9 @@ freely, subject to the following restrictions:
 D.5  TiMidity (dans SDL_mixer) - fichier src/codecs/timidity/COPYING
 ----------------------------------------------------------------------------------------
 
+Copyright (C) 1995 Tuukka Toivonen <toivonen@clinet.fi>
+Licence Perl Artistic License, telle que reproduite dans ce fichier COPYING.
+
 			The "Artistic License"
 
 				Preamble
@@ -2655,6 +2662,127 @@ IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
 WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 
 				The End
+
+
+----------------------------------------------------------------------------------------
+D.6  Composants de SDL 2.28.4 : HIDAPI (BSD choisi) et yuv2rgb
+----------------------------------------------------------------------------------------
+
+HIDAPI propose trois licences alternatives. La licence BSD-style est choisie pour cette
+distribution ; il n'est pas nécessaire de recourir à son alternative GPL.
+Source : https://github.com/libsdl-org/SDL/tree/release-2.28.4/src/hidapi
+HIDAPI - Multi-Platform library for communication with HID devices.
+Copyright 2009, Alan Ott, Signal 11 Software. All Rights Reserved.
+
+Copyright (c) 2010, Alan Ott, Signal 11 Software
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+      this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of Signal 11 Software nor the names of its
+      contributors may be used to endorse or promote products derived from
+      this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.
+
+
+yuv2rgb - SDL/src/video/yuv2rgb/LICENSE
+
+Copyright (c) 2016, Adrien Descamps
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+* Neither the name of yuv2rgb nor the names of its
+  contributors may be used to endorse or promote products derived from
+  this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+----------------------------------------------------------------------------------------
+D.7  dr_flac 0.12.38 et dr_mp3 0.6.33 (dans SDL_mixer 2.6.2)
+----------------------------------------------------------------------------------------
+
+Copyright 2020 David Reid. Ces composants proposent le domaine public (Unlicense) ou
+MIT No Attribution ; la licence MIT No Attribution est choisie pour cette distribution.
+Sources : https://github.com/libsdl-org/SDL_mixer/tree/release-2.6.2/src/codecs/dr_libs
+
+Copyright 2020 David Reid
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+----------------------------------------------------------------------------------------
+D.8  stb_vorbis 1.22 (dans SDL_mixer 2.6.2)
+----------------------------------------------------------------------------------------
+
+Original version written by Sean Barrett in 2007. MIT ou domaine public (Unlicense) ;
+la licence MIT est choisie pour cette distribution.
+Source : https://github.com/libsdl-org/SDL_mixer/blob/release-2.6.2/src/codecs/stb_vorbis/stb_vorbis.h
+
+MIT License
+Copyright (c) 2017 Sean Barrett
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this
+software and associated documentation files (the "Software"), to deal in the Software
+without restriction, including without limitation the rights to use, copy, modify, merge,
+publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
+to whom the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all copies or
+substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
+
 
 ========================================================================================
 E. FreeType - The FreeType Project LICENSE (FTL)
