@@ -16,6 +16,7 @@ Aucune dépendance, aucun traceur, aucun cookie — publié via GitHub Pages.
 ├── confidentialite.html        Politique de confidentialité
 ├── 404.html                    Page introuvable (gérée par GitHub Pages)
 ├── site.webmanifest            Manifeste (icônes / thème)
+├── LICENCES-TIERS.txt          Notices du site (Inter, Lucide / Feather)
 ├── robots.txt · sitemap.xml    Référencement
 ├── css/style.css               Styles du site (design system complet)
 ├── js/script.js                Menu mobile + année du pied de page
@@ -39,6 +40,7 @@ Aucune dépendance, aucun traceur, aucun cookie — publié via GitHub Pages.
 - **Logiciels de tiers contenus dans le `.exe`** (Python, pygame, SDL…) : leurs propres licences,
   reproduites dans `assets/jeux/LICENCES-TIERS.txt`.
 - **Police Inter** : SIL Open Font License (`assets/fonts/Inter-LICENSE.txt`).
+- **Icônes Lucide / Feather** : notices ISC et MIT dans `LICENCES-TIERS.txt`.
 
 Le détail fait foi dans les [mentions légales](https://quanthevaris.github.io/mentions-legales.html#propriete-intellectuelle).
 

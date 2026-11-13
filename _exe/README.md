@@ -9,6 +9,7 @@ Ce dossier `_exe/` contient tout le nécessaire ; il n'est pas publié sur le si
 | `construire_exe.bat` | À double-cliquer sous Windows : installe les outils si besoin, fabrique le `.exe`, le teste. |
 | `fabriquer_exe.py` | Le script qui fait le travail (utilisé par le `.bat` **et** par GitHub). |
 | `fission-arena.ico` | L'icône du `.exe` (la même que celle de la fenêtre du jeu). |
+| `LIRE-MOI.txt` | Notice du kit ZIP : conditions du jeu, licences et versions utilisées pour la publication. |
 
 Le code du jeu et le `.exe` publiés sont dans [`assets/jeux/`](../assets/jeux/).
 
@@ -84,7 +85,7 @@ Windows (clic droit → Propriétés → Détails) et fait les tests.
 2. Refaire le `.exe` (méthode 1 ou 2).
 3. Dans `fission-arena.html`, mettre à jour le numéro de version (chercher « 1.0 » : il apparaît dans le
    texte de la page et dans le bloc `softwareVersion`) et, si besoin, la taille du fichier. Faire de même
-   dans la carte du jeu de `index.html` et de `guides.html`.
+   dans la carte du jeu de `index.html` et de `jeux.html`.
    L'empreinte SHA-256 n'est pas à recopier : la page renvoie vers la fiche, refaite avec chaque `.exe`.
 
 ## Bon à savoir
@@ -118,7 +119,9 @@ Windows (clic droit → Propriétés → Détails) et fait les tests.
   bibliothèques (autre version de Python, pygame-ce…), le script affiche « ATTENTION » avec leur liste :
   pour ton usage personnel, rien à faire ; pour **publier** ce `.exe`-là, il faut d'abord compléter
   `LICENCES-TIERS.txt`. Le plus simple est donc de toujours publier le `.exe` de la méthode 1.
-- **pygame est sous licence LGPL** : en échange du droit de le distribuer dans le `.exe`, le site fournit le
-  code source du jeu (`FISSION_ARENA.py`) et ce kit, et `LICENCES-TIERS.txt` promet d'envoyer le code source
-  de pygame à qui le demande par e-mail (il suffit alors de répondre avec le lien
-  <https://pypi.org/project/pygame/2.6.1/#files>).
+- **pygame est sous LGPL 2.1 et la police FreeSansBold sous GPL.** Le site fournit le code du jeu,
+  un kit pour refabriquer le `.exe`, les notices de licences et une offre écrite de fourniture du code
+  source de pygame 2.6.1 et du fichier exact de la police. Le code du jeu seul ne remplace pas le code
+  source de pygame. Conserver `assets/jeux/LICENCES-TIERS.txt`, l'offre et les moyens de l'honorer
+  pendant trois ans après la dernière mise à disposition du `.exe` concerné. Source pygame :
+  <https://pypi.org/project/pygame/2.6.1/#files> (`pygame-2.6.1.tar.gz`).

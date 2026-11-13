@@ -1,0 +1,26 @@
+FISSION ARENA — kit Windows
+===========================
+
+Télécharge FISSION_ARENA.py depuis la page du jeu et place-le dans ce dossier :
+https://quanthevaris.github.io/fission-arena.html
+
+Installe Python 3.11 ou plus récent, puis double-clique sur construire_exe.bat.
+Pour utiliser ta propre version de pygame, installe-la dans cet environnement Python
+et lance : python fabriquer_exe.py --help
+Consulte les options avant de lancer la fabrication.
+
+Le code du jeu reste soumis aux conditions de sa page. Ce kit ne place pas le jeu
+sous licence MIT. Il permet notamment les opérations de modification et de
+remplacement de pygame prévues par la licence LGPL de cette bibliothèque.
+
+Les bibliothèques installées pendant la fabrication conservent leurs licences.
+Celles du .exe publié (pygame 2.6.1, police FreeSansBold sous GPL, Python, SDL,
+PyInstaller et autres composants), ainsi que l'offre de fourniture des sources,
+sont décrites dans :
+https://quanthevaris.github.io/assets/jeux/LICENCES-TIERS.txt
+
+Pour reproduire au plus près les outils de la version 1.0 publiée, utilise
+Python 3.13, pygame==2.6.1 et pyinstaller==6.22.3. Une autre version peut être
+utilisée pour tes modifications, mais les notices devront être adaptées avant
+toute nouvelle distribution. Les tests du kit ne constituent pas une analyse
+antivirus ni une garantie d'absence d'erreur.
