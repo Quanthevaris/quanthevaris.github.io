@@ -85,8 +85,11 @@ class SiteTests(unittest.TestCase):
                 self.assertNotIn('archive-notice', self.texts[name])
         page = self.texts['assistant-ia.html']
         self.assertIn('id="actualisation"', page)  # anciens liens conservés
-        self.assertIn('réponses simulées', page)
-        self.assertIn('inférence réelle', page)
+        self.assertNotIn('Ce qui est vérifié', page)
+        self.assertNotIn('Ce qui reste à valider sur ton matériel', page)
+        source = (ROOT / '_maintenance/guide-ia/fiche-main.html').read_text()
+        self.assertNotIn('Ce qui est vérifié', source)
+        self.assertNotIn('Ce qui reste à valider sur ton matériel', source)
         for script in re.findall(r'<script type="application/ld\+json">(.*?)</script>', page, re.S):
             data = json.loads(script)
             self.assertEqual(data['numberOfPages'], version['pages'])
