@@ -170,7 +170,7 @@ test('fetch absent ou en erreur ne casse pas la page', async () => {
 });
 
 test('compte réel : chaque page canonique connue est comptée une fois, sans stockage', () => {
-  const pages = fs.readdirSync(root).filter((name) => name.endsWith('.html') && name !== '404.html');
+  const pages = fs.readdirSync(root).filter((name) => name.endsWith('.html') && !['404.html', 'assistant-ia.html', 'guide-assistant-ia.html'].includes(name));
   for (const page of pages) {
     const html = fs.readFileSync(path.join(root, page), 'utf8');
     const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)[1];
@@ -180,8 +180,17 @@ test('compte réel : chaque page canonique connue est comptée une fois, sans st
   }
 });
 
-test('toutes les pages publiques chargent le module une seule fois', () => {
-  const pages = fs.readdirSync(root).filter((name) => name.endsWith('.html'));
+test('les pages IA restent exclues du comptage existant', () => {
+  for (const page of ['assistant-ia.html', 'guide-assistant-ia.html']) {
+    const env = charger({ canonical: 'https://quanthevaris.github.io/' + page });
+    assert.equal(env.calls.length, 0, page);
+  }
+  const guide = fs.readFileSync(path.join(root, 'guide-assistant-ia.html'), 'utf8');
+  assert.doesNotMatch(guide, /\/js\/audience\.js|data-goatcounter=|gc\.zgo\.at/);
+});
+
+test('les pages du site chargent le module une seule fois, hors guide imprimable', () => {
+  const pages = fs.readdirSync(root).filter((name) => name.endsWith('.html') && name !== 'guide-assistant-ia.html');
   assert.ok(pages.length >= 9);
   for (const page of pages) {
     const html = fs.readFileSync(path.join(root, page), 'utf8');

@@ -1,0 +1,10 @@
+{
+  "name": "quanthevaris-maintenance",
+  "private": true,
+  "description": "Outils de génération PDF et de contrôle navigateur, pas de dépendance du site.",
+  "type": "module",
+  "dependencies": {
+    "@sparticuz/chromium": "153.0.0",
+    "playwright-core": "1.65.1"
+  }
+}

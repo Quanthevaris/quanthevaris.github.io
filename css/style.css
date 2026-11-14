@@ -573,6 +573,58 @@ nav {
   height: 15px;
 }
 
+/* ---------- Illustration d’accueil : visuel autonome, sans cadre de capture ---------- */
+.hero-artwork {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  max-width: 640px;
+  justify-self: center;
+}
+.hero-artwork picture {
+  display: block;
+}
+.hero-artwork img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Fond fondu dans le hero ; le masque reste une amélioration facultative. */
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 55%, transparent 76%);
+  mask-image: radial-gradient(ellipse at center, #000 55%, transparent 76%);
+}
+.hero-artwork-label {
+  position: absolute;
+  top: 0;
+  left: 8%;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--text-dim);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+.hero-artwork-label span {
+  color: var(--cyan);
+  font-family: monospace;
+  font-size: 1rem;
+  letter-spacing: 0;
+}
+.hero-artwork figcaption {
+  margin-top: 0;
+  color: var(--text-white);
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+.hero-artwork figcaption small {
+  display: block;
+  margin-top: 6px;
+  color: var(--text-dim);
+  font-size: 0.7rem;
+  font-weight: 400;
+}
+
 /* ---------- Images ---------- */
 .img-card {
   position: relative;

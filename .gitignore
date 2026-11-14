@@ -6,3 +6,10 @@ __pycache__/
 build/
 dist/
 *.spec
+
+# Environnement local de maintenance (non publié)
+.venv/
+
+# Outils de génération et caches locaux
+node_modules/
+.cache/

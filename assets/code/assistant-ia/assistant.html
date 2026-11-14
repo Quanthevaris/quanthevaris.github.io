@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pixel — Assistant IA local · Quanthevaris</title>
+<link rel="stylesheet" href="/assistant.css">
+<script src="/assistant.js" defer></script>
+</head>
+<body>
+<main class="atelier">
+  <header>
+    <div class="marque"><span class="logo" aria-hidden="true">Q<span></span></span> Quanthevaris <span class="edition">ATELIER 02</span></div>
+    <p class="surtitre">PYTHON + OLLAMA · SUR TON ORDINATEUR</p>
+    <div class="titre"><h1>Fais connaissance<br>avec <em>Pixel.</em></h1><span class="puce">IA LOCALE</span></div>
+    <p class="intro">Un assistant pour apprendre, expérimenter et comprendre.<br>Pas un humain. Pas une source infaillible.</p>
+  </header>
+  <section class="conversation" aria-label="Conversation avec Pixel">
+    <div class="barre"><span><span class="point" aria-hidden="true"></span> Pixel <span class="secondaire">/ conversation</span></span><button id="effacer" type="button">Nouvelle discussion</button></div>
+    <p id="etat" role="status">Vérification d’Ollama…</p>
+    <div id="chat" role="log" aria-live="polite" aria-relevant="additions text" tabindex="0">
+      <div class="message bot"><span class="auteur">PIXEL</span><p>Bonjour ! Pose-moi une question sur Python ou la création de jeux. Mes réponses sont générées par le modèle installé sur cet ordinateur.</p></div>
+    </div>
+    <form id="form">
+      <label class="visually-hidden" for="texte">Ton message à Pixel</label>
+      <div class="saisie"><input id="texte" name="message" maxlength="2000" placeholder="Par exemple : à quoi sert une boucle en Python ?" autocomplete="off" required><button id="envoyer" type="submit">Envoyer <span aria-hidden="true">↗</span></button></div>
+      <p class="aide">Historique limité à 6 échanges, en mémoire dans cet onglet. Aucun enregistrement par l’atelier.</p>
+    </form>
+  </section>
+  <footer><span>Crée ton assistant IA · Édition locale 2.0</span><span>Vérifie toujours les réponses importantes.</span></footer>
+  <noscript>Active JavaScript pour utiliser cette interface locale.</noscript>
+</main>
+</body>
+</html>

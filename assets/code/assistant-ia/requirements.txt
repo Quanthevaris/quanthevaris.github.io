@@ -1,0 +1,2 @@
+# Seule dépendance directe Python. Ollama s’installe séparément.
+Flask==3.1.3

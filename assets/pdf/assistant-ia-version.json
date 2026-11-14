@@ -1,0 +1,12 @@
+{
+  "version": "2.0",
+  "date": "2026-11-14",
+  "pages": 49,
+  "pdf_octets": 545753,
+  "pdf_sha256": "3e26a69c5416a498d3d47e87ac57a0e757515a9473de062d7d3ab99638dae61a",
+  "kit_octets": 21787,
+  "kit_sha256": "9195130ed3f6b1f8227dcd66b7e800fe9674400b96fc17c49a6275ee08f4aa74",
+  "modele_reference": "llama3.2:1b",
+  "inference_reelle_effectuee_dans_cet_environnement": false,
+  "validation_restante": "Installer le modèle et tester une vraie conversation sur le matériel du lecteur."
+}

@@ -1,0 +1,6 @@
+Quanthevaris publie gratuitement des guides et des jeux sur quanthevaris.github.io.
+Esquive en Pixels permet de découvrir Python et Pygame à travers un jeu en 2D.
+Le présent atelier propose une adaptation pédagogique d’ELIZA et Pixel, un assistant local.
+Pixel utilise Ollama et un modèle téléchargé sur l’ordinateur de son utilisateur.
+GitHub Pages héberge des pages statiques, pas le serveur Flask ni Ollama.
+Ces repères sont un petit contexte fourni au modèle, pas un moteur de recherche ni un vrai RAG.
