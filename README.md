@@ -107,8 +107,9 @@ de déployer. Tests sans dépendance ni envoi réel : `node --test _audience/tes
 ## Illustration de l’accueil
 
 Le hero utilise `assets/img/code-to-play-hero.webp` (environ 51 Ko), avec repli JPEG.
-Cette illustration d’ambiance 3D générée par IA n’est pas une capture du jeu : la légende
-précise que le jeu du guide reste en 2D. Les véritables aperçus d’Esquive en Pixels sont
+Cette illustration d’ambiance 3D générée par IA est affichée seule, sans titre ni légende.
+Son texte alternatif précise qu’il ne s’agit pas d’une capture du jeu, qui reste en 2D.
+Les véritables aperçus d’Esquive en Pixels sont
 conservés dans les cartes et sur la page du guide. Aucun script tiers n’est ajouté.
 
 ## Assistant IA — édition locale 2.0
