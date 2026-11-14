@@ -2,7 +2,7 @@ LICENCE MIT — code du site et programmes des guides Quanthevaris
 
 Le texte officiel anglais ci-dessous s'applique au code HTML, CSS et JavaScript
 du site ainsi qu’au code des projets des guides « Esquive en Pixels » et
-« Crée ton assistant IA personnalisé — Python, Ollama et GitHub ».
+« Crée ton assistant IA personnalisé — Python et Ollama ».
 Il ne couvre ni le texte et la maquette du guide, ni les jeux à télécharger
 comme FISSION ARENA, ni les composants tiers ou les poids des modèles (qui conservent leurs licences).
 

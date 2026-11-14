@@ -33,9 +33,9 @@ def synchroniser():
                    lambda m: m[1] + 'Pixel, atelier local Python et Ollama — édition 2.0.' + m[2], fiche)
     schema = re.search(r'<script type="application/ld\+json">(.*?)</script>', fiche, re.S)
     donnees = json.loads(schema[1])
-    donnees.update(name='Crée ton assistant IA personnalisé — Python, Ollama et GitHub',
+    donnees.update(name='Crée ton assistant IA personnalisé — Python et Ollama',
                    description=description, numberOfPages=pages, dateModified='2026-11-14',
-                   version='2.0', keywords='assistant local, eliza, ollama, python, flask, github, tutoriel')
+                   version='2.0', keywords='assistant IA local, ollama, python, flask, eliza, tutoriel')
     fiche = fiche[:schema.start(1)] + '\n' + json.dumps(donnees, ensure_ascii=False, indent=2) + '\n' + fiche[schema.end(1):]
     p.write_text(fiche)
     # Une URL différente force le rechargement après remplacement d’un ancien fichier.

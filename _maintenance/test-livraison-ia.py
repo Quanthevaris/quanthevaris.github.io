@@ -49,7 +49,8 @@ class LivraisonTests(unittest.TestCase):
         r = PdfReader(ROOT / 'guide-assistant-ia.pdf')
         self.assertEqual(version['pages'], len(r.pages))
         self.assertGreaterEqual(len(r.pages), 30)
-        self.assertIn('Ollama', r.metadata.title)
+        self.assertIn('Python et Ollama', r.metadata.title)
+        self.assertNotIn('GitHub', r.metadata.title)
         def compter(signets):
             return sum(compter(s) if isinstance(s, list) else 1 for s in signets)
         self.assertGreater(compter(r.outline), 15)
