@@ -8,217 +8,207 @@
 <meta name="author" content="Quanthevaris">
 <style>
 /* ============ Quanthevaris — « Crée ton assistant IA avec GitHub » ============ */
-/* Document conçu pour l'impression A4 : Ctrl+P → Enregistrer au format PDF.      */
+/* Design sombre plein fond, aligné sur le guide « Esquive en Pixels ».           */
 :root{
-  --ink:#17202a; --muted:#5a6675; --paper:#ffffff;
-  --cyan:#00d2ff; --cyan-dark:#0b7285; --cyan-deep:#086b80;
-  --red:#ff5a5a; --red-dark:#c94141;
-  --code-bg:#f6f8fa; --code-border:#d8dee4; --code-ink:#24292f;
-  --line:#e3e8ee;
+  --page:#070d19; --panel:#0f172a; --panel-deep:#050914;
+  --line:#1e293b; --line-soft:#16213a;
+  --ink:#cbd5e1; --ink-strong:#f1f5f9; --muted:#94a3b8; --faint:#64748b;
+  --cyan:#00d2ff; --cyan-soft:#22d3ee; --red:#ff5a5a;
+  --orange:#fb923c; --green:#86efac; --pink:#f472b6; --violet:#c4b5fd; --sky:#7dd3fc;
 }
 *{ box-sizing:border-box; }
 html{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
 body{
-  margin:0; color:var(--ink); background:var(--paper);
-  font-family:Georgia,'Times New Roman','DejaVu Serif',serif;
-  font-size:11pt; line-height:1.62;
+  margin:0; background:var(--page); color:var(--ink);
+  font-family:'Segoe UI','Helvetica Neue',Arial,'DejaVu Sans',sans-serif;
+  font-size:10.5pt; line-height:1.62;
 }
 
-/* ---------- Pages ---------- */
-@page{
-  size:A4;
-  margin:16mm 15mm 18mm 15mm;
-  @bottom-left{
-    content:"Quanthevaris · Crée ton assistant IA avec GitHub";
-    font-family:'Segoe UI',Arial,sans-serif; font-size:7.5pt; color:#9aa4b0;
-  }
-  @bottom-right{
-    content:counter(page);
-    font-family:'Segoe UI',Arial,sans-serif; font-size:9.5pt; font-weight:700; color:#6b7684;
-  }
+/* ---------- Pages plein fond ---------- */
+@page{ size:A4; margin:0; }
+@media print{
+  html, body{ background:var(--page); }
 }
-@page cover{ margin:0; background:#070d19;
-  @bottom-left{ content:none } @bottom-right{ content:none }
-}
+section, nav.toc{ break-before:page; padding:13mm 13mm 15mm; }
+.cover{ break-before:auto; min-height:296mm; display:flex; flex-direction:column; justify-content:space-between; }
+.backcover{ min-height:296mm; justify-content:center; text-align:center; }
 
-section, nav.toc{ break-before:page; }
-.cover{ break-before:auto; page:cover; }
+/* ---------- Bandeaux d'en-tête et de pied (style « Esquive en Pixels ») ---------- */
+.page-top, .page-foot{
+  display:flex; justify-content:space-between; align-items:baseline; gap:6mm;
+  font-family:'Segoe UI',Arial,sans-serif;
+}
+.page-top{
+  border-bottom:1px solid var(--line); padding-bottom:3mm; margin:0 0 9mm;
+  font-size:8pt; letter-spacing:1.8px; text-transform:uppercase;
+}
+.pt-label{ color:var(--cyan); font-weight:700; }
+.pt-right{ color:var(--faint); font-weight:600; }
+.pt-brand{ display:inline-flex; align-items:center; gap:7px; }
+.pt-brand svg{ width:22px; height:22px; }
+.pt-brand .pt-label{ font-size:11pt; letter-spacing:.4px; text-transform:none; color:var(--ink-strong); font-weight:700; }
+.page-foot{
+  border-top:1px solid var(--line); margin-top:12mm; padding-top:3mm;
+  font-size:7.5pt; letter-spacing:1.6px; text-transform:uppercase; color:var(--faint);
+}
 
 /* ---------- Couverture ---------- */
-.cover{
-  width:210mm; height:297mm; background:#070d19; color:#eaf2fa;
-  display:flex; flex-direction:column; justify-content:space-between;
-  padding:16mm 15mm 12mm;
-  font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;
-  background-image:radial-gradient(circle at 85% 8%, rgba(0,210,255,.14), transparent 42%),
-                   radial-gradient(circle at 8% 92%, rgba(255,90,90,.10), transparent 38%);
-}
-.cover-top{ display:flex; justify-content:space-between; align-items:center; }
-.cover-brand{ display:flex; align-items:center; gap:8px; font-size:12pt; font-weight:700; letter-spacing:.4px; color:#eaf2fa; }
-.cover-brand svg{ width:30px; height:30px; }
-.cover-edition{ font-size:8.5pt; letter-spacing:1.6px; text-transform:uppercase; color:#7f95ab; }
-.cover-kicker{ font-size:9pt; letter-spacing:3px; color:var(--cyan); font-weight:600; margin:0 0 10mm; }
 .cover h1{
-  font-size:33pt; line-height:1.14; margin:0 0 7mm; color:#ffffff; font-weight:800; letter-spacing:-.4px;
+  font-size:29pt; line-height:1.16; margin:6mm 0 5mm; color:var(--ink-strong);
+  font-weight:800; letter-spacing:-.3px; text-transform:uppercase;
 }
 .cover h1 em{ font-style:normal; color:var(--cyan); }
-.cover-sub{ font-size:12pt; line-height:1.55; color:#b8c6d4; margin:0 0 9mm; max-width:150mm; }
-.cover-sub strong{ color:#ffffff; }
-.cover-term{ border:1px solid #1e293b; border-radius:8px; overflow:hidden; width:150mm; background:#04101c; box-shadow:0 10px 30px rgba(0,0,0,.45); }
-.term-bar{ display:flex; align-items:center; gap:5px; background:#0b1a2c; padding:6px 10px; font-size:8pt; color:#7f95ab; border-bottom:1px solid #1e293b; }
-.term-bar span{ width:8px; height:8px; border-radius:50%; background:#233b52; display:inline-block; }
-.term-bar .t{ margin-left:6px; }
-.cover-term pre{ margin:0; padding:11px 13px; background:#04101c; font-family:'Cascadia Code',Consolas,'Courier New',monospace; font-size:8.8pt; line-height:1.65; color:#e6edf3; white-space:pre-wrap; }
-.cover-term .p{ color:var(--cyan); font-weight:700; }
-.cover-term .el{ color:var(--red); font-weight:700; }
-.cover-foot{ display:flex; justify-content:space-between; align-items:flex-end; font-size:8.5pt; color:#7f95ab; border-top:1px solid #16273a; padding-top:5mm; }
-.cover-foot b{ color:#cfe3f2; font-weight:600; letter-spacing:.6px; }
+.cover-badge{
+  display:inline-block; border:1.5px solid var(--cyan); color:var(--cyan);
+  border-radius:20pt; padding:2pt 10pt; font-size:9pt; font-weight:600;
+  letter-spacing:.3px; margin:0 0 6mm;
+}
+.cover-sub{ font-size:12pt; line-height:1.6; color:var(--muted); margin:0 0 9mm; max-width:158mm; }
+.cover-sub strong{ color:var(--ink-strong); }
+.cover-cards{ display:flex; gap:5mm; margin-top:9mm; }
+.cover-cards .card{ flex:1; margin:0; }
+.cover-term{ border:1px solid var(--line-soft); border-radius:8px; overflow:hidden; background:var(--panel-deep); }
+.term-bar{
+  display:flex; justify-content:space-between; align-items:center;
+  background:#0b1220; padding:5px 11px; font-size:8pt; color:var(--muted);
+  border-bottom:1px solid var(--line-soft); font-family:'Segoe UI',Arial,sans-serif;
+}
+.term-bar .tr{ color:var(--faint); letter-spacing:1px; font-size:7.5pt; }
+.cover-term pre{ margin:0; padding:12px 14px; background:var(--panel-deep); font-size:9pt; line-height:1.7; }
 
 /* ---------- Typographie intérieure ---------- */
-h1,h2,h3,h4,.sans{ font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif; }
-h1.chapter{ font-size:21pt; line-height:1.2; margin:0 0 3mm; color:#10161f; font-weight:800; letter-spacing:-.2px; }
+h1.chapter{ font-size:22pt; line-height:1.18; margin:0 0 3mm; color:var(--ink-strong); font-weight:800; letter-spacing:-.2px; }
 .chaplabel{
-  font-size:8.5pt; letter-spacing:2.6px; text-transform:uppercase; color:var(--cyan-dark);
+  font-size:9pt; letter-spacing:2.6px; text-transform:uppercase; color:var(--cyan);
   font-weight:700; margin:0 0 2.5mm;
 }
-.lede{ font-size:11.5pt; color:var(--muted); font-style:italic; line-height:1.55; margin:0 0 4mm; }
-.chapter-head{ border-bottom:2.5pt solid #070d19; padding-bottom:4mm; margin-bottom:6mm; }
-h2{ font-size:13pt; color:var(--cyan-deep); margin:7mm 0 2.8mm; font-weight:750; letter-spacing:-.1px; }
-h2 .n{ color:#b7c2cc; font-weight:600; margin-right:4pt; }
-h3{ font-size:10.8pt; color:#10161f; margin:4.5mm 0 1.8mm; font-weight:700; }
-p{ margin:0 0 3.4mm; text-align:justify; hyphens:auto; }
-ul,ol{ margin:0 0 3.6mm; padding-left:6.5mm; }
-li{ margin-bottom:1.6mm; text-align:justify; }
-a{ color:var(--cyan-deep); text-decoration:none; border-bottom:.5pt solid #b9c4cd; }
-strong{ color:#0d141d; }
-hr.thin{ border:0; border-top:.8pt solid var(--line); margin:5mm 0; }
+.lede{ font-size:11.5pt; color:var(--muted); line-height:1.55; margin:0 0 4mm; }
+.chapter-head{ border-bottom:1px solid var(--line); padding-bottom:3.5mm; margin-bottom:6mm; }
+h2{ font-size:13.5pt; color:var(--ink-strong); margin:8mm 0 3mm; font-weight:750; }
+h2 .n{ color:var(--cyan-soft); font-weight:700; margin-right:4pt; }
+h3{ font-size:11.5pt; color:var(--ink-strong); margin:6mm 0 2mm; font-weight:700; }
+p{ margin:0 0 3.4mm; }
+strong{ color:var(--ink-strong); }
+a{ color:var(--cyan); text-decoration:underline; text-underline-offset:2px; }
+hr.thin{ border:0; border-top:1px solid var(--line); margin:6mm 0; }
+em{ color:var(--ink); }
 
 /* ---------- Code ---------- */
 pre{
-  background:var(--code-bg); border:1px solid var(--code-border); border-radius:6pt;
-  padding:7pt 9pt; margin:3.5mm 0;
+  background:var(--panel-deep); border:1px solid var(--line-soft); border-left:3px solid var(--cyan);
+  border-radius:6px; padding:8pt 10pt; margin:3.5mm 0;
   font-family:'Cascadia Code',Consolas,'Courier New',monospace;
-  font-size:9pt; line-height:1.55; color:var(--code-ink); white-space:pre-wrap;
+  font-size:8.7pt; line-height:1.5; color:#e2e8f0; white-space:pre-wrap;
 }
-pre .c{ color:#8b949e; font-style:italic; }
-section[id^='annexe'] pre{ font-size:8.3pt; line-height:1.45; }        /* commentaire */
-pre .s{ color:#8a4a0b; }                            /* chaîne */
-pre .k{ color:#b03a7e; font-weight:600; }           /* mot-clé */
-pre .f{ color:#0b7285; }                            /* fonction */
+pre .c{ color:var(--faint); font-style:italic; }
+pre .s{ color:var(--green); }
+pre .k{ color:var(--pink); font-weight:600; }
+pre .f{ color:var(--sky); }
 code{
   font-family:'Cascadia Code',Consolas,'Courier New',monospace; font-size:9.5pt;
-  background:#eef1f4; border-radius:3pt; padding:0 3pt; color:#24292f;
+  background:#101b30; border:1px solid var(--line-soft); border-radius:3pt; padding:0 3pt; color:#e2e8f0;
 }
-pre code{ background:none; padding:0; font-size:inherit; }
-pre.term{ background:#0d1117; border-color:#0d1117; color:#c9d1d9; }
-pre.term .p{ color:#00d2ff; font-weight:700; }
-pre.term .ok{ color:#7ee787; }
+pre code{ background:none; border:0; padding:0; font-size:inherit; }
+pre.term .p{ color:var(--cyan); font-weight:700; }
+pre.term .ok{ color:var(--green); }
+section[id^='annexe'] pre{ font-size:8.3pt; line-height:1.45; }
 
-/* ---------- Encadrés ---------- */
-.box{ border-radius:5pt; padding:6pt 10pt; margin:4mm 0; break-inside:avoid; border:1px solid; }
+/* ---------- Cartes et encadrés ---------- */
+.box, .card{
+  background:var(--panel); border:1px solid var(--line-soft); border-left:3px solid var(--cyan);
+  border-radius:8px; padding:7pt 11pt; margin:4mm 0; break-inside:avoid;
+}
+.card h3{ margin:0 0 1.6mm; font-size:10.5pt; color:var(--ink-strong); }
+.card p{ margin:0; color:var(--ink); }
 .box .box-label{
-  font-family:'Segoe UI',Arial,sans-serif; font-size:8pt; font-weight:800;
-  letter-spacing:1.8px; text-transform:uppercase; margin:0 0 1.6mm;
+  font-size:8pt; font-weight:800; letter-spacing:1.8px; text-transform:uppercase;
+  margin:0 0 1.6mm; color:var(--cyan);
 }
 .box p:last-child, .box ul:last-child{ margin-bottom:0; }
-.tip{ border-color:#bfe4d1; background:#f2fbf7; } .tip .box-label{ color:#0f7b4f; }
-.warn{ border-color:#f0c8b8; background:#fdf4ef; } .warn .box-label{ color:#b0430f; }
-.info{ border-color:#bcd9f0; background:#f1f7fd; } .info .box-label{ color:#0b5cad; }
-.key{ border-color:#d5cbf0; background:#f6f3fc; } .key .box-label{ color:#5b3fa8; }
-.story{ border-color:#d8dee4; background:#fbfcfd; font-style:italic; color:#3a4653; }
+.warn{ border-left-color:var(--orange); } .warn .box-label{ color:var(--orange); }
+.info{ border-left-color:var(--sky); } .info .box-label{ color:var(--sky); }
+.key{ border-left-color:var(--violet); } .key .box-label{ color:var(--violet); }
+.story{ border-left-color:var(--faint); }
+.story .box-label{ color:var(--muted); }
+.story p{ font-style:italic; color:var(--muted); }
 
 /* ---------- Dialogues ---------- */
-.chat{ border:1px solid #dfe5ea; border-radius:6pt; background:#fbfcfd; padding:7pt 10pt; margin:3.5mm 0; break-inside:avoid; }
-.chat .line{ margin:3pt 0; font-family:'Cascadia Code',Consolas,monospace; font-size:9.2pt; line-height:1.55; }
+.chat{
+  background:var(--panel-deep); border:1px solid var(--line-soft); border-left:3px solid var(--cyan);
+  border-radius:6px; padding:7pt 10pt; margin:3.5mm 0; break-inside:avoid;
+}
+.chat .line{ margin:2.6pt 0; font-family:'Cascadia Code',Consolas,monospace; font-size:9pt; line-height:1.5; }
 .chat .who{ font-weight:800; }
-.chat .toi .who{ color:var(--cyan-dark); }
-.chat .eliza .who{ color:var(--red-dark); }
+.chat .toi .who{ color:var(--cyan); }
+.chat .eliza .who{ color:var(--red); }
 
 /* ---------- Tableaux ---------- */
-table{ width:100%; border-collapse:collapse; margin:4mm 0; font-size:9.6pt; font-family:'Segoe UI',Arial,sans-serif; }
-th{ background:#eef2f6; text-align:left; padding:4.5pt 6.5pt; border:1px solid #d3dae1; font-size:8.6pt; letter-spacing:.6px; text-transform:uppercase; color:#3d4956; }
-td{ padding:4.5pt 6.5pt; border:1px solid #d3dae1; vertical-align:top; }
-tr:nth-child(even) td{ background:#fafbfc; }
+table{
+  width:100%; border-collapse:collapse; margin:4mm 0; font-size:9.6pt;
+  font-family:'Segoe UI',Arial,sans-serif; border:1px solid var(--line);
+}
+th{
+  background:#111e38; text-align:left; padding:5pt 7pt; border:1px solid var(--line);
+  font-size:8.4pt; letter-spacing:1px; text-transform:uppercase; color:var(--ink-strong); font-weight:700;
+}
+td{ padding:5pt 7pt; border:1px solid var(--line); vertical-align:top; color:var(--ink); }
+tr:nth-child(even) td{ background:#0a1220; }
+td strong{ color:var(--ink-strong); }
 
 /* ---------- Sommaire ---------- */
-nav.toc h1{ font-size:20pt; margin:0 0 5mm; font-weight:800; }
-.toc ol{ list-style:none; padding:0; margin:0; font-family:'Segoe UI',Arial,sans-serif; }
-.toc li{ margin:0; border-bottom:.6pt dotted #ccd4dc; }
-.toc a{ display:flex; justify-content:space-between; gap:6mm; padding:2.8mm 0; border-bottom:none; color:var(--ink); }
-.toc .t{ font-weight:600; }
+nav.toc h1{ font-size:20pt; margin:0 0 6mm; font-weight:800; color:var(--ink-strong); }
+.toc ol{
+  list-style:none; padding:0; margin:0; columns:2; column-gap:9mm;
+  font-family:'Segoe UI',Arial,sans-serif;
+}
+.toc li{ margin:0 0 4.6mm; break-inside:avoid; }
+.toc a{ display:block; text-decoration:none; color:var(--ink); }
+.toc .t{ display:block; font-weight:700; color:var(--cyan); text-decoration:underline; text-underline-offset:2px; font-size:10.5pt; }
 .toc .d{ display:block; font-weight:400; font-size:9pt; color:var(--muted); margin-top:.8mm; }
-.toc .pg{ font-weight:700; color:var(--cyan-deep); white-space:nowrap; font-size:10pt; }
-.toc .part{ margin-top:5mm; font-size:8.5pt; letter-spacing:2px; text-transform:uppercase; color:var(--muted); border-bottom:none; padding-bottom:1mm; }
-.toc .part:first-child{ margin-top:0; }
+.toc .pg{ float:right; font-weight:700; color:var(--faint); font-size:9.5pt; }
+.toc .part{
+  margin:0 0 4.6mm; font-size:8.5pt; letter-spacing:2px; text-transform:uppercase;
+  color:var(--faint); font-weight:700; break-inside:avoid;
+}
 
 /* ---------- Divers ---------- */
 .fig-arch{
-  border:1px solid #d8dee4; border-radius:6pt; background:#fbfcfd; padding:8pt 10pt;
-  font-family:'Cascadia Code',Consolas,monospace; font-size:8.6pt; line-height:1.55;
-  white-space:pre; overflow:hidden; margin:4mm 0; break-inside:avoid; color:#33404e;
+  background:var(--panel-deep); border:1px solid var(--line-soft); border-left:3px solid var(--cyan);
+  border-radius:6px; padding:8pt 10pt; font-family:'Cascadia Code',Consolas,monospace;
+  font-size:8.6pt; line-height:1.55; white-space:pre; overflow:hidden; margin:4mm 0;
+  break-inside:avoid; color:var(--ink);
 }
 .checklist{ list-style:none; padding-left:0; }
 .checklist li{ padding-left:7mm; position:relative; }
-.checklist li::before{ content:"☐"; position:absolute; left:0; color:var(--cyan-deep); font-size:11pt; }
-.page-final{ text-align:center; }
-.backcover{
-  page:cover; background:#070d19; color:#b8c6d4; width:210mm; height:297mm;
-  display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;
-  font-family:'Segoe UI',Arial,sans-serif; padding:20mm;
-  background-image:radial-gradient(circle at 50% 40%, rgba(0,210,255,.10), transparent 45%);
-}
-.backcover h2{ color:#fff; font-size:16pt; margin-bottom:4mm; }
-.backcover p{ max-width:120mm; text-align:center; }
-.backcover .logo-line{ margin-bottom:8mm; }
+.checklist li::before{ content:"☐"; position:absolute; left:0; color:var(--cyan); font-size:11pt; }
 .badge-row{ display:flex; gap:6pt; flex-wrap:wrap; margin:2mm 0 4mm; }
-
-/* ---------- Présentation à l'écran : pages « papier » centrées ---------- */
-@media screen{
-  body{ background:#14181f; padding:26px 12px 70px; }
-  body::before{
-    content:"Guide Quanthevaris · présentation page à page. Pour le PDF : bouton en bas à droite, ou Ctrl+P.";
-    display:block; max-width:210mm; margin:0 auto 18px;
-    font-family:'Segoe UI',Arial,sans-serif; font-size:12px; color:#8fa1b3; text-align:center;
-  }
-  section, nav.toc{
-    width:210mm; max-width:100%; margin:0 auto 26px;
-    background:var(--paper); box-shadow:0 6px 30px rgba(0,0,0,.5); border-radius:3px;
-  }
-  section:not(.cover):not(.backcover), nav.toc{ padding:15mm 15mm 18mm; }
-  .cover, .backcover{ box-shadow:0 6px 30px rgba(0,0,0,.5); border-radius:3px; }
-  .noprint-btn{
-    position:fixed; right:22px; bottom:22px; z-index:9;
-    font-family:'Segoe UI',Arial,sans-serif; font-size:13px; font-weight:700;
-    color:#04101c; background:#00d2ff; border:0; border-radius:24px;
-    padding:11px 18px; cursor:pointer; box-shadow:0 4px 16px rgba(0,0,0,.45);
-  }
-  .noprint-btn:hover{ background:#3ddcff; }
-}
-@media print{ .noprint-btn{ display:none; } }
 .badge{
-  font-family:'Segoe UI',Arial,sans-serif; font-size:7.8pt; font-weight:700; letter-spacing:.8px;
-  border:1pt solid #cfe0ee; color:#0b6172; border-radius:20pt; padding:1.6pt 7pt; background:#f0f9fc;
+  font-size:8pt; font-weight:600; letter-spacing:.4px;
+  border:1.5px solid var(--cyan); color:var(--cyan); border-radius:20pt;
+  padding:2pt 10pt; background:none;
 }
+.backcover h2{ color:var(--ink-strong); font-size:16pt; margin-bottom:4mm; }
+.backcover p{ max-width:120mm; margin:0 auto 3mm; color:var(--muted); }
+.backcover .logo-line{ margin-bottom:8mm; }
+.backcover .mentions{ margin-top:10mm; color:var(--faint); font-size:8.5pt; }
 
 /* ---------- Présentation à l'écran : pages « papier » centrées ---------- */
 @media screen{
-  body{ background:#14181f; padding:26px 12px 70px; }
+  body{ background:#04070d; padding:26px 12px 70px; }
   body::before{
-    content:"Guide Quanthevaris · présentation page à page. Pour le PDF : bouton en bas à droite, ou Ctrl+P.";
+    content:"Guide Quanthevaris · présentation page à page. Pour le PDF : bouton en bas à droite, ou Ctrl+P (coche « Graphiques d'arrière-plan »).";
     display:block; max-width:210mm; margin:0 auto 18px;
-    font-family:'Segoe UI',Arial,sans-serif; font-size:12px; color:#8fa1b3; text-align:center;
+    font-family:'Segoe UI',Arial,sans-serif; font-size:12px; color:var(--faint); text-align:center;
   }
   section, nav.toc{
     width:210mm; max-width:100%; margin:0 auto 26px;
-    background:var(--paper); box-shadow:0 6px 30px rgba(0,0,0,.5); border-radius:3px;
+    background:var(--page); box-shadow:0 6px 34px rgba(0,0,0,.65); border-radius:3px;
   }
-  section:not(.cover):not(.backcover), nav.toc{ padding:15mm 15mm 18mm; }
-  .cover, .backcover{ box-shadow:0 6px 30px rgba(0,0,0,.5); border-radius:3px; }
   .noprint-btn{
     position:fixed; right:22px; bottom:22px; z-index:9;
     font-family:'Segoe UI',Arial,sans-serif; font-size:13px; font-weight:700;
-    color:#04101c; background:#00d2ff; border:0; border-radius:24px;
-    padding:11px 18px; cursor:pointer; box-shadow:0 4px 16px rgba(0,0,0,.45);
+    color:#04101c; background:var(--cyan); border:0; border-radius:24px;
+    padding:11px 18px; cursor:pointer; box-shadow:0 4px 16px rgba(0,0,0,.55);
   }
   .noprint-btn:hover{ background:#3ddcff; }
 }
@@ -230,25 +220,25 @@ nav.toc h1{ font-size:20pt; margin:0 0 5mm; font-weight:800; }
 
 <!-- ================= COUVERTURE ================= -->
 <section class="cover">
-  <div class="cover-top">
-    <div class="cover-brand">
-      <svg viewBox="0 0 32 32" aria-hidden="true">
+  <div class="page-top">
+    <span class="pt-brand">
+      <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
         <rect width="32" height="32" rx="8" fill="#04101c"/>
         <rect x=".5" y=".5" width="31" height="31" rx="7.5" fill="none" stroke="#1e293b"/>
         <circle cx="16" cy="16" r="9.4" fill="none" stroke="#00d2ff" stroke-width="3.3"/>
         <rect x="21.2" y="21.2" width="7" height="7" rx="1.8" fill="#ff5a5a"/>
       </svg>
-      Quanthevaris
-    </div>
-    <div class="cover-edition">Édition 2026 · Guide gratuit</div>
+      <span class="pt-label">Quanthevaris</span>
+    </span>
+    <span class="pt-right">Guide pratique · Édition 2026</span>
   </div>
 
   <div class="cover-mid">
-    <p class="cover-kicker">GUIDE PRATIQUE · PAS À PAS · SANS PRÉREQUIS</p>
-    <h1>Crée ton assistant IA personnalisé <em>avec GitHub</em></h1>
+    <p class="cover-badge">Aucune expérience en IA requise</p>
+    <h1>Crée ton assistant IA<br>personnalisé <em>avec GitHub</em></h1>
     <p class="cover-sub">De <strong>ELIZA</strong>, le tout premier chatbot de l'histoire (1966), aux modèles de langage d'aujourd'hui&nbsp;: recode la machine qui a tout commencé, puis branche, déploie et personnalise ton propre assistant intelligent.</p>
     <div class="cover-term">
-      <div class="term-bar"><span></span><span></span><span></span><span class="t">eliza.py</span></div>
+      <div class="term-bar"><span>eliza.py — première session</span><span class="tr">1966 → 2026</span></div>
       <pre><span class="p">$</span> python eliza.py
 <span class="el">ELIZA</span> &gt; Bonjour. Je suis ELIZA. Raconte-moi ton problème.
 <span class="p">Toi</span>   &gt; j'ai peur de parler aux machines
@@ -256,16 +246,27 @@ nav.toc h1{ font-size:20pt; margin:0 0 5mm; font-weight:800; }
 <span class="p">Toi</span>   &gt; depuis que j'ai lu ce guide...
 <span class="el">ELIZA</span> &gt; Et que t'importe ce guide ?</pre>
     </div>
+    <div class="cover-cards">
+      <div class="card">
+        <h3>Ton objectif</h3>
+        <p>Recode le chatbot de 1966, comprends comment une machine «&nbsp;pense&nbsp;», puis branches un vrai modèle de langage sur ton propre assistant.</p>
+      </div>
+      <div class="card">
+        <h3>Ton résultat</h3>
+        <p>Un assistant IA à ta personnalité, un dépôt GitHub propre et testé, un site en ligne — et l'histoire du tout premier chatbot.</p>
+      </div>
+    </div>
   </div>
 
-  <div class="cover-foot">
-    <span><b>Python · HTML/CSS · GitHub Pages · GitHub Models · GitHub Actions</b><br>Deux projets complets, du code au dépôt en ligne.</span>
-    <span style="text-align:right">Quanthevaris<br>quanthevaris.github.io</span>
+  <div class="page-foot">
+    <span>Édition pédagogique · Quanthevaris</span>
+    <span>quanthevaris.github.io</span>
   </div>
 </section>
 
 <!-- ================= À PROPOS ================= -->
 <section class="page-about">
+  <div class="page-top"><span class="pt-label">Assistant IA · Guide pratique</span><span class="pt-right">Édition 2026</span></div>
   <div class="chapter-head">
     <p class="chaplabel">Avant de commencer</p>
     <h1 class="chapter">À propos de ce guide</h1>
@@ -309,33 +310,36 @@ nav.toc h1{ font-size:20pt; margin:0 0 5mm; font-weight:800; }
   </div>
 
   <p style="margin-top:4mm; font-size:9.1pt; color:var(--muted);">Texte&nbsp;: © Quanthevaris. Codes des projets sous <strong>licence MIT</strong>&nbsp;: libre à toi de les utiliser et de les partager, mention d'origine conservée.</p>
-</section>
+
+  <div class="page-foot"><span>Assistant IA · Édition pédagogique</span><span>Quanthevaris</span></div></section>
 
 <!-- ================= SOMMAIRE ================= -->
 <nav class="toc">
+  <div class="page-top"><span class="pt-label">Assistant IA · Guide pratique</span><span class="pt-right">Édition 2026</span></div>
   <h1>Sommaire</h1>
   <ol>
-    <li><a><span class="t">1. ELIZA naît au MIT <span class="d">Le récit du tout premier chatbot, de 1964 à aujourd'hui.</span></span><span class="pg" data-ch="1">6</span></a></li>
-    <li><a><span class="t">2. Sous le capot&nbsp;: comment «&nbsp;pense&nbsp;» un chatbot <span class="d">Mots-clés, reformulations… et ce qui a changé avec les LLM.</span></span><span class="pg" data-ch="2">9</span></a></li>
-    <li><a><span class="t">3. Ton atelier de développement <span class="d">Compte GitHub, Git, Python, VS Code — tout s'installe gratuitement.</span></span><span class="pg" data-ch="3">12</span></a></li>
-    <li><a><span class="t">4. GitHub, la boîte à outils de ton assistant <span class="d">Pages, Codespaces, Actions, Models, Copilot&nbsp;: la visite guidée.</span></span><span class="pg" data-ch="4">15</span></a></li>
-    <li><a><span class="t">5. Projet n°&nbsp;1 — Recoder ELIZA en Python <span class="d">Le moteur de 1966, réimplémenté ligne par ligne, puis testé.</span></span><span class="pg" data-ch="5">18</span></a></li>
-    <li><a><span class="t">6. Projet n°&nbsp;2 — Un assistant moderne branché sur les LLM <span class="d">Token GitHub, serveur Flask, interface web de chat.</span></span><span class="pg" data-ch="6">23</span></a></li>
-    <li><a><span class="t">7. Rends-le unique&nbsp;: personnaliser ton assistant <span class="d">Persona, mémoire, base de connaissances, outils.</span></span><span class="pg" data-ch="7">27</span></a></li>
-    <li><a><span class="t">8. Publier et automatiser <span class="d">GitHub Pages, GitHub Actions, secrets et bonnes pratiques Git.</span></span><span class="pg" data-ch="8">30</span></a></li>
-    <li><a><span class="t">9. Éthique, sécurité et limites <span class="d">L'effet ELIZA aujourd'hui, données personnelles, hallucinations.</span></span><span class="pg" data-ch="9">33</span></a></li>
-    <li><a><span class="t">10. Aller plus loin <span class="d">Voix, outils, modèles locaux… et ta liste de ressources.</span></span><span class="pg" data-ch="10">35</span></a></li>
+    <li><a><span class="t">1. ELIZA naît au MIT <span class="d">Le récit du tout premier chatbot, de 1964 à aujourd'hui.</span></span><span class="pg" data-ch="1">5</span></a></li>
+    <li><a><span class="t">2. Sous le capot&nbsp;: comment «&nbsp;pense&nbsp;» un chatbot <span class="d">Mots-clés, reformulations… et ce qui a changé avec les LLM.</span></span><span class="pg" data-ch="2">8</span></a></li>
+    <li><a><span class="t">3. Ton atelier de développement <span class="d">Compte GitHub, Git, Python, VS Code — tout s'installe gratuitement.</span></span><span class="pg" data-ch="3">11</span></a></li>
+    <li><a><span class="t">4. GitHub, la boîte à outils de ton assistant <span class="d">Pages, Codespaces, Actions, Models, Copilot&nbsp;: la visite guidée.</span></span><span class="pg" data-ch="4">14</span></a></li>
+    <li><a><span class="t">5. Projet n°&nbsp;1 — Recoder ELIZA en Python <span class="d">Le moteur de 1966, réimplémenté ligne par ligne, puis testé.</span></span><span class="pg" data-ch="5">17</span></a></li>
+    <li><a><span class="t">6. Projet n°&nbsp;2 — Un assistant moderne branché sur les LLM <span class="d">Token GitHub, serveur Flask, interface web de chat.</span></span><span class="pg" data-ch="6">22</span></a></li>
+    <li><a><span class="t">7. Rends-le unique&nbsp;: personnaliser ton assistant <span class="d">Persona, mémoire, base de connaissances, outils.</span></span><span class="pg" data-ch="7">26</span></a></li>
+    <li><a><span class="t">8. Publier et automatiser <span class="d">GitHub Pages, GitHub Actions, secrets et bonnes pratiques Git.</span></span><span class="pg" data-ch="8">29</span></a></li>
+    <li><a><span class="t">9. Éthique, sécurité et limites <span class="d">L'effet ELIZA aujourd'hui, données personnelles, hallucinations.</span></span><span class="pg" data-ch="9">32</span></a></li>
+    <li><a><span class="t">10. Aller plus loin <span class="d">Voix, outils, modèles locaux… et ta liste de ressources.</span></span><span class="pg" data-ch="10">34</span></a></li>
     <li class="part">Annexes</li>
-    <li><a><span class="t">A. Code complet d'ELIZA en Python <span class="d">Le fichier eliza.py final, prêt à copier.</span></span><span class="pg" data-ch="A">38</span></a></li>
-    <li><a><span class="t">B. ELIZA dans le navigateur <span class="d">Le même moteur en HTML + JavaScript.</span></span><span class="pg" data-ch="B">41</span></a></li>
-    <li><a><span class="t">C. Le serveur complet (Flask + GitHub Models) <span class="d">Le backend du projet n°&nbsp;2, prêt à l'emploi.</span></span><span class="pg" data-ch="C">43</span></a></li>
-    <li><a><span class="t">D. Fiche de dépannage <span class="d">Les erreurs les plus courantes, et leur solution.</span></span><span class="pg" data-ch="D">46</span></a></li>
-    <li><a><span class="t">Glossaire <span class="d">Les mots de l'IA, expliqués simplement.</span></span><span class="pg" data-ch="G">47</span></a></li>
+    <li><a><span class="t">A. Code complet d'ELIZA en Python <span class="d">Le fichier eliza.py final, prêt à copier.</span></span><span class="pg" data-ch="A">37</span></a></li>
+    <li><a><span class="t">B. ELIZA dans le navigateur <span class="d">Le même moteur en HTML + JavaScript.</span></span><span class="pg" data-ch="B">40</span></a></li>
+    <li><a><span class="t">C. Le serveur complet (Flask + GitHub Models) <span class="d">Le backend du projet n°&nbsp;2, prêt à l'emploi.</span></span><span class="pg" data-ch="C">42</span></a></li>
+    <li><a><span class="t">D. Fiche de dépannage <span class="d">Les erreurs les plus courantes, et leur solution.</span></span><span class="pg" data-ch="D">45</span></a></li>
+    <li><a><span class="t">Glossaire <span class="d">Les mots de l'IA, expliqués simplement.</span></span><span class="pg" data-ch="G">46</span></a></li>
   </ol>
 </nav>
 
 <!-- ================= CHAPITRE 1 ================= -->
 <section class="chapter" id="ch1">
+  <div class="page-top"><span class="pt-label">Assistant IA · Guide pratique</span><span class="pt-right">Édition 2026</span></div>
   <div class="chapter-head">
     <p class="chaplabel">Chapitre 1 · Récit</p>
     <h1 class="chapter">ELIZA naît au MIT</h1>
@@ -395,10 +399,12 @@ nav.toc h1{ font-size:20pt; margin:0 0 5mm; font-weight:800; }
       <li>ELIZA est née d'un simple jeu de règles&nbsp;: c'est précisément ce qui va te permettre de la recoder.</li>
     </ul>
   </div>
-</section>
+
+  <div class="page-foot"><span>Assistant IA · Édition pédagogique</span><span>Quanthevaris</span></div></section>
 
 <!-- ================= CHAPITRE 2 ================= -->
 <section class="chapter" id="ch2">
+  <div class="page-top"><span class="pt-label">Assistant IA · Guide pratique</span><span class="pt-right">Édition 2026</span></div>
   <div class="chapter-head">
     <p class="chaplabel">Chapitre 2 · Comprendre</p>
     <h1 class="chapter">Sous le capot&nbsp;: comment «&nbsp;pense&nbsp;» un chatbot</h1>
@@ -453,10 +459,12 @@ nav.toc h1{ font-size:20pt; margin:0 0 5mm; font-weight:800; }
       <li>Ni l'un ni l'autre ne «&nbsp;comprennent&nbsp;»&nbsp;: l'illusion de compréhension, elle, est bien réelle — méfie-toi d'elle au chapitre 9.</li>
     </ul>
   </div>
-</section>
+
+  <div class="page-foot"><span>Assistant IA · Édition pédagogique</span><span>Quanthevaris</span></div></section>
 
 <!-- ================= CHAPITRE 3 ================= -->
 <section class="chapter" id="ch3">
+  <div class="page-top"><span class="pt-label">Assistant IA · Guide pratique</span><span class="pt-right">Édition 2026</span></div>
   <div class="chapter-head">
     <p class="chaplabel">Chapitre 3 · Installation</p>
     <h1 class="chapter">Ton atelier de développement</h1>
@@ -528,10 +536,12 @@ venv/
       <li>Le <code>.gitignore</code> protège ton dépôt des fichiers indésirables — bientôt, des fichiers <em>sensibles</em>.</li>
     </ul>
   </div>
-</section>
+
+  <div class="page-foot"><span>Assistant IA · Édition pédagogique</span><span>Quanthevaris</span></div></section>
 
 <!-- ================= CHAPITRE 4 ================= -->
 <section class="chapter" id="ch4">
+  <div class="page-top"><span class="pt-label">Assistant IA · Guide pratique</span><span class="pt-right">Édition 2026</span></div>
   <div class="chapter-head">
     <p class="chaplabel">Chapitre 4 · Découverte</p>
     <h1 class="chapter">GitHub, la boîte à outils de ton assistant</h1>
@@ -603,10 +613,12 @@ venv/
       <li>Le PAT est ta clé&nbsp;: permission minimale (<strong>Models: Read</strong>), durée de vie courte, jamais versionné.</li>
     </ul>
   </div>
-</section>
+
+  <div class="page-foot"><span>Assistant IA · Édition pédagogique</span><span>Quanthevaris</span></div></section>
 
 <!-- ================= CHAPITRE 5 ================= -->
 <section class="chapter" id="ch5">
+  <div class="page-top"><span class="pt-label">Assistant IA · Guide pratique</span><span class="pt-right">Édition 2026</span></div>
   <div class="chapter-head">
     <p class="chaplabel">Chapitre 5 · Projet n°&nbsp;1</p>
     <h1 class="chapter">Recoder ELIZA en Python</h1>
@@ -789,10 +801,12 @@ from eliza import repondre, reflechir</span>
       <li>Le listing complet est en <strong>annexe A</strong>, la version navigateur en <strong>annexe B</strong>.</li>
     </ul>
   </div>
-</section>
+
+  <div class="page-foot"><span>Assistant IA · Édition pédagogique</span><span>Quanthevaris</span></div></section>
 
 <!-- ================= CHAPITRE 6 ================= -->
 <section class="chapter" id="ch6">
+  <div class="page-top"><span class="pt-label">Assistant IA · Guide pratique</span><span class="pt-right">Édition 2026</span></div>
   <div class="chapter-head">
     <p class="chaplabel">Chapitre 6 · Projet n°&nbsp;2</p>
     <h1 class="chapter">Un assistant moderne branché sur les LLM</h1>
@@ -935,10 +949,12 @@ document.getElementById(<span class="s">"form"</span>).addEventListener(<span cl
       <li>La personnalité tient dans une chaîne de caractères&nbsp;: le prompt système, ton levier favori — au chapitre suivant.</li>
     </ul>
   </div>
-</section>
+
+  <div class="page-foot"><span>Assistant IA · Édition pédagogique</span><span>Quanthevaris</span></div></section>
 
 <!-- ================= CHAPITRE 7 ================= -->
 <section class="chapter" id="ch7">
+  <div class="page-top"><span class="pt-label">Assistant IA · Guide pratique</span><span class="pt-right">Édition 2026</span></div>
   <div class="chapter-head">
     <p class="chaplabel">Chapitre 7 · Personnalisation</p>
     <h1 class="chapter">Rends-le unique&nbsp;: personnaliser ton assistant</h1>
@@ -1025,10 +1041,12 @@ document.getElementById(<span class="s">"form"</span>).addEventListener(<span cl
       <li>Le function calling transforme un bavard en agent — sous garde-fous.</li>
     </ul>
   </div>
-</section>
+
+  <div class="page-foot"><span>Assistant IA · Édition pédagogique</span><span>Quanthevaris</span></div></section>
 
 <!-- ================= CHAPITRE 8 ================= -->
 <section class="chapter" id="ch8">
+  <div class="page-top"><span class="pt-label">Assistant IA · Guide pratique</span><span class="pt-right">Édition 2026</span></div>
   <div class="chapter-head">
     <p class="chaplabel">Chapitre 8 · Publication</p>
     <h1 class="chapter">Publier et automatiser&nbsp;: Pages, Actions et Cie</h1>
@@ -1116,10 +1134,12 @@ jobs:
       <li>Branches + pull requests + tags = un dépôt qui reste propre pendant des années.</li>
     </ul>
   </div>
-</section>
+
+  <div class="page-foot"><span>Assistant IA · Édition pédagogique</span><span>Quanthevaris</span></div></section>
 
 <!-- ================= CHAPITRE 9 ================= -->
 <section class="chapter" id="ch9">
+  <div class="page-top"><span class="pt-label">Assistant IA · Guide pratique</span><span class="pt-right">Édition 2026</span></div>
   <div class="chapter-head">
     <p class="chaplabel">Chapitre 9 · Responsabilité</p>
     <h1 class="chapter">Éthique, sécurité et limites</h1>
@@ -1152,10 +1172,12 @@ jobs:
       <li>Une hallucination se prévient par la température, le RAG et la vérification.</li>
     </ul>
   </div>
-</section>
+
+  <div class="page-foot"><span>Assistant IA · Édition pédagogique</span><span>Quanthevaris</span></div></section>
 
 <!-- ================= CHAPITRE 10 ================= -->
 <section class="chapter" id="ch10">
+  <div class="page-top"><span class="pt-label">Assistant IA · Guide pratique</span><span class="pt-right">Édition 2026</span></div>
   <div class="chapter-head">
     <p class="chaplabel">Chapitre 10 · Horizon</p>
     <h1 class="chapter">Aller plus loin</h1>
@@ -1221,11 +1243,13 @@ MODELE = <span class="s">"llama3.2"</span>  <span class="c"># téléchargé par 
     <p class="box-label" style="color:#3a4653;">Mot de la fin</p>
     <p>En 1966, une machine reformulait des phrases et le monde y voyait un esprit. Tu as recréé cette machine, puis tu as posé dessus soixante ans de progrès&nbsp;: un modèle statistique géant, un serveur, un site, des tests. Reste la leçon de Weizenbaum, la seule qui ne périme pas&nbsp;: la technique impressionne, la prudence grandit. Fais des machines qui parlent — et garde toi-même le jugement.</p>
   </div>
-</section>
+
+  <div class="page-foot"><span>Assistant IA · Édition pédagogique</span><span>Quanthevaris</span></div></section>
 
 
 <!-- ================= ANNEXE A ================= -->
 <section class="chapter" id="annexe-a">
+  <div class="page-top"><span class="pt-label">Assistant IA · Guide pratique</span><span class="pt-right">Édition 2026</span></div>
   <div class="chapter-head">
     <p class="chaplabel">Annexe A</p>
     <h1 class="chapter">Code complet d'ELIZA en Python</h1>
@@ -1366,10 +1390,12 @@ def main():
 if __name__ == &quot;__main__&quot;:
     main()
 </code></pre>
-</section>
+
+  <div class="page-foot"><span>Assistant IA · Édition pédagogique</span><span>Quanthevaris</span></div></section>
 
 <!-- ================= ANNEXE B ================= -->
 <section class="chapter" id="annexe-b">
+  <div class="page-top"><span class="pt-label">Assistant IA · Guide pratique</span><span class="pt-right">Édition 2026</span></div>
   <div class="chapter-head">
     <p class="chaplabel">Annexe B</p>
     <h1 class="chapter">ELIZA dans le navigateur</h1>
@@ -1475,10 +1501,12 @@ document.getElementById(&quot;form&quot;).addEventListener(&quot;submit&quot;, (
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-</section>
+
+  <div class="page-foot"><span>Assistant IA · Édition pédagogique</span><span>Quanthevaris</span></div></section>
 
 <!-- ================= ANNEXE C ================= -->
 <section class="chapter" id="annexe-c">
+  <div class="page-top"><span class="pt-label">Assistant IA · Guide pratique</span><span class="pt-right">Édition 2026</span></div>
   <div class="chapter-head">
     <p class="chaplabel">Annexe C</p>
     <h1 class="chapter">Le serveur complet (Flask + GitHub Models)</h1>
@@ -1639,10 +1667,12 @@ function ajoute(classe, texte){
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-</section>
+
+  <div class="page-foot"><span>Assistant IA · Édition pédagogique</span><span>Quanthevaris</span></div></section>
 
 <!-- ================= ANNEXE D ================= -->
 <section class="chapter" id="annexe-d">
+  <div class="page-top"><span class="pt-label">Assistant IA · Guide pratique</span><span class="pt-right">Édition 2026</span></div>
   <div class="chapter-head">
     <p class="chaplabel">Annexe D</p>
     <h1 class="chapter">Fiche de dépannage</h1>
@@ -1691,7 +1721,8 @@ function ajoute(classe, texte){
     <tr><td><strong>Token (jeton)</strong></td><td>Chaîne secrète de type mot de passe qui authentifie un programme (ex.&nbsp;: <code>github_pat_…</code>).</td></tr>
     <tr><td><strong>Workflow</strong></td><td>Recette YAML de GitHub Actions&nbsp;: déclencheur + série d'étapes.</td></tr>
   </table>
-</section>
+
+  <div class="page-foot"><span>Assistant IA · Édition pédagogique</span><span>Quanthevaris</span></div></section>
 
 <!-- ================= QUATRIÈME DE COUVERTURE ================= -->
 <section class="backcover">
