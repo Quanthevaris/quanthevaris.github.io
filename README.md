@@ -1,7 +1,8 @@
 # quanthevaris.github.io
 
 Site statique de **Quanthevaris** : guides pédagogiques et jeux gratuits à télécharger.
-Aucune dépendance, aucun traceur, aucun cookie — publié via GitHub Pages.
+Aucune dépendance à l'exécution, aucun cookie — publié via GitHub Pages.
+Une mesure d'audience agrégée GoatCounter est configurée, sans profil individuel (voir plus bas).
 
 ## Structure
 
@@ -20,12 +21,14 @@ Aucune dépendance, aucun traceur, aucun cookie — publié via GitHub Pages.
 ├── robots.txt · sitemap.xml    Référencement
 ├── css/style.css               Styles du site (design system complet)
 ├── js/script.js                Menu mobile + année du pied de page
+├── js/audience.js              Mesure d'audience GoatCounter minimale
 ├── assets/
 │   ├── fonts/                  Inter (WOFF2, subset latin) + licence OFL
 │   ├── img/                    Favicons, images de partage (Open Graph), aperçus, captures du jeu
 │   ├── jeux/                   FISSION ARENA : .exe, code source .py, fiche du .exe, licences des tiers
 │   └── pdf/                    Guides téléchargeables
 ├── _exe/                       Kit qui fabrique le .exe (non publié sur le site : dossier en « _ »)
+├── _audience/                  Mode d'emploi, analyse de confidentialité et tests (non publié : dossier en « _ »)
 └── .github/workflows/          Fabrication et test automatiques du .exe (GitHub Actions)
 ```
 
@@ -50,8 +53,8 @@ Le détail fait foi dans les [mentions légales](https://quanthevaris.github.io/
   `quanthevaris.github.io/` que depuis n'importe quelle sous-adresse.
 - **Images** : toujours renseigner `width`, `height`, `alt` et `loading="lazy"`
   (sauf image du hero). Formats : PNG/WebP, favicons en ICO + PNG.
-- **Polices** : auto-hébergées dans `assets/fonts/`, aucune requête vers un domaine tiers
-  (cohérent avec la politique de confidentialité).
+- **Polices et scripts** : auto-hébergés dans `assets/fonts/` et `js/`, sans chargement de script tiers.
+  La requête de comptage GoatCounter est le seul appel tiers ajouté au chargement des pages.
 - **Accessibilité** : lien d'évitement, focus visible, contrastes AA, `aria-current`
   sur l'onglet actif, menu mobile refermable avec Échap.
 
@@ -83,6 +86,22 @@ Le détail est dans [`_exe/README.md`](_exe/README.md).
 python3 -m http.server 8000
 # puis ouvrir http://localhost:8000
 ```
+
+## Mesure d'audience
+
+`js/audience.js` est chargé par toutes les pages et configuré pour
+`https://quanthevaris.goatcounter.com/count`. Il ne lit ni n'écrit de stockage navigateur,
+respecte Do Not Track et Global Privacy Control, ignore les aperçus/localhost/iframes et ne
+transmet que le chemin canonique des pages connues. Les chiffres sont des estimations de visites,
+pas un nombre exact de personnes. La promesse est « sans cookie ni profil individuel », pas
+« zéro donnée traitée ».
+
+Le compte est réglé au minimum (Sessions uniquement, conservation 365 jours, tableau privé).
+La politique publique décrit ce traitement ; le mode d'emploi et l'analyse sont dans
+[`_audience/ACTIVATION.md`](_audience/ACTIVATION.md) et
+[`_audience/ANALYSE-CONFIDENTIALITE.md`](_audience/ANALYSE-CONFIDENTIALITE.md).
+Pour désactiver, remettre `CONFIG.endpoint` à `""` et restaurer les textes sans audience avant
+de déployer. Tests sans dépendance ni envoi réel : `node --test _audience/test-audience.mjs`.
 
 ## Visibilité
 

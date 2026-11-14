@@ -2,7 +2,7 @@
    - menu mobile (ouverture, fermeture au clic, à Échap, au clic extérieur,
      au redimensionnement)
    - année dynamique dans le pied de page
-   Aucun traceur, aucune dépendance, aucun cookie. */
+   Aucune dépendance, aucun cookie. La mesure d'audience est isolée dans audience.js. */
 (function () {
   'use strict';
 
