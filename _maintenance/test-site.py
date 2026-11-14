@@ -94,6 +94,18 @@ class SiteTests(unittest.TestCase):
             data = json.loads(script)
             self.assertEqual(data['numberOfPages'], version['pages'])
             self.assertIn('Ollama', data['description'])
+            self.assertEqual(data['name'], 'Crée ton assistant IA personnalisé — Python et Ollama')
+            self.assertIn('ollama', data['keywords'].lower())
+            self.assertNotIn('github', data['keywords'].lower())
+        guide = self.texts['guide-assistant-ia.html']
+        titre = re.search(r'<title>(.*?)</title>', guide)[1]
+        self.assertIn('Python et Ollama', titre)
+        self.assertNotIn('GitHub', titre)
+        for nom in ('README.md', 'mentions-legales.html', 'assets/pdf/LICENCE-MIT.txt',
+                    'assets/code/assistant-ia/LICENCE-MIT.txt'):
+            texte = (ROOT / nom).read_text()
+            self.assertIn('Crée ton assistant IA personnalisé — Python et Ollama', texte)
+            self.assertNotIn('Python, Ollama et GitHub', texte)
         for name in ('index.html', 'guides.html', 'assistant-ia.html'):
             for number in re.findall(r'data-ia-pages>(\d+)', self.texts[name]):
                 self.assertEqual(int(number), version['pages'])
