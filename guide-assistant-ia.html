@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crée ton assistant IA personnalisé avec GitHub — Guide gratuit | Quanthevaris</title>
+<meta name="description" content="Guide gratuit de Quanthevaris : recode ELIZA, le premier chatbot de l'histoire, puis crée ton assistant IA personnalisé avec GitHub (Pages, Models, Actions). Version HTML prête à imprimer en PDF.">
+<meta name="author" content="Quanthevaris">
+<style>
+/* ============ Quanthevaris — « Crée ton assistant IA avec GitHub » ============ */
+/* Document conçu pour l'impression A4 : Ctrl+P → Enregistrer au format PDF.      */
+:root{
+  --ink:#17202a; --muted:#5a6675; --paper:#ffffff;
+  --cyan:#00d2ff; --cyan-dark:#0b7285; --cyan-deep:#086b80;
+  --red:#ff5a5a; --red-dark:#c94141;
+  --code-bg:#f6f8fa; --code-border:#d8dee4; --code-ink:#24292f;
+  --line:#e3e8ee;
+}
+*{ box-sizing:border-box; }
+html{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+body{
+  margin:0; color:var(--ink); background:var(--paper);
+  font-family:Georgia,'Times New Roman','DejaVu Serif',serif;
+  font-size:9.6pt; line-height:1.46;
+}
+
+/* ---------- Pages ---------- */
+@page{
+  size:A4;
+  margin:14mm 14mm 16mm 14mm;
+  @bottom-left{
+    content:"Quanthevaris · Crée ton assistant IA avec GitHub";
+    font-family:'Segoe UI',Arial,sans-serif; font-size:7.5pt; color:#9aa4b0;
+  }
+  @bottom-right{
+    content:counter(page);
+    font-family:'Segoe UI',Arial,sans-serif; font-size:9.5pt; font-weight:700; color:#6b7684;
+  }
+}
+@page cover{ margin:0; background:#070d19;
+  @bottom-left{ content:none } @bottom-right{ content:none }
+}
+
+section, nav.toc{ break-before:page; }
+.cover{ break-before:auto; page:cover; }
+
+/* ---------- Couverture ---------- */
+.cover{
+  width:210mm; height:297mm; background:#070d19; color:#eaf2fa;
+  display:flex; flex-direction:column; justify-content:space-between;
+  padding:16mm 15mm 12mm;
+  font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;
+  background-image:radial-gradient(circle at 85% 8%, rgba(0,210,255,.14), transparent 42%),
+                   radial-gradient(circle at 8% 92%, rgba(255,90,90,.10), transparent 38%);
+}
+.cover-top{ display:flex; justify-content:space-between; align-items:center; }
+.cover-brand{ display:flex; align-items:center; gap:8px; font-size:12pt; font-weight:700; letter-spacing:.4px; color:#eaf2fa; }
+.cover-brand svg{ width:30px; height:30px; }
+.cover-edition{ font-size:8.5pt; letter-spacing:1.6px; text-transform:uppercase; color:#7f95ab; }
+.cover-kicker{ font-size:9pt; letter-spacing:3px; color:var(--cyan); font-weight:600; margin:0 0 10mm; }
+.cover h1{
+  font-size:33pt; line-height:1.14; margin:0 0 7mm; color:#ffffff; font-weight:800; letter-spacing:-.4px;
+}
+.cover h1 em{ font-style:normal; color:var(--cyan); }
+.cover-sub{ font-size:12pt; line-height:1.55; color:#b8c6d4; margin:0 0 9mm; max-width:150mm; }
+.cover-sub strong{ color:#ffffff; }
+.cover-term{ border:1px solid #1e293b; border-radius:8px; overflow:hidden; width:150mm; background:#04101c; box-shadow:0 10px 30px rgba(0,0,0,.45); }
+.term-bar{ display:flex; align-items:center; gap:5px; background:#0b1a2c; padding:6px 10px; font-size:8pt; color:#7f95ab; border-bottom:1px solid #1e293b; }
+.term-bar span{ width:8px; height:8px; border-radius:50%; background:#233b52; display:inline-block; }
+.term-bar .t{ margin-left:6px; }
+.cover-term pre{ margin:0; padding:11px 13px; font-family:'Cascadia Code',Consolas,'Courier New',monospace; font-size:8.8pt; line-height:1.65; color:#e6edf3; white-space:pre-wrap; }
+.cover-term .p{ color:var(--cyan); font-weight:700; }
+.cover-term .el{ color:var(--red); font-weight:700; }
+.cover-foot{ display:flex; justify-content:space-between; align-items:flex-end; font-size:8.5pt; color:#7f95ab; border-top:1px solid #16273a; padding-top:5mm; }
+.cover-foot b{ color:#cfe3f2; font-weight:600; letter-spacing:.6px; }
+
+/* ---------- Typographie intérieure ---------- */
+h1,h2,h3,h4,.sans{ font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif; }
+h1.chapter{ font-size:20pt; line-height:1.2; margin:0 0 3mm; color:#10161f; font-weight:800; letter-spacing:-.2px; }
+.chaplabel{
+  font-size:8.5pt; letter-spacing:2.6px; text-transform:uppercase; color:var(--cyan-dark);
+  font-weight:700; margin:0 0 2.5mm;
+}
+.lede{ font-size:10.5pt; color:var(--muted); font-style:italic; line-height:1.45; margin:0 0 3mm; }
+.chapter-head{ border-bottom:2.5pt solid #070d19; padding-bottom:2.5mm; margin-bottom:4.5mm; }
+h2{ font-size:12.2pt; color:var(--cyan-deep); margin:5mm 0 2mm; font-weight:750; letter-spacing:-.1px; }
+h2 .n{ color:#b7c2cc; font-weight:600; margin-right:4pt; }
+h3{ font-size:10.8pt; color:#10161f; margin:4.5mm 0 1.8mm; font-weight:700; }
+p{ margin:0 0 2.7mm; text-align:justify; hyphens:auto; }
+ul,ol{ margin:0 0 3.6mm; padding-left:6.5mm; }
+li{ margin-bottom:1.2mm; text-align:justify; }
+a{ color:var(--cyan-deep); text-decoration:none; border-bottom:.5pt solid #b9c4cd; }
+strong{ color:#0d141d; }
+hr.thin{ border:0; border-top:.8pt solid var(--line); margin:5mm 0; }
+
+/* ---------- Code ---------- */
+pre{
+  background:var(--code-bg); border:1px solid var(--code-border); border-radius:6pt;
+  padding:6pt 8pt; margin:2.8mm 0;
+  font-family:'Cascadia Code',Consolas,'Courier New',monospace;
+  font-size:8pt; line-height:1.38; color:var(--code-ink); white-space:pre-wrap;
+}
+pre .c{ color:#8b949e; font-style:italic; }
+section[id^='annexe'] pre{ font-size:7.5pt; line-height:1.28; }        /* commentaire */
+pre .s{ color:#8a4a0b; }                            /* chaîne */
+pre .k{ color:#b03a7e; font-weight:600; }           /* mot-clé */
+pre .f{ color:#0b7285; }                            /* fonction */
+code{
+  font-family:'Cascadia Code',Consolas,'Courier New',monospace; font-size:8.9pt;
+  background:#eef1f4; border-radius:3pt; padding:0 3pt; color:#24292f;
+}
+pre code{ background:none; padding:0; font-size:inherit; }
+pre.term{ background:#0d1117; border-color:#0d1117; color:#c9d1d9; }
+pre.term .p{ color:#00d2ff; font-weight:700; }
+pre.term .ok{ color:#7ee787; }
+
+/* ---------- Encadrés ---------- */
+.box{ border-radius:5pt; padding:5pt 9pt; margin:2.8mm 0; break-inside:avoid; border:1px solid; }
+.box .box-label{
+  font-family:'Segoe UI',Arial,sans-serif; font-size:8pt; font-weight:800;
+  letter-spacing:1.8px; text-transform:uppercase; margin:0 0 1.6mm;
+}
+.box p:last-child, .box ul:last-child{ margin-bottom:0; }
+.tip{ border-color:#bfe4d1; background:#f2fbf7; } .tip .box-label{ color:#0f7b4f; }
+.warn{ border-color:#f0c8b8; background:#fdf4ef; } .warn .box-label{ color:#b0430f; }
+.info{ border-color:#bcd9f0; background:#f1f7fd; } .info .box-label{ color:#0b5cad; }
+.key{ border-color:#d5cbf0; background:#f6f3fc; } .key .box-label{ color:#5b3fa8; }
+.story{ border-color:#d8dee4; background:#fbfcfd; font-style:italic; color:#3a4653; }
+
+/* ---------- Dialogues ---------- */
+.chat{ border:1px solid #dfe5ea; border-radius:6pt; background:#fbfcfd; padding:7pt 10pt; margin:3.5mm 0; break-inside:avoid; }
+.chat .line{ margin:2.2pt 0; font-family:'Cascadia Code',Consolas,monospace; font-size:8.5pt; line-height:1.45; }
+.chat .who{ font-weight:800; }
+.chat .toi .who{ color:var(--cyan-dark); }
+.chat .eliza .who{ color:var(--red-dark); }
+
+/* ---------- Tableaux ---------- */
+table{ width:100%; border-collapse:collapse; margin:3mm 0; font-size:8.9pt; font-family:'Segoe UI',Arial,sans-serif; }
+th{ background:#eef2f6; text-align:left; padding:3.5pt 5.5pt; border:1px solid #d3dae1; font-size:8.6pt; letter-spacing:.6px; text-transform:uppercase; color:#3d4956; }
+td{ padding:3.5pt 5.5pt; border:1px solid #d3dae1; vertical-align:top; }
+tr:nth-child(even) td{ background:#fafbfc; }
+
+/* ---------- Sommaire ---------- */
+nav.toc h1{ font-size:20pt; margin:0 0 5mm; font-weight:800; }
+.toc ol{ list-style:none; padding:0; margin:0; font-family:'Segoe UI',Arial,sans-serif; }
+.toc li{ margin:0; border-bottom:.6pt dotted #ccd4dc; }
+.toc a{ display:flex; justify-content:space-between; gap:6mm; padding:2.3mm 0; border-bottom:none; color:var(--ink); }
+.toc .t{ font-weight:600; }
+.toc .d{ display:block; font-weight:400; font-size:9pt; color:var(--muted); margin-top:.8mm; }
+.toc .pg{ font-weight:700; color:var(--cyan-deep); white-space:nowrap; font-size:10pt; }
+.toc .part{ margin-top:5mm; font-size:8.5pt; letter-spacing:2px; text-transform:uppercase; color:var(--muted); border-bottom:none; padding-bottom:1mm; }
+.toc .part:first-child{ margin-top:0; }
+
+/* ---------- Divers ---------- */
+.fig-arch{
+  border:1px solid #d8dee4; border-radius:6pt; background:#fbfcfd; padding:8pt 10pt;
+  font-family:'Cascadia Code',Consolas,monospace; font-size:7.9pt; line-height:1.45;
+  white-space:pre; overflow:hidden; margin:3.2mm 0; break-inside:avoid; color:#33404e;
+}
+.checklist{ list-style:none; padding-left:0; }
+.checklist li{ padding-left:7mm; position:relative; }
+.checklist li::before{ content:"☐"; position:absolute; left:0; color:var(--cyan-deep); font-size:11pt; }
+.page-final{ text-align:center; }
+.backcover{
+  page:cover; background:#070d19; color:#b8c6d4; width:210mm; height:297mm;
+  display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;
+  font-family:'Segoe UI',Arial,sans-serif; padding:20mm;
+  background-image:radial-gradient(circle at 50% 40%, rgba(0,210,255,.10), transparent 45%);
+}
+.backcover h2{ color:#fff; font-size:16pt; margin-bottom:4mm; }
+.backcover p{ max-width:120mm; text-align:center; }
+.backcover .logo-line{ margin-bottom:8mm; }
+.badge-row{ display:flex; gap:6pt; flex-wrap:wrap; margin:2mm 0 4mm; }
+.badge{
+  font-family:'Segoe UI',Arial,sans-serif; font-size:7.8pt; font-weight:700; letter-spacing:.8px;
+  border:1pt solid #cfe0ee; color:#0b6172; border-radius:20pt; padding:1.6pt 7pt; background:#f0f9fc;
+}
+</style>
+</head>
+<body>
+
+<!-- ================= COUVERTURE ================= -->
+<section class="cover">
+  <div class="cover-top">
+    <div class="cover-brand">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <rect width="32" height="32" rx="8" fill="#04101c"/>
+        <rect x=".5" y=".5" width="31" height="31" rx="7.5" fill="none" stroke="#1e293b"/>
+        <circle cx="16" cy="16" r="9.4" fill="none" stroke="#00d2ff" stroke-width="3.3"/>
+        <rect x="21.2" y="21.2" width="7" height="7" rx="1.8" fill="#ff5a5a"/>
+      </svg>
+      Quanthevaris
+    </div>
+    <div class="cover-edition">Édition 2026 · Guide gratuit</div>
+  </div>
+
+  <div class="cover-mid">
+    <p class="cover-kicker">GUIDE PRATIQUE · PAS À PAS · SANS PRÉREQUIS</p>
+    <h1>Crée ton assistant IA personnalisé <em>avec GitHub</em></h1>
+    <p class="cover-sub">De <strong>ELIZA</strong>, le tout premier chatbot de l'histoire (1966), aux modèles de langage d'aujourd'hui&nbsp;: recode la machine qui a tout commencé, puis branche, déploie et personnalise ton propre assistant intelligent.</p>
+    <div class="cover-term">
+      <div class="term-bar"><span></span><span></span><span></span><span class="t">eliza.py</span></div>
+      <pre><span class="p">$</span> python eliza.py
+<span class="el">ELIZA</span> &gt; Bonjour. Je suis ELIZA. Raconte-moi ton problème.
+<span class="p">Toi</span>   &gt; j'ai peur de parler aux machines
+<span class="el">ELIZA</span> &gt; Depuis quand as-tu peur de parler aux machines ?
+<span class="p">Toi</span>   &gt; depuis que j'ai lu ce guide...
+<span class="el">ELIZA</span> &gt; Et que t'importe ce guide ?</pre>
+    </div>
+  </div>
+
+  <div class="cover-foot">
+    <span><b>Python · HTML/CSS · GitHub Pages · GitHub Models · GitHub Actions</b><br>Deux projets complets, du code au dépôt en ligne.</span>
+    <span style="text-align:right">Quanthevaris<br>quanthevaris.github.io</span>
+  </div>
+</section>
+
+<!-- ================= À PROPOS ================= -->
+<section class="page-about">
+  <div class="chapter-head">
+    <p class="chaplabel">Avant de commencer</p>
+    <h1 class="chapter">À propos de ce guide</h1>
+    <p class="lede">Pourquoi ce guide existe et comment l'utiliser.</p>
+  </div>
+
+  <p>Tu connais peut-être <em>Esquive en Pixels</em>, le guide qui t'accompagne pour créer ton premier jeu vidéo en Python. Celui-ci suit la même philosophie&nbsp;: <strong>gratuit, sans publicité, sans prérequis</strong> — mais cette fois, on ne fait pas bouger des pixels&nbsp;: on va faire <em>parler</em> une machine.</p>
+  <p>En 1966, un chercheur du MIT a créé ELIZA, le premier chatbot de l'histoire, avec deux cents mots-clés et quelques dizaines de règles. Tu vas le recoder ligne par ligne, puis construire sa descendante directe&nbsp;: un assistant moderne branché sur les grands modèles de langage, personnalisé à ton image et hébergé gratuitement avec GitHub.</p>
+
+  <h3>Ce que tu vas construire</h3>
+  <ul>
+    <li><strong>Projet n°&nbsp;1</strong> — une reconstitution fidèle d'ELIZA en Python (et sa version web), avec son moteur de mots-clés, ses règles de reformulation et sa mémoire.</li>
+    <li><strong>Projet n°&nbsp;2</strong> — un assistant moderne branché sur un modèle accessible avec ton compte GitHub&nbsp;: interface web, personnalité, base de connaissances.</li>
+    <li><strong>Un dépôt GitHub propre</strong>&nbsp;: versionné, testé par GitHub Actions, publié sur GitHub Pages.</li>
+  </ul>
+
+  <h3>À qui il s'adresse</h3>
+  <p>Si tu sais écrire un <code>if</code>… <code>else</code> et créer un fichier, tu as le niveau — le guide explique tout le reste (Git, Python, HTML, les API).</p>
+
+  <h3>Comment lire ce document</h3>
+  <ul>
+    <li>Chapitres 1 et 2&nbsp;: l'histoire et la théorie, à lire sans ordinateur.</li>
+    <li>Chapitres 3 à 6&nbsp;: <strong>les mains sur le clavier</strong>, dans l'ordre.</li>
+    <li>Chapitres 7 à 10&nbsp;: des modules indépendants, à piquer selon tes envies. Les annexes rassemblent codes complets et dépannage.</li>
+  </ul>
+  <p class="badge-row"><span class="badge">⏱ 6 à 8 heures de travail réel</span> <span class="badge">🐍 Python 3.11+</span> <span class="badge">🐙 Un compte GitHub gratuit</span> <span class="badge">💳 Aucune carte bancaire</span></p>
+
+  <div class="box info">
+    <p class="box-label">Les boîtes que tu croiseras</p>
+    <ul>
+      <li><strong>Astuce</strong> (verte)&nbsp;: un raccourci, une bonne habitude.</li>
+      <li><strong>Attention</strong> (orange)&nbsp;: un piège classique — elles t'économiseront des heures.</li>
+      <li><strong>Pour aller plus loin</strong> (bleue)&nbsp;: une piste, jamais obligatoire.</li>
+      <li><strong>À retenir</strong> (violette)&nbsp;: le résumé de la section.</li>
+    </ul>
+  </div>
+
+  <div class="box tip">
+    <p class="box-label">Transformer ce fichier en PDF</p>
+    <p>Ouvre ce fichier dans ton navigateur, puis <code>Ctrl+P</code> → «&nbsp;Enregistrer au format PDF&nbsp;» → format A4 → active «&nbsp;Graphiques d'arrière-plan&nbsp;». Sauts de page et pieds de page sont déjà gérés par le document.</p>
+  </div>
+
+  <p style="margin-top:4mm; font-size:9.1pt; color:var(--muted);">Texte&nbsp;: © Quanthevaris. Codes des projets sous <strong>licence MIT</strong>&nbsp;: libre à toi de les utiliser et de les partager, mention d'origine conservée.</p>
+</section>
+
+<!-- ================= SOMMAIRE ================= -->
+<nav class="toc">
+  <h1>Sommaire</h1>
+  <ol>
+    <li><a><span class="t">1. ELIZA naît au MIT <span class="d">Le récit du tout premier chatbot, de 1964 à aujourd'hui.</span></span><span class="pg" data-ch="1">4</span></a></li>
+    <li><a><span class="t">2. Sous le capot&nbsp;: comment «&nbsp;pense&nbsp;» un chatbot <span class="d">Mots-clés, reformulations… et ce qui a changé avec les LLM.</span></span><span class="pg" data-ch="2">7</span></a></li>
+    <li><a><span class="t">3. Ton atelier de développement <span class="d">Compte GitHub, Git, Python, VS Code — tout s'installe gratuitement.</span></span><span class="pg" data-ch="3">9</span></a></li>
+    <li><a><span class="t">4. GitHub, la boîte à outils de ton assistant <span class="d">Pages, Codespaces, Actions, Models, Copilot&nbsp;: la visite guidée.</span></span><span class="pg" data-ch="4">11</span></a></li>
+    <li><a><span class="t">5. Projet n°&nbsp;1 — Recoder ELIZA en Python <span class="d">Le moteur de 1966, réimplémenté ligne par ligne, puis testé.</span></span><span class="pg" data-ch="5">13</span></a></li>
+    <li><a><span class="t">6. Projet n°&nbsp;2 — Un assistant moderne branché sur les LLM <span class="d">Token GitHub, serveur Flask, interface web de chat.</span></span><span class="pg" data-ch="6">17</span></a></li>
+    <li><a><span class="t">7. Rends-le unique&nbsp;: personnaliser ton assistant <span class="d">Persona, mémoire, base de connaissances, outils.</span></span><span class="pg" data-ch="7">20</span></a></li>
+    <li><a><span class="t">8. Publier et automatiser <span class="d">GitHub Pages, GitHub Actions, secrets et bonnes pratiques Git.</span></span><span class="pg" data-ch="8">22</span></a></li>
+    <li><a><span class="t">9. Éthique, sécurité et limites <span class="d">L'effet ELIZA aujourd'hui, données personnelles, hallucinations.</span></span><span class="pg" data-ch="9">24</span></a></li>
+    <li><a><span class="t">10. Aller plus loin <span class="d">Voix, outils, modèles locaux… et ta liste de ressources.</span></span><span class="pg" data-ch="10">26</span></a></li>
+    <li class="part">Annexes</li>
+    <li><a><span class="t">A. Code complet d'ELIZA en Python <span class="d">Le fichier eliza.py final, prêt à copier.</span></span><span class="pg" data-ch="A">28</span></a></li>
+    <li><a><span class="t">B. ELIZA dans le navigateur <span class="d">Le même moteur en HTML + JavaScript.</span></span><span class="pg" data-ch="B">30</span></a></li>
+    <li><a><span class="t">C. Le serveur complet (Flask + GitHub Models) <span class="d">Le backend du projet n°&nbsp;2, prêt à l'emploi.</span></span><span class="pg" data-ch="C">32</span></a></li>
+    <li><a><span class="t">D. Fiche de dépannage <span class="d">Les erreurs les plus courantes, et leur solution.</span></span><span class="pg" data-ch="D">35</span></a></li>
+    <li><a><span class="t">Glossaire <span class="d">Les mots de l'IA, expliqués simplement.</span></span><span class="pg" data-ch="G">36</span></a></li>
+  </ol>
+</nav>
+
+<!-- ================= CHAPITRE 1 ================= -->
+<section class="chapter" id="ch1">
+  <div class="chapter-head">
+    <p class="chaplabel">Chapitre 1 · Récit</p>
+    <h1 class="chapter">ELIZA naît au MIT</h1>
+    <p class="lede">Comment un programme écrit «&nbsp;pour montrer à quel point les machines sont bêtes&nbsp;» est devenu le tout premier chatbot — et pourquoi son histoire éclaire encore tout ce que tu vas construire dans ce guide.</p>
+  </div>
+
+  <h2><span class="n">1.1</span>Une conversation, en 1966</h2>
+  <p>Imaginons la scène. Nous sommes au début des années 1960, au MIT, près de Boston. Les ordinateurs occupent des salles entières, se pilotent avec des bandes perforées, coûtent des millions — et ne parlent pas&nbsp;: on leur soumet des calculs. Voilà pourquoi ce qui se passe un soir au laboratoire va marquer tout le monde.</p>
+  <p>Une chercheuse s'assied devant un terminal, tape une phrase en anglais courant — pas une formule mathématique, une phrase — et la machine répond. Pas par un chiffre. Par une question, qui ressemble à celle qu'un psychologue poserait. Elle continue. La machine rebondit. Au bout de quelques minutes, elle se tourne vers son collègue et lui demande, sérieusement&nbsp;: «&nbsp;Tu me laisses discuter avec elle un moment, en privé&nbsp;?&nbsp;»</p>
+  <div class="chat">
+    <div class="line toi"><span class="who">Utilisatrice&nbsp;:</span> Men are all alike.</div>
+    <div class="line eliza"><span class="who">ELIZA&nbsp;:</span> In what way?</div>
+    <div class="line toi"><span class="who">Utilisatrice&nbsp;:</span> They're always bugging us about something or other.</div>
+    <div class="line eliza"><span class="who">ELIZA&nbsp;:</span> Can you think of a specific example?</div>
+    <div class="line toi"><span class="who">Utilisatrice&nbsp;:</span> Well, my boyfriend made me come here.</div>
+    <div class="line eliza"><span class="who">ELIZA&nbsp;:</span> Your boyfriend made you come here?</div>
+    <div class="line toi"><span class="who">Utilisatrice&nbsp;:</span> He says I'm depressed much of the time.</div>
+    <div class="line eliza"><span class="who">ELIZA&nbsp;:</span> I am sorry to hear you are depressed.</div>
+  </div>
+  <p style="font-size:9.3pt; color:var(--muted);">Un dialogue d'époque avec le script DOCTOR d'ELIZA (reconstitué). Aucune intelligence compréhensible ici&nbsp;: seulement des règles — et pourtant, l'illusion fonctionne. Tu vas comprendre exactement pourquoi au chapitre 2.</p>
+
+  <h2><span class="n">1.2</span>Joseph Weizenbaum et sa «&nbsp;Pygmalion&nbsp;»</h2>
+  <p>L'auteur de ce programme s'appelle <strong>Joseph Weizenbaum</strong>. Né en 1923 à Berlin, émigré aux États-Unis avec sa famille fuyant le nazisme, il est alors, au début des années 1960, un informaticien respecté du MIT, pilier du projet MAC, l'un des grands laboratoires d'informatique de l'époque. Weizenbaum s'intéresse à un problème très concret&nbsp;: rendre plus naturelle l'interaction entre les humains et les ordinateurs, alors encore remplis de frictions.</p>
+  <p>Entre 1964 et 1965, il écrit un programme qu'il baptise <strong>ELIZA</strong>, en référence à Eliza Doolittle, l'héroïne de <em>Pygmalion</em> de George Bernard Shaw&nbsp;: cette fleuriste que le professeur Higgins enseigne à parler «&nbsp;comme une dame&nbsp;». Le clin d'œil est précis&nbsp;: comme Eliza Doolittle, son programme s'affine en parlant avec celui qui lui parle. Il tourne sur un IBM 7094, le grand ordinateur du labo, écrit dans un langage exotique appelé MAD-SLIP, et fonctionne dans un système à temps partagé — une prouesse pour l'époque&nbsp;: plusieurs personnes peuvent dialoguer avec la machine en même temps, depuis un terminal.</p>
+  <p>En janvier 1966, Weizenbaum publie dans la revue <em>Communications of the ACM</em> un article resté célèbre&nbsp;: <em>ELIZA — A computer program for the study of natural language communication between man and machine</em>. Il y décrit sa méthode, et fournit en annexe le listing de son script le plus connu&nbsp;: <strong>DOCTOR</strong>, une parodie de psychothérapeute rogérien — du nom de Carl Rogers, dont la méthode consiste à reformuler ce que dit le patient plutôt qu'à l'analyser. Ce choix n'est pas anodin&nbsp;: la reformulation est justement ce qu'un programme sait faire sans comprendre.</p>
+
+  <h2><span class="n">1.3</span>Le monde s'enthousiasme, l'inventeur s'inquiète</h2>
+  <p>C'est ici que l'histoire devient passionnante — et un peu vertigineuse. Weizenbaum avait conçu ELIZA comme une <em>démonstration</em>&nbsp;: un programme simpliste, destiné à montrer à quel point la communication homme-machine restait superficielle. Il écrit lui-même, plus tard, son étonnement de voir à quelle vitesse et à quelle profondeur les gens se sont impliqués dans ces conversations.</p>
+  <p>Des secrétaires du laboratoire demandent à être seules avec la machine. Des collègues lui confient leurs soucis. Des psychiatres voient dans le script DOCTOR un outil thérapeutique d'avenir — ce qui horripile Weizenbaum, qui sait que derrière la machine, il n'y a <em>rien</em> à écouter&nbsp;: seulement des règles de substitution de mots. Cet aveuglement collectif, cette tendance à projeter de l'intelligence et de l'empathie sur un simple filtrage de mots-clés, portera plus tard un nom&nbsp;: <strong>l'effet ELIZA</strong>.</p>
+  <div class="box story">
+    <p class="box-label" style="color:#3a4653;">L'anecdote fondatrice</p>
+    <p>Weizenbaum raconta que sa propre secrétaire, qui le voyait chaque jour travailler sur le programme, lui demanda un jour de quitter la pièce pour qu'elle puisse parler à ELIZA <em>en privé</em>. Elle savait mieux que personne qu'il n'y avait derrière cet écran ni âme, ni mémoire, ni jugement. Elle le savait — et elle voulait quand même parler seule à la machine. C'est exactement ce paradoxe qui fascine encore les chercheurs aujourd'hui.</p>
+  </div>
+  <p>À partir des années 1970, Weizenbaum devient l'un des critiques les plus lucides de l'intelligence artificielle. Dans son livre <em>Computer Power and Human Reason</em> (1976), il met en garde contre la tentation de confier à des machines des décisions qui demandent du jugement, de l'empathie, de la sagesse. Il n'était pas un technophobe&nbsp;: c'était un technicien qui connaissait de l'intérieur la fragilité de l'illusion qu'il avait créée. Il est mort en 2008, sans avoir changé d'avis sur l'essentiel&nbsp;: on peut simuler la compréhension sans la posséder — et c'est bien plus convaincant qu'on ne croit.</p>
+
+  <h2><span class="n">1.4</span>La lignée&nbsp;: d'ELIZA à ChatGPT</h2>
+  <p>ELIZA a eu une descendance immense. Voici, en abrégé, un demi-siècle de chatbots&nbsp;:</p>
+  <table>
+    <tr><th style="width:18%">Année</th><th style="width:26%">Programme</th><th>Ce qu'il apporte</th></tr>
+    <tr><td><strong>1950</strong></td><td>Test de Turing</td><td>Alan Turing pose la question&nbsp;: «&nbsp;Une machine peut-elle penser&nbsp;?&nbsp;» — et propose de le tester par la conversation.</td></tr>
+    <tr><td><strong>1966</strong></td><td>ELIZA (Weizenbaum, MIT)</td><td>Le premier chatbot. Mots-clés, règles de reformulation. Naissance de l'effet ELIZA.</td></tr>
+    <tr><td><strong>1972</strong></td><td>PARRY (Colby)</td><td>Il simule un patient paranoïaque. Sur ARPANET, ELIZA et PARRY «&nbsp;discutent&nbsp;» — la première rencontre entre deux chatbots.</td></tr>
+    <tr><td><strong>1995</strong></td><td>A.L.I.C.E. (Wallace)</td><td>Des milliers de règles AIML, à base de gabarits. Trois fois lauréat du concours Loebner.</td></tr>
+    <tr><td><strong>2011</strong></td><td>Watson, Siri</td><td>Watson gagne au jeu <em>Jeopardy!</em>&nbsp;; les assistants vocaux arrivent dans nos poches.</td></tr>
+    <tr><td><strong>2017</strong></td><td>Transformer</td><td>L'article «&nbsp;Attention Is All You Need&nbsp;» introduit l'architecture derrière les modèles de langage modernes.</td></tr>
+    <tr><td><strong>2020</strong></td><td>GPT-3</td><td>175 milliards de paramètres&nbsp;: la conversation fluide devient possible.</td></tr>
+    <tr><td><strong>2022</strong></td><td>ChatGPT</td><td>L'IA conversationnelle devient grand public — et l'effet ELIZA, à l'échelle de centaines de millions de personnes.</td></tr>
+  </table>
+  <p>Détail savoureux&nbsp;: le code source original d'ELIZA, longtemps perdu, a été retrouvé en 2021 dans des archives du MIT. Et ce que révèle sa redécouverte confirme ce que Weizenbaum répétait&nbsp;: derrière la magie, il n'y avait qu'une liste de règles — concise, astucieuse, mais désespérément simple. C'est cette simplicité qui la rend parfaite pour un premier projet&nbsp;: tu vas pouvoir la recréer intégralement, à la main, sans bibliothèque externe.</p>
+
+  <div class="box key">
+    <p class="box-label">À retenir</p>
+    <ul>
+      <li>ELIZA (1964–1966, Joseph Weizenbaum, MIT) est le premier programme capable de tenir une conversation en langue naturelle.</li>
+      <li>Son script DOCTOR parodie un psychothérapeute&nbsp;: c'est la reformulation qui crée l'illusion de compréhension.</li>
+      <li>L'<strong>effet ELIZA</strong>&nbsp;— projeter de l'intelligence sur une machine qui en est dépourvue — est plus actuel que jamais.</li>
+      <li>ELIZA est née d'un simple jeu de règles&nbsp;: c'est précisément ce qui va te permettre de la recoder.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= CHAPITRE 2 ================= -->
+<section class="chapter" id="ch2">
+  <div class="chapter-head">
+    <p class="chaplabel">Chapitre 2 · Comprendre</p>
+    <h1 class="chapter">Sous le capot&nbsp;: comment «&nbsp;pense&nbsp;» un chatbot</h1>
+    <p class="lede">Avant d'écrire la moindre ligne de code, démystifions la bête. Tu verras&nbsp;: la conversation d'ELIZA reposait sur trois astuces d'une simplicité désarmante — et les modèles modernes n'en sont qu'une extension beaucoup, beaucoup plus large.</p>
+  </div>
+
+  <h2><span class="n">2.1</span>Astuce n°&nbsp;1&nbsp;: les mots-clés</h2>
+  <p>Reprends le dialogue du chapitre 1. Quand l'utilisatrice écrit «&nbsp;He says I'm <strong>depressed</strong> much of the time&nbsp;», ELIZA ne comprend ni «&nbsp;depressed&nbsp;» ni «&nbsp;he&nbsp;». Elle repère simplement le mot-clé <code>depressed</code> dans sa liste — l'un des mots les plus prioritaires du script DOCTOR, car parler de tristesse est précieux pour un thérapeute. Ce mot-clé déclenche une règle&nbsp;: «&nbsp;si le texte contient le mot déclencheur, alors réponds ceci&nbsp;».</p>
+  <p>C'est tout le secret&nbsp;: <strong>un chatbot à règles est une grande liste de déclencheurs et de réponses</strong>. Chaque phrase est comparée à cette liste dans l'ordre de priorité&nbsp;; le premier mot-clé trouvé décide de la réponse. Aucun mot-clé&nbsp;? ELIZA sort de son chapeau une réponse neutre&nbsp;: <em>In what way?</em>, <em>Tell me more.</em></p>
+
+  <h2><span class="n">2.2</span>Astuce n°&nbsp;2&nbsp;: la réflexion</h2>
+  <p>La deuxième astuce explique la réponse la plus impressionnante du dialogue&nbsp;: «&nbsp;<em>Your boyfriend made you come here?</em>&nbsp;». Le programme a pris la phrase de l'utilisatrice et l'a renvoyée en miroir, en permutant les pronoms&nbsp;: <code>my</code> devient <code>your</code>, <code>me</code> devient <code>you</code>, <code>I'm</code> devient <code>you are</code>. Cette opération s'appelle une <strong>réflexion</strong>.</p>
+  <p>La règle complète du script DOCTOR dit en substance&nbsp;: «&nbsp;si tu repères <em>boyfriend</em> (ou <em>mother</em>, <em>father</em>…), découpe la phrase et renvoie la partie utile, réfléchie, en question&nbsp;». Le résultat ressemble à s'y méprendre à de l'écoute active&nbsp;: la machine reprend les mots de l'interlocuteur comme un bon thérapeute. Sauf qu'aucune compréhension n'a eu lieu — c'est de la substitution de chaînes de caractères, l'opération la plus basique de l'informatique.</p>
+
+  <h2><span class="n">2.3</span>Astuce n°&nbsp;3&nbsp;: la mémoire</h2>
+  <p>ELIZA avait même un embryon de mémoire. Lorsqu'elle repérait une phrase commençant par <code>I remember</code>, elle mettait le reste de la phrase de côté — et ressortait parfois cette réserve quelques échanges plus tard, pour relancer la conversation&nbsp;: «&nbsp;<em>Earlier you said you remembered X. Why do you bring it up now?</em>&nbsp;». Là encore, aucune pensée&nbsp;: une file d'attente, dans laquelle on pousse des textes et d'où on tire aléatoirement. Tu implémenteras exactement cela au chapitre 5.</p>
+
+  <div class="box tip">
+    <p class="box-label">Astuce</p>
+    <p>Retiens ce trio, car il structure tout ton projet n°&nbsp;1&nbsp;: <strong>1)&nbsp;des mots-clés</strong> qui déclenchent des règles, <strong>2)&nbsp;une réflexion</strong> qui retourne les pronoms, <strong>3)&nbsp;des réponses par défaut</strong> pour survivre aux phrases inconnues. Environ 120 lignes de Python suffisent pour les assembler.</p>
+  </div>
+
+  <h2><span class="n">2.4</span>Où ELIZA s'effondre</h2>
+  <p>Teste mentalement les limites&nbsp;: écris «&nbsp;My kwyjibo is very flubbergasted today&nbsp;» et ELIZA répondra avec sérieux «&nbsp;Tell me more about your kwyjibo&nbsp;» — car elle connaît le schéma «&nbsp;my + chose&nbsp;», pas les mots. Demande-lui «&nbsp;Combien font 2 et 2&nbsp;?&nbsp;» et elle répondra «&nbsp;Why do you ask whether 2 and 2 make 4&nbsp;?&nbsp;» — elle ne calcule pas, elle reformule. Elle ne se souvient de rien au-delà d'une phrase (hors sa petite réserve), ne gère ni le temps, ni le contexte, ni la logique. La conversation donne l'illusion d'une compréhension&nbsp;; la moindre question précise fait tomber le rideau.</p>
+  <p>Cette fragilité est une excellente nouvelle&nbsp;: le comportement est <strong>totalement prévisible et débogable</strong>. Si ELIZA dit quelque chose d'étrange, une règle est mal écrite — corrigeable en trente secondes. Garde cela en tête avec les modèles modernes, bien plus capables… et bien moins contrôlables.</p>
+
+  <h2><span class="n">2.5</span>Et les modèles de langage, alors&nbsp;?</h2>
+  <p>Un <strong>modèle de langage</strong> (LLM, pour <em>Large Language Model</em>) ne travaille pas avec des règles, mais avec des probabilités. Son principe tient en une phrase&nbsp;: <strong>prédire le prochain fragment de texte</strong>. Découpé en petits morceaux appelés <em>tokens</em> (environ ¾ de mot&nbsp;: «&nbsp;chatbot&nbsp;» → «&nbsp;chat&nbsp;» + «&nbsp;bot&nbsp;»), le modèle a été entraîné sur d'immenses corpus à deviner, à chaque position, quel token a le plus de chances de venir ensuite. «&nbsp;Il fait beau et…&nbsp;» → «&nbsp;doux&nbsp;», «&nbsp;chaud&nbsp;», «&nbsp;venteux&nbsp;», chacun avec sa probabilité.</p>
+  <p>Quand tu discutes avec un assistant moderne, ton message et l'historique de la conversation sont envoyés au modèle, qui propose le token le plus plausible, puis le suivant — jusqu'à former une réponse complète. Trois concepts te serviront dans tout le reste du guide&nbsp;:</p>
+  <ul>
+    <li><strong>Le prompt système</strong>&nbsp;: une consigne invisible que tu envoies avant la conversation pour définir qui est l'assistant (nom, ton, spécialité, limites). C'est l'outil principal de personnalisation — le chapitre 7 en fait un usage intensif.</li>
+    <li><strong>La température</strong>&nbsp;: un curseur de 0 à 2 qui règle l'aléatoire. Proche de 0, l'assistant est rigoureux et répétable&nbsp;; proche de 1, il est plus créatif et parfois plus farfelu.</li>
+    <li><strong>La fenêtre de contexte</strong>&nbsp;: la mémoire de travail du modèle, limitée en tokens. Tout ce qui dépasse (vieilles conversations) est oublié&nbsp;: c'est à ton programme de gérer ce qu'il renvoie.</li>
+  </ul>
+  <p>Au passage, tu retrouves ELIZA sous le capot&nbsp;: les LLM génèrent aussi des suites de tokens après avoir repéré des motifs dans le texte. La différence est d'échelle et de méthode — des milliards de paramètres statistiques entraînés pendant des semaines, contre deux cents règles écrites à la main — mais pas de nature profonde&nbsp;: ni l'un ni l'autre ne «&nbsp;comprend&nbsp;» au sens humain.</p>
+
+  <table>
+    <tr><th></th><th>ELIZA (règles)</th><th>LLM (statistique)</th></tr>
+    <tr><td><strong>Principe</strong></td><td>Liste de mots-clés et de règles écrites à la main</td><td>Prédiction du token suivant, apprise sur d'immenses corpus</td></tr>
+    <tr><td><strong>Contexte</strong></td><td>Aucune (une phrase à la fois)</td><td>Fenêtre de dizaines de milliers de tokens</td></tr>
+    <tr><td><strong>Comportement</strong></td><td>Prévisible, débogable, figé</td><td>Probabiliste, parfois imprévisible</td></tr>
+    <tr><td><strong>Erreurs typiques</strong></td><td>Réponses absurdes faciles à repérer</td><td>Hallucinations&nbsp;: des erreurs plausibles et assurées</td></tr>
+    <tr><td><strong>Coût</strong></td><td>Nul (ton CPU)</td><td>Quotas ou paiement par requête</td></tr>
+    <tr><td><strong>Contrôle</strong></td><td>Toi, ligne par ligne</td><td>Le fournisseur du modèle</td></tr>
+  </table>
+
+  <div class="box key">
+    <p class="box-label">À retenir</p>
+    <ul>
+      <li>ELIZA = mots-clés + réflexion (permutation des pronoms) + réponses par défaut + un brin de mémoire.</li>
+      <li>Un LLM = une machine à prédire des tokens, pilotée par prompt système, température et fenêtre de contexte.</li>
+      <li>Ni l'un ni l'autre ne «&nbsp;comprennent&nbsp;»&nbsp;: l'illusion de compréhension, elle, est bien réelle — méfie-toi d'elle au chapitre 9.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= CHAPITRE 3 ================= -->
+<section class="chapter" id="ch3">
+  <div class="chapter-head">
+    <p class="chaplabel">Chapitre 3 · Installation</p>
+    <h1 class="chapter">Ton atelier de développement</h1>
+    <p class="lede">Quinze minutes d'installation, une fois pour toutes&nbsp;: un compte GitHub, Git, Python et un bon éditeur. Tout est gratuit.</p>
+  </div>
+
+  <h2><span class="n">3.1</span>Créer ton compte GitHub</h2>
+  <p>Rends-toi sur <code>github.com</code> et clique sur <strong>Sign up</strong>. Choisis ton nom d'utilisateur avec soin&nbsp;: il apparaîtra dans l'URL de tous tes futurs projets (<code>github.com/tonnom</code>) et dans tes adresses de site publiées (<code>tonnom.github.io</code> — tu connais, tu l'utilises déjà&nbsp;!). Suis les étapes de vérification, puis passe en jeu la <strong>double authentification</strong> (Settings → Password and authentication) quand on te la propose&nbsp;: c'est deux minutes qui protègent tout ton travail.</p>
+  <p>C'est tout pour l'instant&nbsp;: ce compte te donnera accès aux cinq services que tu utiliseras dans ce guide — dépôts, Pages, Codespaces, Actions et Models — tous inclus dans l'offre gratuite.</p>
+
+  <h2><span class="n">3.2</span>Installer les outils</h2>
+  <p>Tu as besoin de quatre choses, toutes gratuites&nbsp;:</p>
+  <table>
+    <tr><th style="width:22%">Outil</th><th style="width:44%">Rôle</th><th>Installation</th></tr>
+    <tr><td><strong>Git</strong></td><td>Versionner ton code (l'historique des modifications)</td><td>Windows&nbsp;: <code>winget install Git.Git</code> ou git-scm.com · macOS&nbsp;: <code>brew install git</code> · Linux&nbsp;: <code>sudo apt install git</code></td></tr>
+    <tr><td><strong>Python</strong></td><td>Exécuter ELIZA et le serveur de l'assistant</td><td>python.org (coche «&nbsp;Add Python to PATH&nbsp;» sous Windows&nbsp;!) — version 3.11 ou plus récente</td></tr>
+    <tr><td><strong>VS Code</strong></td><td>Écrire le code confortablement</td><td>code.visualstudio.com, puis l'extension Python</td></tr>
+    <tr><td><strong>Node.js</strong> <span style="color:var(--muted)">(optionnel)</span></td><td>Tester la version web d'ELIZA hors navigateur</td><td>nodejs.org — version LTS</td></tr>
+  </table>
+  <p>Ouvre ensuite un terminal (sous Windows, «&nbsp;PowerShell&nbsp;» ou «&nbsp;Terminal&nbsp;»&nbsp;; sous macOS, «&nbsp;Terminal&nbsp;») et vérifie que tout est là&nbsp;:</p>
+  <pre class="term"><span class="p">$</span> git --version
+<span class="ok">git version 2.47.0</span>
+<span class="p">$</span> python --version
+<span class="ok">Python 3.12.4</span>
+<span class="p">$</span> node -v
+<span class="ok">v20.18.0</span></pre>
+  <div class="box warn">
+    <p class="box-label">Attention</p>
+    <p>Sous Windows, la commande peut s'appeler <code>py --version</code> plutôt que <code>python --version</code>. Et si l'installation de Python ne fonctionne pas dans le terminal, ferme et rouvre le terminal&nbsp;: les variables d'environnement ne se rechargent qu'à l'ouverture.</p>
+  </div>
+
+  <h2><span class="n">3.3</span>Configurer Git</h2>
+  <p>Git signe chaque enregistrement (chaque <em>commit</em>) avec ton identité. Une fois, pour toutes&nbsp;:</p>
+  <pre class="term"><span class="p">$</span> git config --global user.name "Ton Prénom"
+<span class="p">$</span> git config --global user.email "ton.email@exemple.com"
+<span class="p">$</span> git config --global init.defaultBranch main</pre>
+  <p>Utilise la même adresse email que celle de ton compte GitHub&nbsp;: tes contributions seront rattachées à ton profil.</p>
+
+  <h2><span class="n">3.4</span>Créer ton premier dépôt</h2>
+  <p>Un <strong>dépôt</strong> (repository, «&nbsp;repo&nbsp;») est un dossier suivi par Git, hébergé sur GitHub. C'est là que vivra ton assistant. Depuis la page d'accueil de GitHub&nbsp;:</p>
+  <ol>
+    <li>Clique sur le bouton <strong>+</strong> en haut à droite, puis <strong>New repository</strong>.</li>
+    <li>Nomme-le <code>assistant-ia</code>. Laisse-le <strong>public</strong>&nbsp;: c'est nécessaire pour GitHub Pages gratuitement.</li>
+    <li>Coche <strong>Add a README file</strong>, choisis la licence <strong>MIT</strong>, puis <strong>Create repository</strong>.</li>
+  </ol>
+  <p>Reviens dans ton terminal pour récupérer ce dépôt sur ta machine (<em>cloner</em>)&nbsp;:</p>
+  <pre class="term"><span class="p">$</span> git clone https://github.com/toncompte/assistant-ia.git
+<span class="p">$</span> cd assistant-ia
+<span class="p">$</span> git status
+<span class="ok">On branch main — nothing to commit, working tree clean</span></pre>
+  <p>Ton dossier contient pour l'instant trois fichiers&nbsp;: <code>README.md</code> (la page d'accueil du projet), <code>LICENSE</code> (les termes MIT) et le caché <code>.git</code> (l'historique). Ajoute un fichier <code>.gitignore</code> — la liste de ce que Git doit ignorer — dès maintenant, tu en comprendras l'usage au chapitre 6&nbsp;:</p>
+  <pre><code><span class="c"># .gitignore — ce que Git ne doit jamais versionner</span>
+__pycache__/
+*.pyc
+.env
+venv/
+.DS_Store</code></pre>
+
+  <div class="box info">
+    <p class="box-label">Le rituel Git — à connaître par cœur</p>
+    <p>Ton quotidien avec Git tiendra toujours en trois commandes&nbsp;: <code>git add .</code> (prépare les modifications), <code>git commit -m "Message clair"</code> (les enregistre localement avec un commentaire), <code>git push</code> (les envoie sur GitHub). Une modification non commitée n'existe pas pour Git&nbsp;; un commit bien décrit vaut mieux que dix messages vagues&nbsp;: dans six mois, tu remercieras celui d'aujourd'hui.</p>
+  </div>
+
+  <div class="box key">
+    <p class="box-label">À retenir</p>
+    <ul>
+      <li>Compte GitHub + Git + Python 3.11+ + VS Code&nbsp;: l'atelier est prêt, tout est gratuit.</li>
+      <li>Un dépôt = un projet versionné. Tu le clones, tu commits, tu pushes.</li>
+      <li>Le <code>.gitignore</code> protège ton dépôt des fichiers indésirables — bientôt, des fichiers <em>sensibles</em>.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= CHAPITRE 4 ================= -->
+<section class="chapter" id="ch4">
+  <div class="chapter-head">
+    <p class="chaplabel">Chapitre 4 · Découverte</p>
+    <h1 class="chapter">GitHub, la boîte à outils de ton assistant</h1>
+    <p class="lede">GitHub n'est pas qu'un hébergeur de code&nbsp;: c'est une plateforme complète qui va héberger ton assistant, le tester, le publier — et même lui fournir son cerveau.</p>
+  </div>
+
+  <p>Voici les cinq services que ce guide utilise. Le premier est l'hébergeur de ton code&nbsp;; les autres sont des services autour, tous accessibles depuis ton compte gratuit.</p>
+  <table>
+    <tr><th style="width:22%">Service</th><th style="width:38%">Ce que ça fait</th><th>Ton usage dans ce guide</th></tr>
+    <tr><td><strong>GitHub Dépôts</strong></td><td>Versionner et partager ton code</td><td>La maison de tes projets ELIZA et assistant IA</td></tr>
+    <tr><td><strong>GitHub Pages</strong></td><td>Héberger un site statique gratuitement</td><td>Publier l'interface web de ton assistant</td></tr>
+    <tr><td><strong>GitHub Actions</strong></td><td>Exécuter des tâches automatiques à chaque commit</td><td>Lancer les tests d'ELIZA et déployer le site tout seul</td></tr>
+    <tr><td><strong>GitHub Models</strong></td><td>Interroger des modèles d'IA avec ton compte GitHub</td><td>Le cerveau du projet n°&nbsp;2, sans carte bancaire</td></tr>
+    <tr><td><strong>GitHub Copilot</strong></td><td>T'aider à coder, directement dans l'éditeur</td><td>Un binôme qui suggère du code (optionnel)</td></tr>
+  </table>
+
+  <h2><span class="n">4.1</span>GitHub Pages&nbsp;: ton site en ligne en trois clics</h2>
+  <p>Pages transforme n'importe quel dépôt en site web public. Tu y mettras l'interface de chat de ton assistant (chapitre 6) et la version navigateur d'ELIZA (annexe B). Pour l'activer&nbsp;: dans ton dépôt, <strong>Settings → Pages</strong>, choisis la source <strong>GitHub Actions</strong>, et c'est réglé — nous écrirons le petit fichier de déploiement au chapitre 8. Ton site vivra à l'adresse <code>toncompte.github.io/nom-du-depot</code>, en HTTPS, gratuitement.</p>
+
+  <h2><span class="n">4.2</span>GitHub Models&nbsp;: le cerveau, avec ton compte GitHub</h2>
+  <p>C'est la pièce maîtresse du projet n°&nbsp;2. <strong>GitHub Models</strong> donne accès, avec ton simple compte GitHub, à un catalogue de modèles de langage — des GPT d'OpenAI, des Llama de Meta, des Mistral, des Phi de Microsoft… — via une API. Le principe&nbsp;:</p>
+  <ul>
+    <li>Un <strong>playground</strong> web pour tester les modèles depuis le navigateur, sans code&nbsp;: github.com → <strong>Marketplace → Models</strong> (ou models.github.ai).</li>
+    <li>Une <strong>API compatible OpenAI</strong>&nbsp;: ton programme envoie un JSON, reçoit un JSON. L'adresse du service est <code>https://models.github.ai/inference</code>.</li>
+    <li>Un usage <strong>gratuit dans la limite de quotas</strong> (des limites de débit par minute et par jour, largement suffisantes pour un assistant personnel et ses tests).</li>
+  </ul>
+  <div class="box warn">
+    <p class="box-label">Attention — le piège du nom de modèle</p>
+    <p>Dans l'API de GitHub Models, un modèle s'identifie par son nom <strong>précédé de son fournisseur</strong>&nbsp;: <code>openai/gpt-4o-mini</code>, et non <code>gpt-4o-mini</code>. Passer le nom seul déclenche une erreur de validation — c'est la première chose à vérifier si ton serveur répond 404 ou 400. Choisis pour commencer <code>openai/gpt-4o-mini</code>&nbsp;: rapide, très capable, et économe en quota.</p>
+  </div>
+
+  <h2><span class="n">4.3</span>Le jeton d'accès (PAT)&nbsp;: la clé de ta machine</h2>
+  <p>Pour appeler l'API, ton programme doit prouver ton identité. C'est le rôle du <strong>PAT</strong> (<em>Personal Access Token</em>)&nbsp;: une chaîne de caractères qui joue le rôle de mot de passe pour les programmes. Créons le tien&nbsp;:</p>
+  <ol>
+    <li>Sur GitHub, clique sur ta photo de profil → <strong>Settings</strong> → tout en bas <strong>Developer settings</strong>.</li>
+    <li><strong>Personal access tokens → Fine-grained tokens</strong> → <strong>Generate new token</strong>.</li>
+    <li>Donne-lui un nom clair (<code>assistant-ia-dev</code>), une expiration de <strong>90 jours</strong> (tu pourras en regénérer un, c'est une bonne habitude).</li>
+    <li>Descends jusqu'aux <strong>permissions</strong> et coche&nbsp;: <strong>Models → Read</strong>. C'est la seule permission nécessaire pour ce guide.</li>
+    <li>Generate, puis <strong>copie immédiatement</strong> le jeton (il commence par <code>github_pat_…</code>)&nbsp;: il ne sera plus jamais affiché.</li>
+  </ol>
+  <div class="box warn">
+    <p class="box-label">La règle d'or</p>
+    <p>Un jeton qui fuit, c'est ton compte qui parle à ta place. <strong>Ne le mets JAMAIS dans ton code, jamais dans un commit, jamais dans un message.</strong> Il vivra dans un fichier <code>.env</code> local (ignoré par le <code>.gitignore</code> que tu as créé au chapitre 3) ou dans les <em>secrets</em> chiffrés de ton dépôt. Si tu suspectes une fuite&nbsp;: reviens sur cette page et révoque le jeton — c'est instantané.</p>
+  </div>
+
+  <h2><span class="n">4.4</span>Copilot et Codespaces&nbsp;: les bonus</h2>
+  <p><strong>GitHub Copilot</strong> est l'assistant de code intégré à VS Code&nbsp;: il complète tes lignes, écrit des tests, explique des erreurs. L'offre gratuite (limitée) suffit pour ce guide&nbsp;; si tu es étudiant·e ou enseignant·e, le pack GitHub Education offre Copilot et de nombreux outils sans frais. Il t'aidera volontiers sur les exercices de ce guide — le chapitre 9 te dira pourquoi il faut néanmoins garder la main.</p>
+  <p><strong>GitHub Codespaces</strong>, enfin, ouvre un VS Code complet dans ton navigateur, connecté à ton dépôt&nbsp;: pratique si tu es sur un ordinateur où tu ne peux rien installer. L'offre gratuite comprend quelques dizaines d'heures par mois — largement de quoi suivre ce guide.</p>
+
+  <div class="box key">
+    <p class="box-label">À retenir</p>
+    <ul>
+      <li>Pages publie, Actions automatise, Models raisonne, Copilot t'aide — le tout avec un compte gratuit.</li>
+      <li>L'API de Models est compatible OpenAI&nbsp;: ce que tu apprendras ici se transférera à n'importe quel autre fournisseur.</li>
+      <li>Le PAT est ta clé&nbsp;: permission minimale (<strong>Models: Read</strong>), durée de vie courte, jamais versionné.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= CHAPITRE 5 ================= -->
+<section class="chapter" id="ch5">
+  <div class="chapter-head">
+    <p class="chaplabel">Chapitre 5 · Projet n°&nbsp;1</p>
+    <h1 class="chapter">Recoder ELIZA en Python</h1>
+    <p class="lede">Le moment que tu attends&nbsp;: reconstruire le chatbot de 1966, ligne par ligne. Aucune bibliothèque externe, aucune clé d'API — seulement la bibliothèque standard de Python.</p>
+  </div>
+
+  <p>Objectif du chapitre&nbsp;: un fichier <code>eliza.py</code> d'environ 130 lignes qui tient une conversation, fait des fautes de grammaire de 1966 et surprend tes proches. Les étapes suivent la théorie du chapitre 2&nbsp;: le miroir (réflexion), le carnet de règles, le filet de sécurité, la mémoire, puis la boucle de conversation.</p>
+
+  <h2><span class="n">5.1</span>La carte du projet</h2>
+  <p>Dans ton dépôt <code>assistant-ia</code> (chapitre 3), organise le projet ainsi&nbsp;:</p>
+  <div class="fig-arch">assistant-ia/
+├── eliza.py          ← le chatbot (ce chapitre)
+├── test_eliza.py     ← les tests automatiques
+├── .gitignore        ← créé au chapitre 3
+├── README.md         ← présente ton projet
+└── LICENSE           ← licence MIT</div>
+  <p>Crée <code>eliza.py</code> dans VS Code, et écris-le au fur et à mesure — ne copie-colle pas tout d'un coup&nbsp;: chaque étape s'explique.</p>
+
+  <h2><span class="n">5.2</span>Étape 1 — le miroir</h2>
+  <p>D'abord les importations et le dictionnaire de réflexion&nbsp;: il dit, pour chaque pronom, comment le retourner.</p>
+  <pre><code><span class="c"># -*- coding: utf-8 -*-
+"""ELIZA — reconstitution pédagogique du chatbot de Joseph Weizenbaum (1966)."""
+import random
+import re
+
+# Étape 1 — La réflexion : retourner les pronoms, comme un miroir.</span>
+REFLEXION = {
+    "i": "you", "me": "you", "my": "your", "myself": "yourself",
+    "am": "are", "you": "me", "your": "my", "yours": "mine",
+    "yourself": "myself", "are": "am", "mine": "yours",
+}</code></pre>
+  <p>Et la fonction qui l'utilise. Elle nettoie la ponctuation, découpe la phrase en mots, remplace chacun par son reflet s'il en a un, puis recolle le tout&nbsp;:</p>
+  <pre><code><span class="k">def</span> <span class="f">reflechir</span>(texte):
+    <span class="c">"""Retourne le texte avec les pronoms retournés (my -> your, etc.)."""</span>
+    <span class="k">if</span> <span class="k">not</span> texte:
+        <span class="k">return</span> ""
+    mots = texte.strip(<span class="s">" .!?,;: "</span>).lower().split()
+    <span class="k">return</span> <span class="s">" "</span>.join(REFLEXION.get(mot, mot) <span class="k">for</span> mot <span class="k">in</span> mots)</code></pre>
+  <div class="box tip">
+    <p class="box-label">Astuce</p>
+    <p><code>REFLEXION.get(mot, mot)</code> lit&nbsp;: «&nbsp;donne-moi le reflet du mot, sinon rends le mot tel quel&nbsp;». C'est le deuxième argument de <code>get()</code>&nbsp;: la valeur par défaut. Un idiome Python à retenir.</p>
+  </div>
+
+  <h2><span class="n">5.3</span>Étape 2 — le carnet de règles</h2>
+  <p>Le cœur du script DOCTOR&nbsp;: une liste de règles. Chaque règle associe un <strong>motif</strong> (une expression régulière) à plusieurs <strong>réponses possibles</strong> — ELIZA en choisira une au hasard, ce qui donne l'illusion de l'imprévu. Les gabarits <code>{0}</code>, <code>{1}</code>… sont remplacés par les morceaux capturés par le motif, <em>après réflexion</em>&nbsp;:</p>
+  <pre><code><span class="c"># Les contractions sont dépliées avant tout traitement.</span>
+CONTRACTIONS = {
+    <span class="s">"i'm"</span>: <span class="s">"i am"</span>, <span class="s">"i've"</span>: <span class="s">"i have"</span>, <span class="s">"i'd"</span>: <span class="s">"i would"</span>,
+    <span class="s">"i'll"</span>: <span class="s">"i will"</span>, <span class="s">"don't"</span>: <span class="s">"do not"</span>, <span class="s">"can't"</span>: <span class="s">"cannot"</span>,
+}
+
+# Étape 2 — Les règles : (motif regex, réponses possibles).
+REGLES = [
+    (r<span class="s">".*\bi am (depressed|sad|unhappy|lonely|afraid|scared|angry|worried)\b.*"</span>, [
+        <span class="s">"I am sorry to hear you are {0}."</span>,
+        <span class="s">"Why do you say you are {0}?"</span>,
+        <span class="s">"How long have you felt {0}?"</span>,
+    ]),
+    (r<span class="s">".*\bi need\b(.*)"</span>, [
+        <span class="s">"Why do you need {0}?"</span>,
+        <span class="s">"Would it really help you to get {0}?"</span>,
+        <span class="s">"What would it mean to you if you got {0}?"</span>,
+    ]),
+    <span class="c"># ... (la liste complète est en annexe A)</span>
+    (r<span class="s">".*\byou\b(.*)"</span>, [
+        <span class="s">"Why do you say I{0}?"</span>,
+        <span class="s">"What makes you think I{0}?"</span>,
+        <span class="s">"We were discussing you, not me."</span>,
+    ]),
+]</code></pre>
+  <p>Regarde comment ça s'articule, avec «&nbsp;<em>I need help with my computer</em>&nbsp;»&nbsp;: le motif <code>.*\bi need\b(.*)</code> capte «&nbsp;<code>&nbsp;help with my computer</code>&nbsp;»&nbsp;; la réflexion transforme ce morceau en «&nbsp;<code>help with your computer</code>&nbsp;»&nbsp;; et le gabarit assemble&nbsp;: <em>«&nbsp;Why do you need help with your computer?&nbsp;»</em>. La machine semble avoir compris — elle n'a fait que découper, retourner, recoller.</p>
+  <p>Deux détails de pro&nbsp;: le premier groupe de la règle famille capte <em>toute</em> la phrase contenant «&nbsp;my + proche&nbsp;», ce qui permet à ELIZA de la renvoyer en écho intégral&nbsp;; et l'ordre de la liste <strong>est</strong> la priorité&nbsp;: la règle des sentiments passe avant celle des besoins, qui passe avant l'attrape-tout «&nbsp;you&nbsp;».</p>
+
+  <h2><span class="n">5.4</span>Étape 3 — le filet de sécurité et la mémoire</h2>
+  <p>Si aucun mot-clé ne matche, ELIZA sort une réponse neutre de sa liste — six formulations suffisent. Et si le visiteur a parlé d'un souvenir, on le range dans <code>MEMOIRE</code> pour le ressortir plus tard&nbsp;:</p>
+  <pre><code><span class="c"># Étape 3 — Les réponses par défaut : le filet de sécurité.</span>
+REPONSES_DEFAUT = [
+    <span class="s">"Tell me more."</span>, <span class="s">"In what way?"</span>, <span class="s">"Can you be more specific?"</span>,
+    <span class="s">"I see. And what does that suggest to you?"</span>,
+    <span class="s">"Why do you say that?"</span>, <span class="s">"That is interesting. Please go on."</span>,
+]
+
+MEMOIRE = []  <span class="c"># La petite réserve d'ELIZA.</span>
+
+<span class="k">def</span> <span class="f">repondre</span>(phrase):
+    <span class="c">"""Le cœur d'ELIZA : une phrase entre, une réponse sort."""</span>
+    phrase = phrase.lower()
+    <span class="k">for</span> contraction, depliee <span class="k">in</span> CONTRACTIONS.items():
+        phrase = phrase.replace(contraction, depliee)
+
+    <span class="c"># Parfois, ELIZA ressort un souvenir rangé quelques échanges plus tôt.</span>
+    <span class="k">if</span> MEMOIRE <span class="k">and</span> random.random() &lt; 0.25:
+        souvenir = MEMOIRE.pop(0)
+        <span class="k">return</span> (<span class="s">"Earlier you said you remembered "</span> + souvenir
+                + <span class="s">". Does that have anything to do with now?"</span>)
+
+    <span class="k">for</span> motif, reponses <span class="k">in</span> REGLES:
+        m = re.match(motif, phrase)
+        <span class="k">if</span> m:
+            morceaux = [reflechir(g) <span class="k">for</span> g <span class="k">in</span> m.groups()]
+            <span class="k">if</span> <span class="s">"remember"</span> <span class="k">in</span> motif:
+                MEMOIRE.append(reflechir(m.group(1)))
+            reponse = random.choice(reponses).format(*morceaux)
+            <span class="k">return</span> reponse[0].upper() + reponse[1:]
+    <span class="k">return</span> random.choice(REPONSES_DEFAUT)</code></pre>
+
+  <h2><span class="n">5.5</span>Étape 4 — la boucle de conversation</h2>
+  <p>Il ne manque plus que la boucle qui lit au clavier et répond, jusqu'à «&nbsp;au revoir&nbsp;»&nbsp;:</p>
+  <pre><code><span class="k">def</span> <span class="f">main</span>():
+    print(<span class="s">"ELIZA — script DOCTOR. Tape 'au revoir' pour quitter."</span>)
+    print(<span class="s">"ELIZA &gt; How do you do. Please state your problem."</span>)
+    <span class="k">while</span> <span class="k">True</span>:
+        phrase = input(<span class="s">"Toi &gt; "</span>).strip()
+        <span class="k">if</span> phrase.lower() <span class="k">in</span> {<span class="s">"au revoir"</span>, <span class="s">"quit"</span>, <span class="s">"bye"</span>, <span class="s">"q"</span>}:
+            print(<span class="s">"ELIZA &gt; Au revoir. Cela m'a fait plaisir de te parler."</span>)
+            <span class="k">break</span>
+        <span class="k">if</span> phrase:
+            print(<span class="s">"ELIZA &gt;"</span>, repondre(phrase))
+
+<span class="k">if</span> __name__ == <span class="s">"__main__"</span>:
+    main()</code></pre>
+  <p>Lance dans le terminal&nbsp;: <code>python eliza.py</code>.</p>
+
+  <h2><span class="n">5.6</span>Une session réelle</h2>
+  <p>Voici un échange obtenu avec ce code exact (les réponses peuvent varier d'une session à l'autre&nbsp;: ELIZA choisit au hasard parmi les formulations de chaque règle)&nbsp;:</p>
+  <div class="chat">
+    <div class="line toi"><span class="who">Toi&nbsp;:</span> Hello, I need help</div>
+    <div class="line eliza"><span class="who">ELIZA&nbsp;:</span> What would it mean to you if you got help?</div>
+    <div class="line toi"><span class="who">Toi&nbsp;:</span> My boyfriend made me come here</div>
+    <div class="line eliza"><span class="who">ELIZA&nbsp;:</span> Your boyfriend made you come here?</div>
+    <div class="line toi"><span class="who">Toi&nbsp;:</span> He says I'm depressed much of the time</div>
+    <div class="line eliza"><span class="who">ELIZA&nbsp;:</span> I am sorry to hear you are depressed.</div>
+    <div class="line toi"><span class="who">Toi&nbsp;:</span> I remember my first video game</div>
+    <div class="line eliza"><span class="who">ELIZA&nbsp;:</span> What else do you remember?</div>
+    <div class="line toi"><span class="who">Toi&nbsp;:</span> You never listen to me</div>
+    <div class="line eliza"><span class="who">ELIZA&nbsp;:</span> Earlier you said you remembered your first video game. Does that have anything to do with now?</div>
+    <div class="line toi"><span class="who">Toi&nbsp;:</span> Bliblou kwyjibo flubbergasted</div>
+    <div class="line eliza"><span class="who">ELIZA&nbsp;:</span> In what way?</div>
+  </div>
+  <p>Regarde bien l'avant-dernier échange&nbsp;: c'est la <strong>mémoire</strong> qui a travaillé. Tu as parlé de ton premier jeu vidéo trois messages plus tôt, ELIZA l'avait rangé, et elle le ressort au moment le plus troublant. En 1966, ce petit effet faisait franchement froid dans le dos. Il tourne dans une trentaine de lignes de code.</p>
+
+  <h2><span class="n">5.7</span>Étape 5 — les tests, puis le commit</h2>
+  <p>Un chatbot à règles est prévisible&nbsp;: c'est le programme idéal pour écrire ses premiers tests automatiques. Crée <code>test_eliza.py</code>&nbsp;:</p>
+  <pre><code><span class="c"># -*- coding: utf-8 -*-
+"""Tests d'ELIZA — exécution : python test_eliza.py (ou python -m pytest)."""
+from eliza import repondre, reflechir</span>
+
+<span class="k">def</span> <span class="f">test_reflexion_simple</span>():
+    <span class="k">assert</span> reflechir(<span class="s">"my friend"</span>) == <span class="s">"your friend"</span>
+    <span class="k">assert</span> reflechir(<span class="s">"i am sad"</span>) == <span class="s">"you are sad"</span>
+
+<span class="k">def</span> <span class="f">test_echo_de_phrase</span>():
+    r = repondre(<span class="s">"My boyfriend made me come here"</span>).lower()
+    <span class="k">assert</span> <span class="s">"your boyfriend made you come here"</span> <span class="k">in</span> r
+
+<span class="k">def</span> <span class="f">test_memoire_remplie</span>():
+    <span class="k">from</span> eliza <span class="k">import</span> MEMOIRE
+    MEMOIRE.clear()
+    repondre(<span class="s">"I remember my childhood"</span>)
+    <span class="k">assert</span> MEMOIRE == [<span class="s">"your childhood"</span>]
+
+<span class="k">def</span> <span class="f">test_reponse_defaut</span>():
+    <span class="k">assert</span> len(repondre(<span class="s">"Bliblou kwyjibo flubbergasted"</span>)) &gt; 0</code></pre>
+  <p>Exécute <code>python test_eliza.py</code> — tu dois voir les tests passer. Ensuite, l'habituelle triple commande Git&nbsp;:</p>
+  <pre class="term"><span class="p">$</span> git add .
+<span class="p">$</span> git commit -m "Ajoute ELIZA : moteur de règles, réflexion et mémoire"
+<span class="p">$</span> git push</pre>
+
+  <div class="box info">
+    <p class="box-label">Pour aller plus loin — un ELIZA en français&nbsp;?</p>
+    <p>Exercice redoutable, mais instructif&nbsp;: traduire <code>REFLEXION</code> («&nbsp;je&nbsp;»→«&nbsp;vous&nbsp;», «&nbsp;mon&nbsp;»→«&nbsp;votre&nbsp;»…). Le piège&nbsp;: les conjugaisons. «&nbsp;Je suis triste&nbsp;» doit devenir «&nbsp;<em>vous êtes</em> triste&nbsp;», pas «&nbsp;vous suis triste&nbsp;»&nbsp;: il faut donc aussi un dictionnaire de correspondances verbales (<code>suis</code>→<code>êtes</code>, <code>ai</code>→<code>avez</code>, <code>veux</code>→<code>voulez</code>…). Weizenbaum avait choisi l'anglais&nbsp;; tu comprendras vite pourquoi.</p>
+  </div>
+
+  <div class="box key">
+    <p class="box-label">À retenir</p>
+    <ul>
+      <li>Trois ingrédients ont suffi&nbsp;: un dictionnaire de réflexion, une liste ordonnée de règles, des réponses par défaut.</li>
+      <li>Le charme d'ELIZA vient des hasards d'<code>random.choice</code> et de sa petite mémoire.</li>
+      <li>Tes tests vérifient les comportements clés — ils serviront de garde-fou à GitHub Actions au chapitre 8.</li>
+      <li>Le listing complet est en <strong>annexe A</strong>, la version navigateur en <strong>annexe B</strong>.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= CHAPITRE 6 ================= -->
+<section class="chapter" id="ch6">
+  <div class="chapter-head">
+    <p class="chaplabel">Chapitre 6 · Projet n°&nbsp;2</p>
+    <h1 class="chapter">Un assistant moderne branché sur les LLM</h1>
+    <p class="lede">ELIZA reformulait. Le tien va <em>répondre</em> — avec un modèle de langage accessible depuis ton compte GitHub, sans carte bancaire.</p>
+  </div>
+
+  <h2><span class="n">6.1</span>L'architecture, en trois boîtes</h2>
+  <p>Trois rôles se séparent&nbsp;: le navigateur affiche l'interface, un petit serveur garde le jeton secret et parle au modèle, le modèle réfléchit. Le fichier du chapitre 5 devient un serveur — des années d'avance technique, la même vocation&nbsp;: faire dialoguer un humain et une machine.</p>
+  <div class="fig-arch">┌──────────────────┐   POST /api/chat   ┌────────────────────┐   HTTPS   ┌─────────────────────┐
+│    Navigateur     │  ────────────────► │  Ton serveur Flask  │ ────────► │    GitHub Models     │
+│  (interface chat) │  ◄──────────────── │     serveur.py      │ ◄──────── │  models.github.ai    │
+│                   │     réponse JSON   │  garde GITHUB_TOKEN │  réponse  │   openai/gpt-4o-mini │
+└──────────────────┘                    └────────────────────┘           └─────────────────────┘
+      GitHub Pages                              ta machine                        le cerveau</div>
+  <div class="box warn">
+    <p class="box-label">Pourquoi un serveur, et pas tout dans le navigateur&nbsp;?</p>
+    <p>Appeler l'API directement en JavaScript mettrait le jeton <strong>dans la page</strong>, visible par tout visiteur qui ouvre les outils de développement. Règle absolue&nbsp;: <strong>un jeton secret ne vit jamais côté navigateur</strong>. D'où ce petit serveur, seul dépositaire de la clé.</p>
+  </div>
+
+  <h2><span class="n">6.2</span>Le jeton dans son coffre</h2>
+  <p>Crée un fichier <code>.env</code> à la racine — rappelle-toi, il est dans le <code>.gitignore</code>, il n'ira jamais sur GitHub&nbsp;:</p>
+  <pre><code><span class="c"># .env — copie ton jeton ici. Ce fichier ne doit JAMAIS être commité.</span>
+GITHUB_TOKEN=github_pat_Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</code></pre>
+  <p>Installe les dépendances du serveur&nbsp;:</p>
+  <pre class="term"><span class="p">$</span> pip install flask flask-cors openai python-dotenv</pre>
+  <div class="box tip">
+    <p class="box-label">Astuce</p>
+    <p>La bibliothèque <code>openai</code> fonctionne avec tout service compatible&nbsp;: on lui passe une autre <code>base_url</code>. Aujourd'hui GitHub Models, demain un modèle local — sans réécrire ton code.</p>
+  </div>
+
+  <h2><span class="n">6.3</span>Le serveur, en cinq morceaux</h2>
+  <p>Crée <code>serveur.py</code>. Le listing complet est en annexe C&nbsp;; voici les morceaux qui comptent. D'abord, la connexion au modèle et la <strong>personnalité</strong> de ton assistant — le fameux prompt système&nbsp;:</p>
+  <pre><code>client = OpenAI(
+    base_url=<span class="s">"https://models.github.ai/inference"</span>,
+    api_key=os.environ[<span class="s">"GITHUB_TOKEN"</span>],
+)
+MODELE = <span class="s">"openai/gpt-4o-mini"</span>
+
+PERSONA = <span class="s">"""Tu es Pixel, l'assistant du site Quanthevaris, un site qui propose
+des guides gratuits pour apprendre à créer des jeux vidéo en Python.
+Règles :
+- tu réponds en français, de façon claire et encourageante ;
+- tes réponses sont courtes (3 phrases maximum) ;
+- tu ne prétends jamais être humain : tu es un assistant ;
+- si on te pose une question hors de ton domaine, tu le dis honnêtement ;
+- tu ne donnes jamais de conseil médical, juridique ou financier."""</span></code></pre>
+  <p>Ensuite, l'unique point d'entrée&nbsp;: le navigateur enverra <code>{"message": "...", "historique": [...]}</code>, le serveur répondra <code>{"reponse": "..."}</code>. La gestion d'erreurs intercepte tout — jamais de crash, jamais de traceback renvoyé au visiteur.</p>
+  <pre><code><span class="f">@app.post</span>(<span class="s">"/api/chat"</span>)
+<span class="k">def</span> <span class="f">chat</span>():
+    donnees = request.get_json(silent=True) <span class="k">or</span> {}
+    message = (donnees.get(<span class="s">"message"</span>) <span class="k">or</span> "").strip()
+    <span class="k">if</span> <span class="k">not</span> message:
+        <span class="k">return</span> jsonify({<span class="s">"erreur"</span>: <span class="s">"Message vide."</span>}), 400
+
+    historique = donnees.get(<span class="s">"historique"</span>, [])[-HISTORIQUE_MAX:]
+    messages = [{<span class="s">"role"</span>: <span class="s">"system"</span>, <span class="s">"content"</span>: PERSONA},
+                *historique,
+                {<span class="s">"role"</span>: <span class="s">"user"</span>, <span class="s">"content"</span>: message}]
+
+    <span class="k">try</span>:
+        reponse = client.chat.completions.create(
+            model=MODELE, messages=messages,
+            temperature=0.7, max_tokens=500,
+        )
+    <span class="k">except</span> Exception <span class="k">as</span> exc:
+        app.logger.error(<span class="s">"Erreur API : %s"</span>, exc)
+        <span class="k">return</span> jsonify({<span class="s">"erreur"</span>: <span class="s">"Le modèle est momentanément indisponible."</span>}), 502
+
+    <span class="k">return</span> jsonify({<span class="s">"reponse"</span>: reponse.choices[0].message.content})</code></pre>
+
+  <h2><span class="n">6.4</span>Premier essai, hors navigateur</h2>
+  <p>Lance le serveur (<code>python serveur.py</code>), puis interroge-le avec <code>curl</code> — ou teste d'abord l'API directement&nbsp;:</p>
+  <pre class="term"><span class="p">$</span> curl https://models.github.ai/inference/chat/completions \
+    -H "Authorization: Bearer $GITHUB_TOKEN" \
+    -H "Content-Type: application/json" \
+    -d '{"model": "openai/gpt-4o-mini",
+         "messages": [{"role": "user", "content": "Dis bonjour en français"}]}'
+<span class="ok">{"choices":[{"message":{"role":"assistant","content":"Bonjour ! ..."}}]}</span>
+<span class="p">$</span> curl -X POST http://127.0.0.1:5000/api/chat \
+    -H "Content-Type: application/json" \
+    -d '{"message": "Bonjour, qui es-tu ?"}'
+<span class="ok">{"reponse":"Je suis Pixel, l'assistant du site Quanthevaris..."}</span></pre>
+  <p>Si tu vois la réponse de Pixel, ton assistant <strong>vit</strong>. Erreur 401&nbsp;→ jeton ou permission <em>Models: Read</em>&nbsp;; 429&nbsp;→ quota atteint, attends quelques minutes&nbsp;; 400/404&nbsp;→ vérifie le nom du modèle, préfixe du fournisseur obligatoire. Fiche complète en annexe D.</p>
+
+  <h2><span class="n">6.5</span>L'interface web du chat</h2>
+  <p>Crée <code>assistant.html</code>&nbsp;: chaque message part au serveur, la réponse s'affiche. L'historique, gardé côté navigateur et renvoyé à chaque tour, donne au modèle la sensation de continuité.</p>
+  <pre><code>&lt;<span class="f">script</span>&gt;
+<span class="k">const</span> API = <span class="s">"http://127.0.0.1:5000/api/chat"</span>;  <span class="c">// l'URL de ton serveur</span>
+<span class="k">const</span> historique = [];
+
+document.getElementById(<span class="s">"form"</span>).addEventListener(<span class="s">"submit"</span>, <span class="k">async</span> (e) =&gt; {
+  e.preventDefault();
+  <span class="k">const</span> champ = document.getElementById(<span class="s">"texte"</span>);
+  <span class="k">const</span> message = champ.value.trim();
+  <span class="k">if</span> (!message) <span class="k">return</span>;
+  ajoute(<span class="s">"toi"</span>, message);
+  champ.value = <span class="s">""</span>;
+  <span class="k">const</span> bulle = ajoute(<span class="s">"bot"</span>, <span class="s">"…"</span>);  <span class="c">// bulle d'attente</span>
+  <span class="k">try</span> {
+    <span class="k">const</span> r = <span class="k">await</span> fetch(API, {
+      method: <span class="s">"POST"</span>,
+      headers: {<span class="s">"Content-Type"</span>: <span class="s">"application/json"</span>},
+      body: JSON.stringify({message, historique}),
+    });
+    <span class="k">const</span> data = <span class="k">await</span> r.json();
+    bulle.textContent = data.reponse ?? (<span class="s">"Erreur : "</span> + (data.erreur ?? r.status));
+    <span class="k">if</span> (data.reponse) {
+      historique.push({role: <span class="s">"user"</span>, content: message},
+                      {role: <span class="s">"assistant"</span>, content: data.reponse});
+      <span class="k">while</span> (historique.length &gt; 12) historique.shift();  <span class="c">// garde le contexte court</span>
+    }
+  } <span class="k">catch</span> {
+    bulle.textContent = <span class="s">"Impossible de joindre le serveur."</span>;
+  }
+});
+
+<span class="k">function</span> <span class="f">ajoute</span>(classe, texte){
+  <span class="k">const</span> div = document.createElement(<span class="s">"div"</span>);
+  div.className = <span class="s">"msg "</span> + classe;
+  div.textContent = texte;
+  document.getElementById(<span class="s">"chat"</span>).appendChild(div);
+  <span class="k">return</span> div;
+}
+&lt;/<span class="f">script</span>&gt;</code></pre>
+  <p>La feuille de style reprend les couleurs de ton site&nbsp;; la page intégrale figure en annexe C.</p>
+
+  <h2><span class="n">6.6</span>Du local au web</h2>
+  <p>En développement, tout tourne sur ta machine&nbsp;: le serveur sur le port 5000, la page ouverte en fichier local. Pour publier&nbsp;:</p>
+  <ul>
+    <li><strong>L'interface</strong> part sur GitHub Pages au chapitre 8 — mets à jour la constante <code>API</code> avec l'adresse publique de ton serveur.</li>
+    <li><strong>Le serveur</strong> a besoin d'une machine qui tourne&nbsp;: ta machine, un Codespace, ou un petit hébergeur gratuit. Le jeton y passera par une <em>variable d'environnement</em>, jamais par le dépôt.</li>
+    <li><strong>Le CORS</strong> doit connaître l'origine exacte de ton site (<code>https://toncompte.github.io</code>) pour n'autoriser que tes pages.</li>
+  </ul>
+
+  <div class="box key">
+    <p class="box-label">À retenir</p>
+    <ul>
+      <li>Trois boîtes&nbsp;: navigateur (Pages) → ton serveur Flask (le coffre du jeton) → GitHub Models (le cerveau).</li>
+      <li>Le jeton ne vit que dans un <code>.env</code> ignoré par Git, ou dans les variables d'environnement d'un hébergeur.</li>
+      <li>La personnalité tient dans une chaîne de caractères&nbsp;: le prompt système, ton levier favori — au chapitre suivant.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= CHAPITRE 7 ================= -->
+<section class="chapter" id="ch7">
+  <div class="chapter-head">
+    <p class="chaplabel">Chapitre 7 · Personnalisation</p>
+    <h1 class="chapter">Rends-le unique&nbsp;: personnaliser ton assistant</h1>
+    <p class="lede">Un assistant générique, tout le monde en a. Ici, on façonne le tien&nbsp;: personnalité, mémoire, culture générale — et même ses outils.</p>
+  </div>
+
+  <h2><span class="n">7.1</span>Sculpter la personnalité&nbsp;: l'anatomie d'un bon prompt système</h2>
+  <p>Le prompt système est l'ADN de ton assistant. Un bon prompt couvre cinq étages, du plus stable au plus précis&nbsp;:</p>
+  <ol>
+    <li><strong>Identité</strong>&nbsp;: nom, affiliation. («&nbsp;Tu es Pixel, l'assistant du site Quanthevaris…&nbsp;»)</li>
+    <li><strong>Mission</strong>&nbsp;: spécialité. («&nbsp;Il aide les débutants à créer des jeux vidéo en Python.&nbsp;»)</li>
+    <li><strong>Ton</strong>&nbsp;: registre, longueur, langue. («&nbsp;Tu tutoies, trois phrases maximum.&nbsp;»)</li>
+    <li><strong>Règles dures</strong>&nbsp;: ce qu'il ne fera <em>jamais</em>. («&nbsp;Pas de conseil médical.&nbsp;»)</li>
+    <li><strong>Exemples</strong>&nbsp;: un couple question→réponse modèle vaut mieux qu'un paragraphe de consignes (<em>few-shot</em>&nbsp;: montrer plutôt que dicter).</li>
+  </ol>
+  <p>Traite ce prompt comme du code&nbsp;: il vit dans ton dépôt, il évolue par commits, chaque amélioration est testable. Et note l'effet ELIZA au passage — il reviendra au chapitre 9&nbsp;: un assistant trop charmeur, qui ne dit pas qu'il est une machine, finit toujours par tromper quelqu'un.</p>
+
+  <h2><span class="n">7.2</span>La mémoire longue&nbsp;: le résumé roulant</h2>
+  <p>La fenêtre de contexte est limitée, et renvoyer toute la conversation coûte des tokens. Solution élégante&nbsp;: quand l'historique déborde, fais-le <strong>résumer</strong> par le modèle, et garde ce résumé en tête de pile&nbsp;:</p>
+  <pre><code><span class="k">def</span> <span class="f">resumer</span>(historique):
+    <span class="c">"""Condense une longue conversation en quelques phrases."""</span>
+    dialogue = <span class="s">"\n"</span>.join(
+        <span class="s">f"{m['role']}&nbsp;: {m['content']}"</span> <span class="k">for</span> m <span class="k">in</span> historique)
+    r = client.chat.completions.create(
+        model=MODELE,
+        messages=[
+            {<span class="s">"role"</span>: <span class="s">"system"</span>,
+             <span class="s">"content"</span>: <span class="s">"Résume cette conversation en trois phrases, en gardant
+                        le prénom de l'utilisateur et ses préférences."</span>},
+            {<span class="s">"role"</span>: <span class="s">"user"</span>, <span class="s">"content"</span>: dialogue},
+        ],
+    )
+    <span class="k">return</span> r.choices[0].message.content</code></pre>
+  <p>Dans <code>chat()</code>, quand l'historique dépasse ton seuil, remplace-le par un message système «&nbsp;Rappel des échanges précédents&nbsp;: …&nbsp;» contenant le résumé. Ton assistant se souviendra d'une session entière pour le prix de trois phrases.</p>
+
+  <h2><span class="n">7.3</span>La base de connaissances&nbsp;: un mini-RAG</h2>
+  <p>Les grands modèles savent tout mal et rien précisément. Pour que ton assistant réponde <strong>selon tes contenus</strong> — par exemple les guides de ton site —, range-les dans des fichiers <code>docs/*.txt</code> et injecte les passages pertinents dans le prompt. C'est le principe du <em>RAG</em> (<em>Retrieval-Augmented Generation</em>), en version artisanale&nbsp;:</p>
+  <pre><code><span class="k">import</span> glob
+
+<span class="k">def</span> <span class="f">chercher_extraits</span>(question, k=2):
+    <span class="c">"""Renvoie les k documents les plus proches de la question."""</span>
+    scores = []
+    <span class="k">for</span> chemin <span class="k">in</span> glob.glob(<span class="s">"docs/*.txt"</span>):
+        texte = open(chemin, encoding=<span class="s">"utf-8"</span>).read()
+        score = <span class="f">sum</span>(mot <span class="k">in</span> texte.lower() <span class="k">for</span> mot <span class="k">in</span> question.lower().split())
+        scores.append((score, texte[:600]))
+    scores.sort(reverse=True)
+    <span class="k">return</span> [t <span class="k">for</span> s, t <span class="k">in</span> scores[:k] <span class="k">if</span> s &gt; 0]</code></pre>
+  <p>Et dans <code>chat()</code>&nbsp;: si <code>chercher_extraits(message)</code> renvoie quelque chose, ajoute un bloc «&nbsp;Contexte utile&nbsp;: …&nbsp;» au prompt, avec la consigne «&nbsp;Réponds en t'appuyant sur ce contexte&nbsp;; s'il ne suffit pas, dis-le.&nbsp;» Les versions industrielles remplacent ce comptage de mots par des <em>embeddings</em> (des vecteurs de sens) — la mécanique reste celle-ci.</p>
+
+  <h2><span class="n">7.4</span>Donner des outils à ton assistant</h2>
+  <p>Un modèle ne sait ni lire l'heure, ni piocher dans tes fichiers — mais il sait <strong>demander</strong> qu'on le fasse pour lui. C'est le <em>function calling</em>&nbsp;: tu décris des fonctions en JSON, et le modèle répond parfois non par un texte, mais par «&nbsp;appelle <code>conseil_jeu</code> avec <code>sujet = "pygame"</code>&nbsp;». Ton serveur exécute, renvoie le résultat, le modèle rédige la réponse finale&nbsp;:</p>
+  <pre><code>OUTILS = [{
+    <span class="s">"type"</span>: <span class="s">"function"</span>,
+    <span class="s">"function"</span>: {
+        <span class="s">"name"</span>: <span class="s">"conseil_jeu"</span>,
+        <span class="s">"description"</span>: <span class="s">"Renvoie un conseil tiré d'un guide du site."</span>,
+        <span class="s">"parameters"</span>: {
+            <span class="s">"type"</span>: <span class="s">"object"</span>,
+            <span class="s">"properties"</span>: {
+                <span class="s">"sujet"</span>: {<span class="s">"type"</span>: <span class="s">"string"</span>,
+                          <span class="s">"enum"</span>: [<span class="s">"pygame"</span>, <span class="s">"python"</span>, <span class="s">"publication"</span>]}
+            },
+            <span class="s">"required"</span>: [<span class="s">"sujet"</span>],
+        },
+    },
+}]
+<span class="c"># puis, dans l'appel : client.chat.completions.create(..., tools=OUTILS)</span></code></pre>
+  <p>C'est la porte vers les <strong>agents</strong>&nbsp;: un assistant qui consulte l'heure, cherche dans tes guides, écrit un fichier — et enchaîne (chapitre 10).</p>
+
+  <h2><span class="n">7.5</span>Les garde-fous</h2>
+  <ul>
+    <li><strong>Longueur</strong>&nbsp;: refuse les messages de plus de 2 000 caractères (déjà dans le serveur) — tes quotas te remercient.</li>
+    <li><strong>Fréquence</strong>&nbsp;: limite par adresse IP le nombre de requêtes par minute — un dictionnaire <code>{ip: [horodatages]}</code> suffit.</li>
+    <li><strong>Contenus</strong>&nbsp;: le prompt système interdit les sujets sensibles&nbsp;; une liste de mots interdits côté serveur déclenche une réponse type «&nbsp;Je préfère éviter ce sujet.&nbsp;»</li>
+    <li><strong>Confidentialité</strong>&nbsp;: logge des événements (horodatage, durée, code HTTP), pas les conversations.</li>
+  </ul>
+
+  <div class="box key">
+    <p class="box-label">À retenir</p>
+    <ul>
+      <li>Le prompt système se structure en cinq étages et se versionne comme du code.</li>
+      <li>Résumé roulant = mémoire longue pas chère&nbsp;; mini-RAG = réponses ancrées dans <em>tes</em> contenus.</li>
+      <li>Le function calling transforme un bavard en agent — sous garde-fous.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= CHAPITRE 8 ================= -->
+<section class="chapter" id="ch8">
+  <div class="chapter-head">
+    <p class="chaplabel">Chapitre 8 · Publication</p>
+    <h1 class="chapter">Publier et automatiser&nbsp;: Pages, Actions et Cie</h1>
+    <p class="lede">Un projet qui vit sur GitHub se déploie et se teste tout seul. Écrivons les deux fichiers de recette qui le rendent autonome.</p>
+  </div>
+
+  <h2><span class="n">8.1</span>Le dépôt final</h2>
+  <div class="fig-arch">assistant-ia/
+├── eliza.py                ← projet n° 1 (chapitre 5)
+├── test_eliza.py           ← ses tests
+├── eliza-web.html          ← ELIZA dans le navigateur (annexe B)
+├── serveur.py              ← projet n° 2 (annexe C)
+├── assistant.html          ← l'interface du chat
+├── docs/                   ← ta base de connaissances (*.txt)
+├── .github/
+│   └── workflows/
+│       ├── ci.yml          ← les tests, à chaque commit
+│       └── pages.yml       ← la publication du site
+├── .gitignore              ← .env n'y échappera pas !
+├── README.md               ← la vitrine du projet
+└── LICENSE</div>
+
+  <h2><span class="n">8.2</span>GitHub Pages&nbsp;: la recette de déploiement</h2>
+  <p>Crée le fichier <code>.github/workflows/pages.yml</code>. Un <em>workflow</em> est une recette en YAML&nbsp;: elle dit <em>quand</em> (à chaque push sur <code>main</code>) et <em>comment</em> (publier le dépôt tel quel) déployer ton site.</p>
+  <pre><code><span class="c"># .github/workflows/pages.yml — publie le site à chaque push sur main</span>
+name: Déployer le site
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - uses: actions/deploy-pages@v4</code></pre>
+  <p>Dans <strong>Settings → Pages</strong>, choisis la source <strong>GitHub Actions</strong>. À chaque <code>git push</code>, la machine de GitHub récupère ton dépôt et publie <code>assistant.html</code> et <code>eliza-web.html</code> sur <code>https://toncompte.github.io/assistant-ia/</code>. Ta première page web d'assistant est en ligne — bravo, c'est le moment de donner l'URL à tes amis.</p>
+
+  <h2><span class="n">8.3</span>GitHub Actions&nbsp;: le gardien des tests</h2>
+  <p>Deuxième recette, <code>.github/workflows/ci.yml</code>&nbsp;: relancer tes tests ELIZA à chaque modification, sur les serveurs de GitHub. Si un test casse, tu le vois avant tes visiteurs&nbsp;:</p>
+  <pre><code><span class="c"># .github/workflows/ci.yml — vérifie ELIZA à chaque commit</span>
+name: Tests ELIZA
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: <span class="s">"3.12"</span>
+      - run: python test_eliza.py</code></pre>
+  <p>Remarque&nbsp;: aucun jeton n'apparaît dans ces fichiers. Actions met à disposition un <code>GITHUB_TOKEN</code> jetable par exécution — celui-là seul peut demander la permission <code>models: read</code> si un jour ton workflow veut interroger un modèle (par exemple pour étiqueter automatiquement tes <em>issues</em>). Ton jeton personnel, lui, ne s'utilise que sur ta machine&nbsp;; si un workflow a besoin d'un jeton durable, passe par <strong>Settings → Secrets and variables → Actions</strong>, qui chiffre les secrets et les masque dans les journaux.</p>
+
+  <h2><span class="n">8.4</span>Branches et pull requests&nbsp;: le filet du funambule</h2>
+  <p>Pour toute évolution qui risque de casser&nbsp;: crée une branche, travaille dedans, puis propose une <strong>pull request</strong> — une demande de fusion que GitHub teste automatiquement grâce à <code>ci.yml</code>.</p>
+  <pre class="term"><span class="p">$</span> git switch -c ajout-outils-conseils
+<span class="p">$</span> git add . && git commit -m "Ajoute l'outil conseil_jeu"
+<span class="p">$</span> git push -u origin ajout-outils-conseils
+<span class="ok">→ ouvre la pull request sur github.com, vérifie les tests, fusionne</span></pre>
+  <p><code>main</code> reste toujours déployable&nbsp;; les idées risquées mûrissent dans leur branche. Quand une version te satisfait, étiquette-la&nbsp;: <code>git tag v1.0 && git push --tags</code>.</p>
+
+  <h2><span class="n">8.5</span>Le README, vitrine du projet</h2>
+  <p>Ton README.md mérite trois sections&nbsp;: une <em>capture d'écran</em> d'une conversation avec ton assistant, un <em>tableau</em> «&nbsp;ce que fait ce projet&nbsp;», et un paragraphe «&nbsp;Comment lancer&nbsp;» (les commandes des chapitres 5 et 6). C'est la page que liront les curieux — dont, dans six mois, toi.</p>
+
+  <div class="box tip">
+    <p class="box-label">Astuce — le rituel complet, résumé</p>
+    <p><code>git switch -c branche</code> → code → <code>git add .</code> → <code>git commit -m "…"</code> → <code>git push -u origin branche</code> → pull request → tests verts → fusion. Ce circuit, tu vas le répéter toute ta vie de développeur&nbsp;; il devient un réflexe en deux semaines.</p>
+  </div>
+
+  <div class="box key">
+    <p class="box-label">À retenir</p>
+    <ul>
+      <li>Pages publie, Actions vérifie&nbsp;: deux fichiers YAML suffisent à l'autonomie du projet.</li>
+      <li>Les secrets de CI passent par l'onglet Secrets, jamais par le code.</li>
+      <li>Branches + pull requests + tags = un dépôt qui reste propre pendant des années.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= CHAPITRE 9 ================= -->
+<section class="chapter" id="ch9">
+  <div class="chapter-head">
+    <p class="chaplabel">Chapitre 9 · Responsabilité</p>
+    <h1 class="chapter">Éthique, sécurité et limites</h1>
+    <p class="lede">Weizenbaum a passé la seconde moitié de sa vie à mettre en garde contre ce que son chatbot révélait de nous. Ce chapitre court est le plus important du guide.</p>
+  </div>
+
+  <h2><span class="n">9.1</span>L'effet ELIZA, soixante ans plus tard</h2>
+  <p>Ta secrétaire de 1966, celle qui voulait parler seule à la machine, a aujourd'hui des millions de cousines&nbsp;: les utilisateurs qui s'attachent à des compagnons numériques, les enfants qui croient parler à un ami, les adultes qui confient des secrets à une fenêtre de chat. La mécanique que tu as codée au chapitre 5 — reformulation + hasard + mémoire — est littéralement ce qui <em>fonctionne encore</em> dans ces produits, à une échelle statistique incomparablement plus large.</p>
+  <p>De cette réalité découlent trois règles que ton assistant respectera dès aujourd'hui&nbsp;:</p>
+  <ul>
+    <li><strong>Annonce la machine.</strong> Ton assistant dit qui il est quand on lui demande — et l'interface le rappelle. Ne conçois jamais un bot qui se fait passer pour un humain&nbsp;: c'est trompeur, et dans certains contextes, illégal.</li>
+    <li><strong>Pas de fausse empathie sur les sujets graves.</strong> Détresse, santé mentale, médecine, droit&nbsp;: le prompt système refuse et oriente vers un humain, une ligne d'écoute, un professionnel. Un modèle qui «&nbsp;console&nbsp;» sans comprendre n'est pas un thérapeute&nbsp;— Weizenbaum l'écrivait dès 1976.</li>
+    <li><strong>Reste l'adulte de la boucle.</strong> Ton code, tes tests, tes garde-fous&nbsp;: c'est toi la responsabilité. Un assistant est un outil, pas un être à qui déléguer des décisions.</li>
+  </ul>
+
+  <h2><span class="n">9.2</span>Les données&nbsp;: ce qui part, ce qui reste</h2>
+  <p>Chaque message envoyé à l'API transite par Internet vers un service tiers, et s'ajoute à ta consommation de quota. Trois habitudes s'imposent&nbsp;: <strong>minimiser</strong> (n'envoie que le nécessaire — pas les logs, pas les adresses emails de tes visiteurs)&nbsp;; <strong>ne pas conserver</strong> (ton serveur n'écrit pas les conversations sur disque&nbsp;; si tu veux des statistiques, compte les requêtes, pas les mots)&nbsp;; <strong>ne jamais saisir de secret dans un chatbot</strong> — ni le tien, ni celui de personne. Ces principes sont ceux du RGPD&nbsp;; ils sont aussi, tout simplement, ceux du respect.</p>
+
+  <h2><span class="n">9.3</span>Les hallucinations</h2>
+  <p>Un modèle de langage produit <strong>la suite la plus plausible</strong>, pas la plus vraie. Il inventera un nom de fonction Python inexistante avec aplomb, une date fausse, une API révolue. Parades concrètes&nbsp;: température basse (0–0,3) pour les usages factuels&nbsp;; le mini-RAG du chapitre 7 pour ancrer les réponses dans tes sources&nbsp;; et, pour les affirmations importantes, la règle d'or que tu appliques déjà en lisant ce guide&nbsp;: <strong>tester soi-même avant de croire</strong>.</p>
+
+  <h2><span class="n">9.4</span>Quotas, coûts, abus</h2>
+  <p>L'offre gratuite de GitHub Models impose des limites de débit&nbsp;: c'est sa façon de dire «&nbsp;c'est un bac à sable, pas une infrastructure de production&nbsp;». Conçois en conséquence&nbsp;: un assistant personnel et son petit cercle de testeurs, ça passe&nbsp;; un service public viral, non. Respecte les quotas, gère l'erreur 429 avec patience (réessayer plus tard), surveille ta consommation — et garde en tête que le passage à un modèle payant est une décision de budget, pas une fatalité technique.</p>
+
+  <div class="box key">
+    <p class="box-label">À retenir</p>
+    <ul>
+      <li>L'effet ELIZA n'est pas une blague d'histoire&nbsp;: c'est un risque d'usage. Transparence, garde-fous, humain dans la boucle.</li>
+      <li>Minimisation et non-conservation des données&nbsp;; jamais de secrets dans un chat.</li>
+      <li>Une hallucination se prévient par la température, le RAG et la vérification.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= CHAPITRE 10 ================= -->
+<section class="chapter" id="ch10">
+  <div class="chapter-head">
+    <p class="chaplabel">Chapitre 10 · Horizon</p>
+    <h1 class="chapter">Aller plus loin</h1>
+    <p class="lede">Tu as un chatbot historique, un assistant moderne, un dépôt propre et publié. Voici les portes suivantes — chacune s'ouvre depuis le code que tu as déjà.</p>
+  </div>
+
+  <h2><span class="n">10.1</span>Donner une voix à ton assistant</h2>
+  <p>Deux API du navigateur suffisent à rendre la conversation audible&nbsp;— sans serveur, sans clé&nbsp;:</p>
+  <pre><code><span class="c">// Faire parler l'assistant</span>
+<span class="k">function</span> <span class="f">parle</span>(texte){
+  <span class="k">const</span> voix = <span class="k">new</span> SpeechSynthesisUtterance(texte);
+  voix.lang = <span class="s">"fr-FR"</span>;
+  speechSynthesis.speak(voix);
+}
+<span class="c">// Écouter l'utilisateur (navigateur compatible, micro autorisé)</span>
+<span class="k">const</span> reconaissance = <span class="k">new</span> webkitSpeechRecognition();
+reconaissance.lang = <span class="s">"fr-FR"</span>;
+reconaissance.onresult = (e) =&gt; {
+  <span class="k">const</span> phrase = e.results[0][0].transcript;
+  <span class="c">// … envoie `phrase` à /api/chat comme dans assistant.html</span>
+};
+reconaissance.start();</code></pre>
+  <p>Branche <code>parle(reponse)</code> sur chaque réponse de Pixel, et ton interface devient un talkie-walkie. La reconstitution d'ELIZA au clavier, elle, gagne à rester muette&nbsp;: le silence fait partie du charme des années 60.</p>
+
+  <h2><span class="n">10.2</span>Les modèles locaux&nbsp;: ton assistant, sans Internet</h2>
+  <p>Avec <strong>Ollama</strong> (ollama.com), tu exécutes un modèle de langage sur ta propre machine. Le plus beau&nbsp;: ton <code>serveur.py</code> fonctionne sans modification, hormis l'adresse et le nom&nbsp;:</p>
+  <pre><code>client = OpenAI(base_url=<span class="s">"http://localhost:11434/v1"</span>, api_key=<span class="s">"ollama"</span>)
+MODELE = <span class="s">"llama3.2"</span>  <span class="c"># téléchargé par la commande : ollama pull llama3.2</span></code></pre>
+  <p>Zéro quota, zéro jeton, zéro donnée qui sort de chez toi — et l'occasion de mesurer, sur ton propre matériel, la différence entre un petit modèle local et les grands modèles de GitHub Models.</p>
+
+  <h2><span class="n">10.3</span>Images, documents, agents</h2>
+  <ul>
+    <li><strong>Multimodal</strong>&nbsp;: certains modèles acceptent des images (encodées en base64 dans le message) — décris une capture d'écran de ton jeu, demande une critique d'interface.</li>
+    <li><strong>Agents</strong>&nbsp;: enchaîne le function calling du chapitre 7 en boucle — le modèle choisit un outil, le serveur exécute, le modèle choisit le suivant — jusqu'à ce qu'il décide d'avoir terminé. Deux outils suffisent pour un premier agent utile&nbsp;: «&nbsp;lire un guide&nbsp;» et «&nbsp;réserver une information dans un fichier&nbsp;».</li>
+    <li><strong>Évaluation</strong>&nbsp;: constitue un fichier de 20 questions-réponses attendues et fais-le rejouer par GitHub Actions à chaque commit. Ton assistant cesse d'être une sensation&nbsp;: c'est un produit mesuré.</li>
+  </ul>
+
+  <h2><span class="n">10.4</span>Partager ton œuvre</h2>
+  <p>Un projet achevé se montre&nbsp;: soigne le README, publie l'URL Pages, raconte l'aventure — «&nbsp;j'ai recodé le chatbot de 1966, voici ce que j'ai appris&nbsp;» est un billet de blog que beaucoup liront. Si tu es étudiant·e, demande le <strong>GitHub Student Developer Pack</strong>&nbsp;: des outils professionnels gratuits pour aller plus loin. Et si tu construis l'assistant de ton site de jeux vidéo, n'oublie pas de lui faire lire <em>Esquive en Pixels</em>&nbsp;: il saura enfin répondre à «&nbsp;pourquoi mon carré traverse les murs&nbsp;?&nbsp;».</p>
+
+  <h2><span class="n">10.5</span>Tes ressources</h2>
+  <ul>
+    <li><strong>docs.github.com/models</strong> — la référence de l'API, les quotas, le catalogue de modèles.</li>
+    <li><strong>docs.github.com/pages</strong> et <strong>docs.github.com/actions</strong> — publication et automatisation, officielles et claires.</li>
+    <li><strong>elizagen.org</strong> — le conservatoire d'ELIZA&nbsp;: sources historiques, reconstructions, anecdotes.</li>
+    <li><em>ELIZA — A computer program for the study of natural language communication between man and machine</em>, J. Weizenbaum, <em>Communications of the ACM</em>, janvier 1966 — l'article originel, avec le script DOCTOR en annexe.</li>
+    <li><em>Computer Power and Human Reason</em>, J. Weizenbaum, 1976 — la mise en garde, toujours brûlante.</li>
+    <li><strong>developer.mozilla.org</strong> — Web Speech API, fetch, tout le HTML/CSS/JS de ce guide.</li>
+  </ul>
+
+  <h2><span class="n">10.6</span>La checklist du voyage</h2>
+  <ul class="checklist">
+    <li>J'ai un compte GitHub sécurisé et un atelier Git/Python fonctionnel.</li>
+    <li>J'ai recodé ELIZA, avec réflexion, règles, défauts et mémoire — et ses tests passent.</li>
+    <li>Ma version navigateur d'ELIZA est en ligne sur GitHub Pages.</li>
+    <li>Mon serveur Flask parle à GitHub Models avec un jeton fin-grained <em>Models: Read</em>, jamais commité.</li>
+    <li>Mon assistant a une personnalité écrite, une mémoire résumée et des garde-fous.</li>
+    <li>Pages et Actions déploient et testent mon projet à chaque push.</li>
+    <li>Je sais expliquer à un ami ce qu'est l'effet ELIZA — et pourquoi ça compte.</li>
+  </ul>
+
+  <div class="box story">
+    <p class="box-label" style="color:#3a4653;">Mot de la fin</p>
+    <p>En 1966, une machine reformulait des phrases et le monde y voyait un esprit. Tu as recréé cette machine, puis tu as posé dessus soixante ans de progrès&nbsp;: un modèle statistique géant, un serveur, un site, des tests. Reste la leçon de Weizenbaum, la seule qui ne périme pas&nbsp;: la technique impressionne, la prudence grandit. Fais des machines qui parlent — et garde toi-même le jugement.</p>
+  </div>
+</section>
+
+
+<!-- ================= ANNEXE A ================= -->
+<section class="chapter" id="annexe-a">
+  <div class="chapter-head">
+    <p class="chaplabel">Annexe A</p>
+    <h1 class="chapter">Code complet d'ELIZA en Python</h1>
+    <p class="lede">Le fichier <code>eliza.py</code> intégral — exactement celui testé au chapitre 5. Copie, lance, modifie&nbsp;: licence MIT.</p>
+  </div>
+  <pre><code><span class="c"># -*- coding: utf-8 -*-</span>
+&quot;&quot;&quot;
+ELIZA — reconstitution pédagogique du chatbot de Joseph Weizenbaum (1966).
+Script DOCTOR : mots-clés, réflexion des pronoms, réponses par défaut, mémoire.
+&quot;&quot;&quot;
+import random
+import re
+
+<span class="c"># Étape 1 — La réflexion : retourner les pronoms, comme un miroir.</span>
+REFLEXION = {
+    &quot;i&quot;: &quot;you&quot;, &quot;me&quot;: &quot;you&quot;, &quot;my&quot;: &quot;your&quot;, &quot;myself&quot;: &quot;yourself&quot;,
+    &quot;am&quot;: &quot;are&quot;, &quot;you&quot;: &quot;me&quot;, &quot;your&quot;: &quot;my&quot;, &quot;yours&quot;: &quot;mine&quot;,
+    &quot;yourself&quot;: &quot;myself&quot;, &quot;are&quot;: &quot;am&quot;, &quot;mine&quot;: &quot;yours&quot;,
+}
+
+<span class="c"># Les contractions sont dépliées avant tout traitement.</span>
+CONTRACTIONS = {
+    &quot;i&#x27;m&quot;: &quot;i am&quot;, &quot;i&#x27;ve&quot;: &quot;i have&quot;, &quot;i&#x27;d&quot;: &quot;i would&quot;, &quot;i&#x27;ll&quot;: &quot;i will&quot;,
+    &quot;don&#x27;t&quot;: &quot;do not&quot;, &quot;can&#x27;t&quot;: &quot;cannot&quot;, &quot;won&#x27;t&quot;: &quot;will not&quot;,
+}
+
+<span class="c"># Étape 2 — Les règles : (motif regex, réponses possibles).</span>
+<span class="c"># {0}, {1}… sont remplacés par les morceaux capturés, après réflexion.</span>
+REGLES = [
+    (r&quot;.*\bi am (depressed|sad|unhappy|lonely|afraid|scared|angry|worried)\b.*&quot;, [
+        &quot;I am sorry to hear you are {0}.&quot;,
+        &quot;Why do you say you are {0}?&quot;,
+        &quot;How long have you felt {0}?&quot;,
+    ]),
+    (r&quot;.*\bi need\b(.*)&quot;, [
+        &quot;Why do you need {0}?&quot;,
+        &quot;Would it really help you to get {0}?&quot;,
+        &quot;What would it mean to you if you got {0}?&quot;,
+    ]),
+    (r&quot;.*\bi (?:feel|think)\b(.*)&quot;, [
+        &quot;Why do you feel {0}?&quot;,
+        &quot;Do you often feel {0}?&quot;,
+        &quot;What makes you feel {0}?&quot;,
+    ]),
+    (r&quot;.*(\bmy (?:mother|father|mum|dad|brother|sister|family|boyfriend|girlfriend|friend|wife|husband|son|daughter)\b.*)&quot;, [
+        &quot;{0}?&quot;,
+        &quot;Tell me more about your family.&quot;,
+    ]),
+    (r&quot;.*\bi remember\b(.*)&quot;, [
+        &quot;Do you often think of {0}?&quot;,
+        &quot;What else do you remember?&quot;,
+        &quot;Why do you remember {0} just now?&quot;,
+    ]),
+    (r&quot;.*\bdream\b(.*)&quot;, [
+        &quot;What does that dream suggest to you?&quot;,
+        &quot;Do you dream often?&quot;,
+        &quot;What persons appear in your dreams?&quot;,
+    ]),
+    (r&quot;.*\bsorry\b(.*)&quot;, [
+        &quot;Please do not apologize.&quot;,
+        &quot;Apologies are not necessary.&quot;,
+        &quot;What feelings do you have when you apologize?&quot;,
+    ]),
+    (r&quot;.*\bno\b(.*)&quot;, [
+        &quot;Why not?&quot;,
+        &quot;Are you saying no just to be negative?&quot;,
+    ]),
+    (r&quot;.*\byes\b(.*)&quot;, [
+        &quot;Why do you think so?&quot;,
+        &quot;I see. And what does that suggest to you?&quot;,
+    ]),
+    (r&quot;.*\bperhaps\b(.*)&quot;, [
+        &quot;You do not seem very certain.&quot;,
+        &quot;Would you say it is likely, or not?&quot;,
+    ]),
+    (r&quot;.*\bhello\b.*&quot;, [
+        &quot;How do you do. Please state your problem.&quot;,
+    ]),
+    (r&quot;.*\byou\b(.*)&quot;, [
+        &quot;Why do you say I{0}?&quot;,
+        &quot;What makes you think I{0}?&quot;,
+        &quot;We were discussing you, not me.&quot;,
+    ]),
+]
+
+<span class="c"># Étape 3 — Les réponses par défaut : le filet de sécurité.</span>
+REPONSES_DEFAUT = [
+    &quot;Tell me more.&quot;,
+    &quot;In what way?&quot;,
+    &quot;Can you be more specific?&quot;,
+    &quot;I see. And what does that suggest to you?&quot;,
+    &quot;Why do you say that?&quot;,
+    &quot;That is interesting. Please go on.&quot;,
+]
+
+MEMOIRE = []  # La petite réserve d&#x27;ELIZA.
+
+def reflechir(texte):
+    &quot;&quot;&quot;Retourne le texte avec les pronoms retournés (my -&gt; your, etc.).&quot;&quot;&quot;
+    if not texte:
+        return &quot;&quot;
+    mots = texte.strip(&quot; .!?,;: &quot;).lower().split()
+    return &quot; &quot;.join(REFLEXION.get(mot, mot) for mot in mots)
+
+def repondre(phrase):
+    &quot;&quot;&quot;Le cœur d&#x27;ELIZA : une phrase entre, une réponse sort.&quot;&quot;&quot;
+    phrase = phrase.lower()
+    for contraction, depliee in CONTRACTIONS.items():
+        phrase = phrase.replace(contraction, depliee)
+
+<span class="c">    # Parfois, ELIZA ressort un souvenir rangé quelques échanges plus tôt.</span>
+    if MEMOIRE and random.random() &lt; 0.25:
+        souvenir = MEMOIRE.pop(0)
+        return (&quot;Earlier you said you remembered &quot; + souvenir
+                + &quot;. Does that have anything to do with now?&quot;)
+
+    for motif, reponses in REGLES:
+        m = re.match(motif, phrase)
+        if m:
+            morceaux = [reflechir(g) for g in m.groups()]
+            if &quot;remember&quot; in motif:
+                MEMOIRE.append(reflechir(m.group(1)))
+            reponse = random.choice(reponses).format(*morceaux)
+            return reponse[0].upper() + reponse[1:]
+    return random.choice(REPONSES_DEFAUT)
+
+def main():
+    print(&quot;ELIZA — script DOCTOR. Tape &#x27;au revoir&#x27; pour quitter.&quot;)
+    print(&quot;ELIZA &gt; How do you do. Please state your problem.&quot;)
+    while True:
+        phrase = input(&quot;Toi &gt; &quot;).strip()
+        if phrase.lower() in {&quot;au revoir&quot;, &quot;quit&quot;, &quot;bye&quot;, &quot;q&quot;}:
+            print(&quot;ELIZA &gt; Au revoir. Cela m&#x27;a fait plaisir de te parler.&quot;)
+            break
+        if phrase:
+            print(&quot;ELIZA &gt;&quot;, repondre(phrase))
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</code></pre>
+</section>
+
+<!-- ================= ANNEXE B ================= -->
+<section class="chapter" id="annexe-b">
+  <div class="chapter-head">
+    <p class="chaplabel">Annexe B</p>
+    <h1 class="chapter">ELIZA dans le navigateur</h1>
+    <p class="lede">Le même moteur que l'annexe A, en HTML + JavaScript, dans un seul fichier. Pose-le dans ton dépôt et publie-le sur GitHub Pages (chapitre 8).</p>
+  </div>
+  <pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;fr&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;title&gt;ELIZA · script DOCTOR (1966)&lt;/title&gt;
+&lt;style&gt;
+  body{font-family:system-ui,Arial,sans-serif;background:#070d19;color:#c9d1d9;
+       max-width:640px;margin:2rem auto;padding:0 1rem}
+  h1{color:#00d2ff;font-size:1.2rem}
+  #chat{border:1px solid #1e293b;border-radius:8px;min-height:300px;padding:1rem;
+        overflow-y:auto;background:#04101c}
+  .toi{color:#00d2ff}.eliza{color:#ff5a5a}
+  form{display:flex;gap:.5rem;margin-top:1rem}
+  input{flex:1;padding:.5rem;border-radius:6px;border:1px solid #1e293b;
+        background:#0b1a2c;color:#eaf2fa}
+  button{padding:.5rem 1rem;border:0;border-radius:6px;background:#00d2ff;
+         color:#04101c;font-weight:700}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;ELIZA · script DOCTOR (1966)&lt;/h1&gt;
+&lt;div id=&quot;chat&quot; aria-live=&quot;polite&quot;&gt;&lt;/div&gt;
+&lt;form id=&quot;form&quot;&gt;
+  &lt;input id=&quot;texte&quot; autocomplete=&quot;off&quot; placeholder=&quot;Parle à ELIZA…&quot;&gt;
+  &lt;button&gt;Envoyer&lt;/button&gt;
+&lt;/form&gt;
+&lt;script&gt;
+const REFLEXION = {i:&quot;you&quot;, me:&quot;you&quot;, my:&quot;your&quot;, myself:&quot;yourself&quot;, am:&quot;are&quot;,
+                   you:&quot;me&quot;, your:&quot;my&quot;, yours:&quot;mine&quot;, yourself:&quot;myself&quot;,
+                   are:&quot;am&quot;, mine:&quot;yours&quot;};
+const CONTRACTIONS = {&quot;i&#x27;m&quot;:&quot;i am&quot;, &quot;i&#x27;ve&quot;:&quot;i have&quot;, &quot;don&#x27;t&quot;:&quot;do not&quot;,
+                      &quot;can&#x27;t&quot;:&quot;cannot&quot;};
+const REGLES = [
+  [/.*\bi am (depressed|sad|unhappy|lonely|afraid|scared|angry|worried)\b.*/i,
+   [&quot;I am sorry to hear you are {0}.&quot;, &quot;Why do you say you are {0}?&quot;,
+    &quot;How long have you felt {0}?&quot;]],
+  [/.*\bi need\b(.*)/i,
+   [&quot;Why do you need {0}?&quot;, &quot;Would it really help you to get {0}?&quot;]],
+  [/.*\bi (?:feel|think)\b(.*)/i, [&quot;Why do you feel {0}?&quot;, &quot;What makes you feel {0}?&quot;]],
+  [/.*(\bmy (?:mother|father|mum|dad|brother|sister|family|boyfriend|girlfriend|friend|wife|husband|son|daughter)\b.*)/i,
+   [&quot;{0}?&quot;, &quot;Tell me more about your family.&quot;]],
+  [/.*\bi remember\b(.*)/i, [&quot;Do you often think of {0}?&quot;, &quot;What else do you remember?&quot;]],
+  [/.*\bsorry\b(.*)/i, [&quot;Please do not apologize.&quot;, &quot;Apologies are not necessary.&quot;]],
+  [/.*\byes\b(.*)/i, [&quot;Why do you think so?&quot;, &quot;I see. And what does that suggest to you?&quot;]],
+  [/.*\bno\b(.*)/i, [&quot;Why not?&quot;, &quot;Are you saying no just to be negative?&quot;]],
+  [/.*\bhello\b.*/i, [&quot;How do you do. Please state your problem.&quot;]],
+  [/.*\byou\b(.*)/i, [&quot;Why do you say I{0}?&quot;, &quot;We were discussing you, not me.&quot;]],
+];
+const DEFAUT = [&quot;Tell me more.&quot;, &quot;In what way?&quot;, &quot;Can you be more specific?&quot;,
+                &quot;I see. And what does that suggest to you?&quot;, &quot;Why do you say that?&quot;];
+const memoire = [];
+
+function reflechir(texte){
+  if(!texte) return &quot;&quot;;
+  const mots = texte.replace(/^[ .!?,;: ]+|[ .!?,;: ]+$/g, &quot;&quot;)
+                    .toLowerCase().split(/\s+/);
+  return mots.map(m =&gt; REFLEXION[m] ?? m).join(&quot; &quot;);
+}
+
+function repondre(phrase){
+  let p = phrase.toLowerCase();
+  for(const [c, d] of Object.entries(CONTRACTIONS)) p = p.replaceAll(c, d);
+  if(memoire.length &amp;&amp; Math.random() &lt; 0.25){
+    return &quot;Earlier you said you remembered &quot; + memoire.shift()
+         + &quot;. Does that have anything to do with now?&quot;;
+  }
+  for(const [motif, reponses] of REGLES){
+    const m = p.match(motif);
+    if(m){
+      const morceaux = m.slice(1).map(reflechir);
+      if(String(motif).includes(&quot;remember&quot;)) memoire.push(reflechir(m[1]));
+      let r = reponses[Math.floor(Math.random() * reponses.length)];
+      r = r.replace(/\{(\d)\}/g, (_, i) =&gt; morceaux[i]);
+      return r.charAt(0).toUpperCase() + r.slice(1);
+    }
+  }
+  return DEFAUT[Math.floor(Math.random() * DEFAUT.length)];
+}
+
+function ajoute(classe, texte){
+  const div = document.createElement(&quot;div&quot;);
+  div.className = classe;
+  div.textContent = (classe === &quot;toi&quot; ? &quot;Toi &gt; &quot; : &quot;ELIZA &gt; &quot;) + texte;
+  document.getElementById(&quot;chat&quot;).appendChild(div);
+}
+
+document.getElementById(&quot;form&quot;).addEventListener(&quot;submit&quot;, (e) =&gt; {
+  e.preventDefault();
+  const champ = document.getElementById(&quot;texte&quot;);
+  const phrase = champ.value.trim();
+  if(!phrase) return;
+  ajoute(&quot;toi&quot;, phrase);
+  ajoute(&quot;eliza&quot;, repondre(phrase));
+  champ.value = &quot;&quot;;
+});
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+</section>
+
+<!-- ================= ANNEXE C ================= -->
+<section class="chapter" id="annexe-c">
+  <div class="chapter-head">
+    <p class="chaplabel">Annexe C</p>
+    <h1 class="chapter">Le serveur complet (Flask + GitHub Models)</h1>
+    <p class="lede">Le backend du projet n°&nbsp;2, tel que décrit au chapitre 6 — avec l'interface du chat et la liste des dépendances.</p>
+  </div>
+
+  <h2><span class="n">C.1</span><code>requirements.txt</code></h2>
+  <pre><code>flask&gt;=3.0
+flask-cors&gt;=4.0
+openai&gt;=1.40
+python-dotenv&gt;=1.0</code></pre>
+
+  <h2><span class="n">C.2</span><code>.env</code> (jamais commité&nbsp;!)</h2>
+  <pre><code>GITHUB_TOKEN=github_pat_Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</code></pre>
+
+  <h2><span class="n">C.3</span><code>serveur.py</code></h2>
+  <pre><code><span class="c"># -*- coding: utf-8 -*-</span>
+&quot;&quot;&quot;
+Serveur de l&#x27;assistant IA — backend minimal (Flask + GitHub Models).
+
+Installation et lancement :
+    pip install flask flask-cors openai python-dotenv
+    python serveur.py
+&quot;&quot;&quot;
+import os
+
+from dotenv import load_dotenv
+from flask import Flask, jsonify, request
+from flask_cors import CORS
+from openai import OpenAI
+
+load_dotenv()  # lit le fichier .env (GITHUB_TOKEN=...)
+
+client = OpenAI(
+    base_url=&quot;https://models.github.ai/inference&quot;,
+    api_key=os.environ[&quot;GITHUB_TOKEN&quot;],
+)
+MODELE = &quot;openai/gpt-4o-mini&quot;
+
+PERSONA = &quot;&quot;&quot;Tu es Pixel, l&#x27;assistant du site Quanthevaris, un site qui propose
+des guides gratuits pour apprendre à créer des jeux vidéo en Python.
+Règles :
+- tu réponds en français, de façon claire et encourageante ;
+- tes réponses sont courtes (3 phrases maximum) ;
+- tu ne prétends jamais être humain : tu es un assistant ;
+- si on te pose une question hors de ton domaine, tu le dis honnêtement
+  et tu proposes d&#x27;en parler au créateur du site par email ;
+- tu ne donnes jamais de conseil médical, juridique ou financier.&quot;&quot;&quot;
+
+app = Flask(__name__)
+CORS(app, origins=[&quot;https://toncompte.github.io&quot;])  # ton site GitHub Pages
+
+HISTORIQUE_MAX = 12  # nombre de messages renvoyés au modèle
+
+@app.post(&quot;/api/chat&quot;)
+def chat():
+    donnees = request.get_json(silent=True) or {}
+    message = (donnees.get(&quot;message&quot;) or &quot;&quot;).strip()
+    if not message:
+        return jsonify({&quot;erreur&quot;: &quot;Message vide.&quot;}), 400
+    if len(message) &gt; 2000:
+        return jsonify({&quot;erreur&quot;: &quot;Message trop long.&quot;}), 400
+
+    historique = donnees.get(&quot;historique&quot;, [])[-HISTORIQUE_MAX:]
+    messages = [{&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: PERSONA},
+                *historique,
+                {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: message}]
+
+    try:
+        reponse = client.chat.completions.create(
+            model=MODELE,
+            messages=messages,
+            temperature=0.7,
+            max_tokens=500,
+        )
+    except Exception as exc:  # quota atteint, réseau, jeton invalide…
+        app.logger.error(&quot;Erreur API : %s&quot;, exc)
+        return jsonify({&quot;erreur&quot;: &quot;Le modèle est momentanément indisponible.&quot;}), 502
+
+    return jsonify({&quot;reponse&quot;: reponse.choices[0].message.content})
+
+@app.get(&quot;/api/health&quot;)
+def health():
+    return jsonify({&quot;statut&quot;: &quot;ok&quot;})
+
+if __name__ == &quot;__main__&quot;:
+    app.run(host=&quot;127.0.0.1&quot;, port=5000, debug=True)
+</code></pre>
+
+  <h2><span class="n">C.4</span><code>assistant.html</code> — l'interface du chat</h2>
+  <pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;fr&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;title&gt;Pixel — l&#x27;assistant de Quanthevaris&lt;/title&gt;
+&lt;style&gt;
+  body{font-family:system-ui,Arial,sans-serif;background:#070d19;color:#eaf2fa;
+       max-width:640px;margin:0 auto;padding:1rem}
+  h1{color:#00d2ff;font-size:1.2rem}
+  #chat{border:1px solid #1e293b;border-radius:8px;min-height:320px;padding:1rem;
+        background:#04101c;display:flex;flex-direction:column;gap:.5rem}
+  .msg{padding:.5rem .7rem;border-radius:8px;max-width:85%;white-space:pre-wrap}
+  .toi{background:#0b1a2c;align-self:flex-end}
+  .bot{background:#101f33;align-self:flex-start}
+  form{display:flex;gap:.5rem;margin-top:1rem}
+  input{flex:1;padding:.6rem;border-radius:6px;border:1px solid #1e293b;
+        background:#0b1a2c;color:#eaf2fa}
+  button{padding:.6rem 1.1rem;border:0;border-radius:6px;background:#00d2ff;
+         color:#04101c;font-weight:700}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Pixel, l&#x27;assistant de Quanthevaris&lt;/h1&gt;
+&lt;div id=&quot;chat&quot; aria-live=&quot;polite&quot;&gt;&lt;/div&gt;
+&lt;form id=&quot;form&quot;&gt;
+  &lt;input id=&quot;texte&quot; autocomplete=&quot;off&quot; placeholder=&quot;Écris à Pixel…&quot;&gt;
+  &lt;button&gt;Envoyer&lt;/button&gt;
+&lt;/form&gt;
+&lt;script&gt;
+const API = &quot;http://127.0.0.1:5000/api/chat&quot;; // en prod : l&#x27;URL publique de ton serveur
+const historique = [];
+
+document.getElementById(&quot;form&quot;).addEventListener(&quot;submit&quot;, async (e) =&gt; {
+  e.preventDefault();
+  const champ = document.getElementById(&quot;texte&quot;);
+  const message = champ.value.trim();
+  if (!message) return;
+  ajoute(&quot;toi&quot;, message);
+  champ.value = &quot;&quot;;
+  const bulle = ajoute(&quot;bot&quot;, &quot;…&quot;);
+  try {
+    const r = await fetch(API, {
+      method: &quot;POST&quot;,
+      headers: {&quot;Content-Type&quot;: &quot;application/json&quot;},
+      body: JSON.stringify({message, historique}),
+    });
+    const data = await r.json();
+    bulle.textContent = data.reponse ?? (&quot;Erreur : &quot; + (data.erreur ?? r.status));
+    if (data.reponse) {
+      historique.push({role: &quot;user&quot;, content: message},
+                      {role: &quot;assistant&quot;, content: data.reponse});
+      while (historique.length &gt; 12) historique.shift();
+    }
+  } catch {
+    bulle.textContent = &quot;Impossible de joindre le serveur.&quot;;
+  }
+});
+
+function ajoute(classe, texte){
+  const div = document.createElement(&quot;div&quot;);
+  div.className = &quot;msg &quot; + classe;
+  div.textContent = texte;
+  document.getElementById(&quot;chat&quot;).appendChild(div);
+  return div;
+}
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+</section>
+
+<!-- ================= ANNEXE D ================= -->
+<section class="chapter" id="annexe-d">
+  <div class="chapter-head">
+    <p class="chaplabel">Annexe D</p>
+    <h1 class="chapter">Fiche de dépannage</h1>
+    <p class="lede">Les douze ennuis les plus fréquents de ce guide, leurs causes et leurs remèdes.</p>
+  </div>
+  <table>
+    <tr><th style="width:30%">Symptôme</th><th style="width:33%">Cause probable</th><th>Solution</th></tr>
+    <tr><td><code>python: command not found</code></td><td>Python hors PATH</td><td>Réinstalle depuis python.org en cochant «&nbsp;Add to PATH&nbsp;» (Windows)&nbsp;; sinon essaie <code>py</code>.</td></tr>
+    <tr><td><code>ModuleNotFoundError: No module named 'flask'</code></td><td>Dépendance non installée</td><td><code>pip install -r requirements.txt</code> — et vérifie que tu es dans le bon environnement.</td></tr>
+    <tr><td>API → erreur 401</td><td>Jeton invalide, expiré, ou sans permission</td><td>Régénère un PAT <em>fine-grained</em> avec <strong>Models: Read</strong>&nbsp;; vérifie qu'il est bien lu depuis <code>.env</code>.</td></tr>
+    <tr><td>API → erreur 429</td><td>Quota de débit atteint</td><td>Attends quelques minutes, espaces tes requêtes, réduis la longueur de l'historique envoyé.</td></tr>
+    <tr><td>API → erreur 400 ou 404 sur le modèle</td><td>Nom de modèle sans préfixe</td><td>Écris <code>openai/gpt-4o-mini</code> (fournisseur inclus), pas <code>gpt-4o-mini</code>.</td></tr>
+    <tr><td>«&nbsp;CORS policy has blocked…&nbsp;» dans la console</td><td>Origine non autorisée</td><td>Ajoute l'origine exacte de ton site (ex.&nbsp;: <code>https://toncompte.github.io</code>) dans <code>CORS(app, origins=[…])</code>.</td></tr>
+    <tr><td>Page 404 sur <code>toncompte.github.io/assistant-ia/</code></td><td>Pages pas encore déployé</td><td>Vérifie l'onglet <strong>Actions</strong> du dépôt (le workflow a-t-il tourné&nbsp;?) puis <strong>Settings → Pages</strong> (source&nbsp;: GitHub Actions).</td></tr>
+    <tr><td><code>.env</code> commité par erreur</td><td>Manque dans <code>.gitignore</code></td><td><strong>Révoque immédiatement le jeton</strong> sur GitHub, régénère-le, ajoute <code>.env</code> au <code>.gitignore</code>, purge l'historique (outil BFG) puis force-push.</td></tr>
+    <tr><td>Tests verts en local, rouges en CI</td><td>Environnement différent</td><td>Aligne la version Python (workflow&nbsp;: 3.12), rends les tests indépendants de l'ordre aléatoire.</td></tr>
+    <tr><td>ELIZA répond toujours la même chose</td><td>Choix aléatoire normal… ou règle trop gourmande</td><td>Ajoute des formulations par règle&nbsp;; vérifie l'ordre des règles (les premières prennent tout).</td></tr>
+    <tr><td><code>ValueError</code> sur <code>.format()</code></td><td>Accolade isolée dans une réponse</td><td>Doubles les accolades littérales&nbsp;: <code>{</code> et <code>}</code>.</td></tr>
+    <tr><td>Le serveur ne démarre pas</td><td>Port 5000 déjà pris</td><td>Arrête l'ancien process, ou lance sur un autre port&nbsp;: <code>app.run(port=5001)</code>.</td></tr>
+  </table>
+  <style>section#annexe-d table.gloss{ font-size:8.6pt; }</style>
+  <h2 style="margin-top:8mm;">Glossaire — les mots de l'IA, expliqués simplement</h2>
+  <table class="gloss">
+    <tr><th style="width:26%">Terme</th><th>Définition</th></tr>
+    <tr><td><strong>Agent</strong></td><td>Assistant capable d'utiliser des outils et d'enchaîner plusieurs actions pour atteindre un but.</td></tr>
+    <tr><td><strong>API</strong></td><td>Interface de programmation&nbsp;: la porte par laquelle un programme parle à un autre.</td></tr>
+    <tr><td><strong>Commit</strong></td><td>Enregistrement signé d'un état du projet, avec son message décrivant le changement.</td></tr>
+    <tr><td><strong>Dépôt (repo)</strong></td><td>Dossier versionné par Git, hébergé sur GitHub, avec tout son historique.</td></tr>
+    <tr><td><strong>Effet ELIZA</strong></td><td>Tendance humaine à projeter intelligence et empathie sur un programme qui n'en a pas.</td></tr>
+    <tr><td><strong>Embedding</strong></td><td>Représentation d'un texte par un vecteur de nombres qui capture son sens&nbsp;: base des recherches sémantiques.</td></tr>
+    <tr><td><strong>Fenêtre de contexte</strong></td><td>Quantité maximale de texte (en tokens) que le modèle peut considérer à la fois.</td></tr>
+    <tr><td><strong>Fine-grained PAT</strong></td><td>Jeton d'accès personnel à permissions ciblées (ici&nbsp;: <em>Models: Read</em>) et à durée de vie limitée.</td></tr>
+    <tr><td><strong>Function calling</strong></td><td>Mécanisme par lequel le modèle demande l'exécution d'une fonction décrite par ton code.</td></tr>
+    <tr><td><strong>GitHub Actions</strong></td><td>Service qui exécute des workflows (recettes YAML) à chaque commit&nbsp;: tests, déploiements, automatisations.</td></tr>
+    <tr><td><strong>GitHub Models</strong></td><td>Catalogue de modèles d'IA accessibles avec ton compte GitHub via une API compatible OpenAI.</td></tr>
+    <tr><td><strong>GitHub Pages</strong></td><td>Hébergement gratuit de sites statiques depuis un dépôt.</td></tr>
+    <tr><td><strong>Hallucination</strong></td><td>Réponse plausible mais fausse, produite avec assurance par un modèle.</td></tr>
+    <tr><td><strong>LLM</strong></td><td><em>Large Language Model</em>&nbsp;: modèle statistique géant entraîné à prédire le token suivant.</td></tr>
+    <tr><td><strong>Persona</strong></td><td>Identité fictionnelle ou cadrée d'un assistant&nbsp;: nom, ton, mission, règles.</td></tr>
+    <tr><td><strong>Prompt</strong></td><td>Texte envoyé au modèle. Le <strong>prompt système</strong> fixe le cadre&nbsp;; le prompt utilisateur pose la question.</td></tr>
+    <tr><td><strong>RAG</strong></td><td><em>Retrieval-Augmented Generation</em>&nbsp;: chercher des extraits pertinents dans tes documents, puis les injecter dans le prompt.</td></tr>
+    <tr><td><strong>Réflexion</strong></td><td>Dans ELIZA&nbsp;: permutation des pronoms («&nbsp;my&nbsp;»→«&nbsp;your&nbsp;») pour renvoyer la phrase en miroir.</td></tr>
+    <tr><td><strong>Regex</strong></td><td>Expression régulière&nbsp;: motif décrivant une famille de chaînes de caractères.</td></tr>
+    <tr><td><strong>Température</strong></td><td>Curseur d'aléatoire du modèle&nbsp;: 0 = rigide et répétable, 1+ = créatif et imprévisible.</td></tr>
+    <tr><td><strong>Token (texte)</strong></td><td>Fragment de mot manipulé par un LLM (environ ¾ de mot en moyenne).</td></tr>
+    <tr><td><strong>Token (jeton)</strong></td><td>Chaîne secrète de type mot de passe qui authentifie un programme (ex.&nbsp;: <code>github_pat_…</code>).</td></tr>
+    <tr><td><strong>Workflow</strong></td><td>Recette YAML de GitHub Actions&nbsp;: déclencheur + série d'étapes.</td></tr>
+  </table>
+</section>
+
+<!-- ================= QUATRIÈME DE COUVERTURE ================= -->
+<section class="backcover">
+  <div class="logo-line">
+    <svg viewBox="0 0 32 32" width="56" height="56" aria-hidden="true">
+      <rect width="32" height="32" rx="8" fill="#04101c"/>
+      <rect x=".5" y=".5" width="31" height="31" rx="7.5" fill="none" stroke="#1e293b"/>
+      <circle cx="16" cy="16" r="9.4" fill="none" stroke="#00d2ff" stroke-width="3.3"/>
+      <rect x="21.2" y="21.2" width="7" height="7" rx="1.8" fill="#ff5a5a"/>
+    </svg>
+  </div>
+  <h2>Crée ton assistant IA personnalisé avec GitHub</h2>
+  <p>De ELIZA au LLM&nbsp;: deux projets complets, testés et commentés, pour apprendre en construisant — comme toujours sur Quanthevaris.</p>
+  <p style="margin-top:10mm; color:#7f95ab; font-size:9pt;">Édition 2026 · Guide gratuit · Sans publicité ni compte<br>quanthevaris.github.io · Codes des projets sous licence MIT</p>
+</section>
+
+</body>
+</html>
