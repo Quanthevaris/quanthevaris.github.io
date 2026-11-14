@@ -1,0 +1,46 @@
+name: Vérifier le site et le guide IA
+
+on:
+  pull_request:
+  push:
+    branches: [main, "arena/**"]
+    paths:
+      - "*.html"
+      - "*.pdf"
+      - "sitemap.xml"
+      - "js/**"
+      - "css/**"
+      - "assets/code/**"
+      - "assets/pdf/**"
+      - "_audience/**"
+      - "_maintenance/**"
+      - ".github/workflows/verifier-site.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verifier:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+      - name: Installer les dépendances de contrôle (aucun modèle)
+        run: python -m pip install -r _maintenance/requirements.txt -r assets/code/assistant-ia/requirements.txt
+      - name: Vérifier le site, l’audience et le code sans vrai modèle
+        run: |
+          python _maintenance/test-site.py
+          node --test _audience/test-audience.mjs
+          python -m unittest discover -s assets/code/assistant-ia -v
+          python _maintenance/test-livraison-ia.py
+          node --check js/audience.js
+          node --check js/script.js
+          node --check assets/code/assistant-ia/assistant.js
+          git diff --check

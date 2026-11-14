@@ -40,7 +40,9 @@ Le code ne peut pas vérifier les réglages internes du compte à distance.
 
 ## 2. Ce que fait le code
 
-`js/audience.js` est chargé par toutes les pages. Il :
+`js/audience.js` est chargé par les pages du site, hors guide HTML imprimable
+`guide-assistant-ia.html`. La fiche `assistant-ia.html` et ce guide restent exclues
+de la liste des chemins comptés ; la revue de l’audit n’étend pas la collecte. Il :
 
 - n'utilise ni cookie, ni localStorage, ni sessionStorage ;
 - respecte **Global Privacy Control** et **Do Not Track** ;

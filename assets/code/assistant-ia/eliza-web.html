@@ -1,0 +1,105 @@
+<!-- © 2026 Quanthevaris — MIT (voir LICENCE-MIT.txt). -->
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ELIZA · script DOCTOR (1966)</title>
+<style>
+  body{font-family:system-ui,Arial,sans-serif;background:#070d19;color:#c9d1d9;
+       max-width:640px;margin:2rem auto;padding:0 1rem}
+  h1{color:#00d2ff;font-size:1.2rem}
+  #chat{border:1px solid #1e293b;border-radius:8px;min-height:300px;padding:1rem;
+        overflow-y:auto;background:#04101c}
+  .toi{color:#00d2ff}.eliza{color:#ff5a5a}
+  form{display:flex;gap:.5rem;margin-top:1rem}
+  input{flex:1;padding:.5rem;border-radius:6px;border:1px solid #1e293b;
+        background:#0b1a2c;color:#eaf2fa}
+  button{padding:.5rem 1rem;border:0;border-radius:6px;background:#00d2ff;
+         color:#04101c;font-weight:700}
+</style>
+</head>
+<body>
+<h1>ELIZA · adaptation pédagogique</h1>
+<p>Règles en anglais, aucune IA générative et aucun serveur requis.</p>
+<div id="chat" aria-live="polite"></div>
+<form id="form">
+  <label for="texte">Ton message (en anglais)</label>
+  <input id="texte" maxlength="2000" autocomplete="off" placeholder="Parle à ELIZA…">
+  <button>Envoyer</button>
+</form>
+<script>
+const REFLEXION = {i:"you", me:"you", my:"your", myself:"yourself", am:"are",
+                   you:"me", your:"my", yours:"mine", yourself:"myself",
+                   are:"am", mine:"yours"};
+const CONTRACTIONS = {"i'm":"i am", "i've":"i have", "don't":"do not",
+                      "can't":"cannot"};
+const REGLES = [
+  [/.*\bi am (depressed|sad|unhappy|lonely|afraid|scared|angry|worried)\b.*/i,
+   ["I am sorry to hear you are {0}.", "Why do you say you are {0}?",
+    "How long have you felt {0}?"]],
+  [/.*\bi need\b(.*)/i,
+   ["Why do you need {0}?", "Would it really help you to get {0}?"]],
+  [/.*\bi (?:feel|think)\b(.*)/i, ["Why do you feel {0}?", "What makes you feel {0}?"]],
+  [/.*(\bmy (?:mother|father|mum|dad|brother|sister|family|boyfriend|girlfriend|friend|wife|husband|son|daughter)\b.*)/i,
+   ["{0}?", "Tell me more about your family."]],
+  [/.*\bi remember\b(.*)/i, ["Do you often think of {0}?", "What else do you remember?"]],
+  [/.*\bsorry\b(.*)/i, ["Please do not apologize.", "Apologies are not necessary."]],
+  [/.*\byes\b(.*)/i, ["Why do you think so?", "I see. And what does that suggest to you?"]],
+  [/.*\bno\b(.*)/i, ["Why not?", "Are you saying no just to be negative?"]],
+  [/.*\bhello\b.*/i, ["How do you do. Please state your problem."]],
+  [/.*\byou\b(.*)/i, ["Why do you say I {0}?", "We were discussing you, not me."]],
+];
+const DEFAUT = ["Tell me more.", "In what way?", "Can you be more specific?",
+                "I see. And what does that suggest to you?", "Why do you say that?"];
+const memoire = [];
+
+function reflechir(texte){
+  if(!texte) return "";
+  const mots = texte.replace(/^[ .!?,;: ]+|[ .!?,;: ]+$/g, "")
+                    .toLowerCase().split(/\s+/);
+  return mots.map(m => REFLEXION[m] ?? m).join(" ");
+}
+
+function repondre(phrase){
+  let p = phrase.toLowerCase();
+  for(const [c, d] of Object.entries(CONTRACTIONS)) p = p.replaceAll(c, d);
+  if(memoire.length && Math.random() < 0.25){
+    return "Earlier you said you remembered " + memoire.shift()
+         + ". Does that have anything to do with now?";
+  }
+  for(const [motif, reponses] of REGLES){
+    const m = p.match(motif);
+    if(m){
+      const morceaux = m.slice(1).map(reflechir);
+      if(String(motif).includes("remember")) {
+        memoire.push(reflechir(m[1]));
+        if(memoire.length > 20) memoire.shift();
+      }
+      let r = reponses[Math.floor(Math.random() * reponses.length)];
+      r = r.replace(/\{(\d)\}/g, (_, i) => morceaux[i]);
+      return r.charAt(0).toUpperCase() + r.slice(1);
+    }
+  }
+  return DEFAUT[Math.floor(Math.random() * DEFAUT.length)];
+}
+
+function ajoute(classe, texte){
+  const div = document.createElement("div");
+  div.className = classe;
+  div.textContent = (classe === "toi" ? "Toi > " : "ELIZA > ") + texte;
+  document.getElementById("chat").appendChild(div);
+}
+
+document.getElementById("form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const champ = document.getElementById("texte");
+  const phrase = champ.value.trim();
+  if(!phrase) return;
+  ajoute("toi", phrase);
+  ajoute("eliza", repondre(phrase));
+  champ.value = "";
+});
+</script>
+</body>
+</html>

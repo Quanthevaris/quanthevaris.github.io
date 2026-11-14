@@ -1,0 +1,55 @@
+
+/* © 2026 Quanthevaris — MIT. Aucun import, aucune police distante. */
+:root{color-scheme:dark;--fond:#070d19;--panneau:#0c1627;--ligne:#21334a;--texte:#eef5fc;--discret:#9fadc1;--cyan:#00d2ff}
+
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 80% 0%,#06314466,transparent 55%),var(--fond);color:var(--texte);font:15px/1.6 system-ui,sans-serif}
+.atelier{width:min(100% - 40px,880px);margin:32px auto}
+.marque{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700}
+.logo{position:relative;color:var(--cyan);border:1px solid #214357;border-radius:8px;padding:0 7px;font-size:25px;line-height:34px}
+.logo span{position:absolute;width:6px;height:6px;border-radius:2px;background:#ff5a5a;right:4px;bottom:5px}
+.edition{margin-left:auto;font:10px/1.5 monospace;letter-spacing:.2em;color:var(--discret)}
+.surtitre{font-size:10px;letter-spacing:.2em;color:var(--cyan);margin:34px 0 12px}
+.titre{display:flex;justify-content:space-between;align-items:center;gap:12px}
+h1{font-size:clamp(32px,6vw,49px);letter-spacing:-.045em;line-height:1.08;margin:0}
+h1 em{font-style:normal;color:var(--cyan)}
+.puce{border:1px solid #176075;background:#00d2ff0d;border-radius:30px;padding:6px 12px;color:var(--cyan);font-size:10px;letter-spacing:.12em;white-space:nowrap}
+.intro{color:var(--discret);font-size:13px;margin:16px 0 24px}
+.conversation{background:linear-gradient(140deg,#0e1c30,var(--panneau));border:1px solid var(--ligne);border-radius:16px;overflow:hidden;box-shadow:0 25px 80px #0005}
+.barre{padding:14px 20px;border-bottom:1px solid var(--ligne);display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:600}
+.point{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--cyan);margin-right:8px;box-shadow:0 0 12px #00d2ff55}
+.secondaire{font-size:11px;color:var(--discret);font-weight:400}
+button,input{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,#chat:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}
+#effacer{font-size:11px;background:none;border:1px solid var(--ligne);color:var(--discret);border-radius:6px;padding:6px 9px}
+#etat{margin:0;padding:10px 20px;font:11px/1.5 monospace;color:var(--discret);background:#070d1966}
+#chat{padding:20px;min-height:180px;max-height:370px;overflow-y:auto}
+.message{max-width:92%;margin:0 0 18px;border-left:2px solid #ff6c72;padding:0 14px;overflow-wrap:anywhere}
+.message.toi{border-left-color:var(--cyan)}
+.auteur{font:9px monospace;color:#ff8b91;letter-spacing:.15em}
+.toi .auteur{color:var(--cyan)}
+.message p{font-size:13px;white-space:pre-wrap;margin:5px 0}
+.erreur p{color:#ffb4b4}
+form{padding:0 20px 14px}
+.saisie{display:flex;border:1px solid #284159;border-radius:10px;background:#070f1d;padding:6px;gap:8px}
+input{min-width:0;flex:1;background:none;border:0;color:var(--texte);padding:8px;font-size:12px}
+input::placeholder{color:#93a5bd}
+#envoyer{border:0;border-radius:7px;background:var(--cyan);color:#02131f;padding:8px 15px;font-weight:700;font-size:12px}
+#envoyer span{margin-left:8px}
+button:disabled{opacity:.5;cursor:wait}
+.aide{font-size:9px;color:var(--discret);margin:10px 0 0}
+footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;color:var(--discret);font-size:10px;margin:18px 0}
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:500px){.atelier{width:calc(100% - 28px);margin:20px auto}
+.barre{padding:12px}
+.secondaire{display:none}
+#chat{padding:16px;min-height:150px}
+form{padding:0 12px 12px}
+.saisie{gap:2px}
+#envoyer{padding:8px}
+#envoyer span{display:none}
+.puce{font-size:8px;padding:5px 8px}
+.aide{font-size:10px}
+}
+

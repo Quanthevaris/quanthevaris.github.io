@@ -10,7 +10,7 @@ Une mesure d'audience agrégée GoatCounter est configurée, sans profil individ
 ├── index.html                  Accueil
 ├── guides.html                 Liste des guides
 ├── jeux.html                   Catalogue des jeux (à enrichir lors de chaque sortie)
-├── assistant-ia.html           Page du guide « Crée ton assistant IA personnalisé avec GitHub »
+├── assistant-ia.html           Page du guide « Crée ton assistant IA personnalisé — Python, Ollama et GitHub »
 ├── esquive-en-pixels.html      Page du guide « Esquive en Pixels »
 ├── fission-arena.html          Page du jeu FISSION ARENA (téléchargement, notice de santé, licence)
 ├── contact.html                Contact
@@ -35,8 +35,8 @@ Une mesure d'audience agrégée GoatCounter est configurée, sans profil individ
 
 ## Licences
 
-- **Code du site** (HTML, CSS, JavaScript) et programmes des guides « Esquive en Pixels » et « Crée ton assistant IA personnalisé avec GitHub » : licence MIT.
-- **Texte et maquette des guides** « Esquive en Pixels » et « Crée ton assistant IA personnalisé avec GitHub » : © 2026 Quanthevaris, tous droits réservés.
+- **Code du site** (HTML, CSS, JavaScript) et programmes des guides « Esquive en Pixels » et « Crée ton assistant IA personnalisé — Python, Ollama et GitHub » : licence MIT.
+- **Texte et maquette des guides** « Esquive en Pixels » et « Crée ton assistant IA personnalisé — Python, Ollama et GitHub » : © 2026 Quanthevaris, tous droits réservés.
 - **Jeu FISSION ARENA** (`assets/jeux/FISSION_ARENA.py`, `FISSION_ARENA.exe`, nom, images, sons) :
   © 2026 Quanthevaris, tous droits réservés. Jeu gratuit, mais **pas sous licence MIT** : usage personnel
   libre, redistribution ou diffusion d'une version modifiée seulement avec l'accord de l'auteur.
@@ -90,12 +90,12 @@ python3 -m http.server 8000
 
 ## Mesure d'audience
 
-`js/audience.js` est chargé par toutes les pages et configuré pour
+`js/audience.js` est chargé par les pages du site (hors guide HTML imprimable) et configuré pour
 `https://quanthevaris.goatcounter.com/count`. Il ne lit ni n'écrit de stockage navigateur,
 respecte Do Not Track et Global Privacy Control, ignore les aperçus/localhost/iframes et ne
 transmet que le chemin canonique des pages connues. Les chiffres sont des estimations de visites,
-pas un nombre exact de personnes. La promesse est « sans cookie ni profil individuel », pas
-« zéro donnée traitée ».
+pas un nombre exact de personnes. Les pages IA restent exclues de la liste des chemins comptés.
+La promesse est « sans cookie ni profil individuel », pas « zéro donnée traitée ».
 
 Le compte est réglé au minimum (Sessions uniquement, conservation 365 jours, tableau privé).
 La politique publique décrit ce traitement ; le mode d'emploi et l'analyse sont dans
@@ -103,6 +103,75 @@ La politique publique décrit ce traitement ; le mode d'emploi et l'analyse sont
 [`_audience/ANALYSE-CONFIDENTIALITE.md`](_audience/ANALYSE-CONFIDENTIALITE.md).
 Pour désactiver, remettre `CONFIG.endpoint` à `""` et restaurer les textes sans audience avant
 de déployer. Tests sans dépendance ni envoi réel : `node --test _audience/test-audience.mjs`.
+
+## Illustration de l’accueil
+
+Le hero utilise `assets/img/code-to-play-hero.webp` (environ 51 Ko), avec repli JPEG.
+Cette illustration d’ambiance 3D générée par IA n’est pas une capture du jeu : la légende
+précise que le jeu du guide reste en 2D. Les véritables aperçus d’Esquive en Pixels sont
+conservés dans les cartes et sur la page du guide. Aucun script tiers n’est ajouté.
+
+## Assistant IA — édition locale 2.0
+
+Le parcours GitHub Models est remplacé par **Flask + API native Ollama + modèle local
+`llama3.2:1b`**. GitHub sert au versionnement, aux tests et à une démo ELIZA statique,
+pas à l’hébergement d’un assistant public. Aucun jeton ni service de conversation
+Quanthevaris n’est utilisé. ELIZA fonctionne indépendamment du modèle.
+
+- Source éditoriale : `_maintenance/guide-ia/contenu.md`, template et style voisins.
+- Sources réellement livrées : `assets/code/assistant-ia/` ; kit téléchargeable
+  `assets/code/assistant-ia-kit.zip` (sans environnement, cache, modèle ni logiciel tiers).
+- `guide-assistant-ia.html` est généré avec les listings de ces mêmes fichiers.
+- Les deux PDF sont identiques ; `assets/pdf/assistant-ia-version.json` fournit le
+  nombre de pages, les tailles et les empreintes PDF/ZIP. Ne pas les modifier à la main.
+- Tests du programme et du navigateur avec **moteur simulé**, pas une inférence réelle.
+  Le modèle, ses performances et la qualité des réponses doivent être essayés sur le
+  matériel du lecteur. `verifier_installation.py` dans le kit effectue ce vrai test.
+
+### Régénérer le guide (maintenance, pas installation du lecteur)
+
+Python 3.11+, Node 22+ et Linux pour le Chromium embarqué ; sur un autre système,
+définir `CHROME_EXECUTABLE` vers une installation Chrome/Chromium compatible.
+
+```bash
+python3 -m venv .venv
+.venv/bin/pip install -r _maintenance/requirements.txt
+npm ci --prefix _maintenance
+.venv/bin/python _maintenance/generer-guide-ia.py
+node _maintenance/exporter-guide-ia.mjs
+.venv/bin/python _maintenance/synchroniser-ia.py
+```
+
+Les outils Node sont dans `_maintenance/`, sans impact sur le site statique.
+L’ancien script d’estampillage d’archive est retiré : il ne faut pas le réappliquer
+à la nouvelle édition. Le workflow PDF ne télécharge aucun poids de modèle.
+
+### Vérifier
+
+```bash
+python3 _maintenance/test-site.py
+node --test _audience/test-audience.mjs
+.venv/bin/pip install -r assets/code/assistant-ia/requirements.txt
+.venv/bin/python -m unittest discover -s assets/code/assistant-ia -v
+.venv/bin/python _maintenance/test-livraison-ia.py
+# Test HTTP et navigateur avec un faux moteur, nécessite les outils npm ci-dessus :
+.venv/bin/python _maintenance/test-parcours-ia.py
+# Mettre à jour les miniatures après une modification de l’interface (Linux + polices DejaVu) :
+.venv/bin/python _maintenance/miniatures-ia.py
+node --check js/audience.js
+node --check js/script.js
+git diff --check
+```
+
+Le workflow `.github/workflows/verifier-site.yml` rejoue les tests Python, statiques,
+de livraison et d’audience sur les pull requests, sans télécharger de modèle. Le contrôle
+navigateur reste une commande de maintenance distincte ; il n’est pas exécuté par ce workflow.
+
+Les commandes de validation **avec un vrai modèle**, les étapes restantes de l’éditeur
+et les précautions de publication figurent dans
+[`_maintenance/POUR-TOI-ETAPES.md`](_maintenance/POUR-TOI-ETAPES.md).
+Le suivi de l’audit, y compris les vérifications privées de GoatCounter encore à faire,
+est dans [`_maintenance/SUIVI-AUDIT.md`](_maintenance/SUIVI-AUDIT.md).
 
 ## Visibilité
 

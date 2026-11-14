@@ -1,0 +1,4 @@
+# Génération HTML, mesures PDF et miniatures. Pas de dépendance côté site.
+Markdown==3.10.2
+pypdf==7.1.0
+Pillow==12.1.1
