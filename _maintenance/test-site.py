@@ -58,8 +58,13 @@ class SiteTests(unittest.TestCase):
         self.assertIn('/assets/img/code-to-play-hero.webp', hero)
         self.assertIn('width="1200" height="896"', hero)
         self.assertIn('fetchpriority="high"', hero)
-        self.assertIn('Illustration 3D', hero)
-        self.assertIn('Le jeu du guide se joue en 2D', hero)
+        self.assertIn('Illustration d’ambiance 3D', hero)
+        self.assertIn('qui se joue en 2D', hero)
+        artwork = hero.split('<figure class="hero-artwork">', 1)[1].split('</figure>', 1)[0]
+        self.assertNotIn('<figcaption', artwork)
+        self.assertNotIn('hero-artwork-label', artwork)
+        # Le visuel n’a ni titre ni légende visibles ; l’alternative reste accessible.
+        self.assertEqual(re.sub(r'<[^>]+>', '', artwork).strip(), '')
         self.assertNotIn('/assets/img/esquive-preview', hero)
         # Les vraies captures du guide sont conservées plus bas dans la page.
         self.assertIn('/assets/img/esquive-preview.png', text.split('</section>', 1)[1])
