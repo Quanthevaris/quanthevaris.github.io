@@ -10,6 +10,7 @@ Une mesure d'audience agrégée GoatCounter est configurée, sans profil individ
 ├── index.html                  Accueil
 ├── guides.html                 Liste des guides
 ├── jeux.html                   Catalogue des jeux (à enrichir lors de chaque sortie)
+├── assistant-ia.html           Page du guide « Crée ton assistant IA personnalisé avec GitHub »
 ├── esquive-en-pixels.html      Page du guide « Esquive en Pixels »
 ├── fission-arena.html          Page du jeu FISSION ARENA (téléchargement, notice de santé, licence)
 ├── contact.html                Contact
@@ -34,8 +35,8 @@ Une mesure d'audience agrégée GoatCounter est configurée, sans profil individ
 
 ## Licences
 
-- **Code du site** (HTML, CSS, JavaScript) et programme du guide « Esquive en Pixels » : licence MIT.
-- **Texte et maquette du guide** « Esquive en Pixels » : © 2026 Quanthevaris, tous droits réservés.
+- **Code du site** (HTML, CSS, JavaScript) et programmes des guides « Esquive en Pixels » et « Crée ton assistant IA personnalisé avec GitHub » : licence MIT.
+- **Texte et maquette des guides** « Esquive en Pixels » et « Crée ton assistant IA personnalisé avec GitHub » : © 2026 Quanthevaris, tous droits réservés.
 - **Jeu FISSION ARENA** (`assets/jeux/FISSION_ARENA.py`, `FISSION_ARENA.exe`, nom, images, sons) :
   © 2026 Quanthevaris, tous droits réservés. Jeu gratuit, mais **pas sous licence MIT** : usage personnel
   libre, redistribution ou diffusion d'une version modifiée seulement avec l'accord de l'auteur.
