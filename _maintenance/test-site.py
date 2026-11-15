@@ -70,6 +70,14 @@ class SiteTests(unittest.TestCase):
         self.assertIn('/assets/img/esquive-preview.png', text.split('</section>', 1)[1])
         self.assertLess((ROOT / 'assets/img/code-to-play-hero.webp').stat().st_size, 100_000)
 
+    def test_accueil_distingue_les_deux_pdf(self):
+        version = json.loads((ROOT / 'assets/pdf/assistant-ia-version.json').read_text())
+        hero = self.texts['index.html'].split('<section class="hero">', 1)[1].split('</section>', 1)[0]
+        self.assertNotIn('PDF de 25 pages', hero)
+        self.assertIn('PDF jeu : 25 pages', hero)
+        self.assertIn(f'PDF IA : <span data-ia-pages>{version["pages"]}</span> pages', hero)
+        self.assertIn('Code des guides sous licence MIT', hero)
+
     def test_identifiants_uniques(self):
         for name, page in self.pages.items():
             with self.subTest(page=name):
