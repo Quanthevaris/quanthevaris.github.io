@@ -55,7 +55,7 @@ L’intégration GitHub ne dispose pas des droits administrateur pour certains r
 - **Activer une passkey ou la double authentification** sur GitHub et sur la messagerie de récupération ; conserver les codes de secours hors ligne.
 - Vérifier les sessions, applications autorisées, jetons personnels et clés de déploiement ; révoquer les accès inutiles.
 - Configurer une règle adaptée sur **main** : pas de force-push ni suppression, contrôles requis et PR avant fusion si possible. Attention au job qui range l’EXE : une interdiction complète d’écriture directe nécessitera d’adapter la livraison vers une PR dédiée ; ne pas donner une large exemption à tous les workflows.
-- Activer manuellement **Settings → General → Pull Requests → Automatically delete head branches**. Les huit anciennes branches fusionnées sont déjà supprimées ; la branche du cours de français non fusionné reste conservée.
+- Activer manuellement **Settings → General → Pull Requests → Automatically delete head branches**. Les anciennes branches ont été nettoyées ; ne conserver que `main` et la branche de session nécessaire pendant une intervention.
 - Garder une sauvegarde indépendante. Maintenir aussi Windows, navigateurs et lecteurs PDF à jour ; une signature et un contrôle antivirus de l’EXE ne sont pas remplacés par ces tests.
 
 ## Limites des protections navigateur

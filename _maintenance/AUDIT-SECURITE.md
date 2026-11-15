@@ -106,12 +106,7 @@ Aucune PR ouverte lors du contrôle. Avant chaque suppression, l’API de compar
 - `arena/145162de-quanthevaris-github-io`
 - `arena/244229b1-quanthevaris-github-io`
 
-Branches distantes restantes au dernier contrôle :
-
-- `main`, branche publiée ;
-- `arena/2f0940aa-quanthevaris-github-io`, **conservée car non intégrée** : commit `6756b9cd025cb6de54984a5e3c0525b9130417ae`, ajout d’un PDF de français 3e et de trois illustrations. Aucune suppression sans décision de conserver autrement ou d’abandonner ce travail.
-
-La branche active de cette session, `arena/1fbc2c6e-quanthevaris-github-io`, est conservée localement, sans changement de branche. Le rapport n’a pas été poussé ni publié.
+Mise à jour du nettoyage : les anciennes branches restantes ont également été supprimées sur demande explicite de l’éditeur. Conserver `main` comme branche publiée et uniquement la branche de session nécessaire pendant une intervention. Aucun changement ni réécriture de l’historique de `main` n’a été effectué.
 
 L’activation de la suppression automatique des branches fusionnées a été refusée par l’API (403, droit administrateur non accordé). À faire manuellement : dépôt → Settings → General → Pull Requests → **Automatically delete head branches**. Cette option ne supprime pas un travail non fusionné et ne change pas la branche `main`.
 
