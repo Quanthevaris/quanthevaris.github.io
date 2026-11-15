@@ -37,8 +37,10 @@ jobs:
           - python: "3.14"
             moteur: "pygame-ce==2.5.8"
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-python@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
         with:
           python-version: ${{ matrix.python }}
       - name: Installer le moteur de jeu
@@ -65,12 +67,12 @@ jobs:
     needs: code
     runs-on: windows-latest
     timeout-minutes: 30
-    permissions:
-      contents: write        # pour ranger le .exe fabriqué dans le dépôt
-      pages: write           # pour demander la mise à jour du site après ce rangement
+    # Compilation et exécution du jeu avec un jeton en lecture seule.
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-python@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
         with:
           python-version: "3.13"
       - name: Installer pygame et PyInstaller
@@ -80,11 +82,30 @@ jobs:
           FISSION_ARENA_GARDER_RAPPORTS: "1"
         run: python _exe/fabriquer_exe.py --source assets/jeux/FISSION_ARENA.py --sortie "$env:RUNNER_TEMP\exe"
       - name: Garder le .exe en pièce jointe de cette exécution
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: FISSION_ARENA-exe
           path: ${{ runner.temp }}/exe/
           retention-days: 30
+
+  publier:
+    name: Ranger le résultat testé (sans exécuter le jeu)
+    needs: exe
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      pages: write
+    steps:
+      # Seul ce job isolé possède les droits d’écriture. Ni pip ni exécutable lancé.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ github.ref }}
+          persist-credentials: true
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
+        with:
+          name: FISSION_ARENA-exe
+          path: ${{ runner.temp }}/exe
       - name: Ranger le .exe dans le site si le code du jeu a changé
         id: ranger
         shell: bash
@@ -94,6 +115,12 @@ jobs:
           lire_empreinte() { sed -n 's/^SHA-256 du code source : //p' "$1" 2>/dev/null | tr -d '\r' || true; }
           empreinte_nouvelle="$(lire_empreinte "$nouveau/FISSION_ARENA-fiche.txt")"
           empreinte_publiee="$(lire_empreinte assets/jeux/FISSION_ARENA-fiche.txt)"
+          # Ne pas publier un binaire construit sur une ancienne version du code.
+          empreinte_source="$(sha256sum assets/jeux/FISSION_ARENA.py | cut -d ' ' -f 1)"
+          if [ -z "$empreinte_nouvelle" ] || [ "$empreinte_nouvelle" != "$empreinte_source" ]; then
+            echo "::error::Le code a changé depuis la compilation : relancer le workflow."
+            exit 1
+          fi
           message="$(git log -1 --pretty=%B)"
           if [[ "$message" == *"[test]"* ]]; then
             echo "::notice title=FISSION ARENA::Essai seulement ([test] dans le message du commit) : le .exe n'est pas rangé dans le site."
@@ -109,16 +136,9 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add assets/jeux/FISSION_ARENA.exe assets/jeux/FISSION_ARENA-fiche.txt
           git commit -m "FISSION ARENA : .exe fabriqué et testé automatiquement" -m "$(head -n 5 assets/jeux/FISSION_ARENA-fiche.txt)"
-          for essai in 1 2 3; do
-            if git push origin "HEAD:${GITHUB_REF_NAME}"; then
-              echo "::notice title=FISSION ARENA::Nouveau .exe rangé dans assets/jeux/ (branche ${GITHUB_REF_NAME})."
-              echo "range=oui" >> "$GITHUB_OUTPUT"
-              exit 0
-            fi
-            git pull --rebase origin "${GITHUB_REF_NAME}"
-          done
-          echo "::error title=FISSION ARENA::Impossible d'enregistrer le .exe dans le dépôt."
-          exit 1
+          # Échec explicite si la branche a changé : aucune réécriture ni rebase automatique.
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+          echo "range=oui" >> "$GITHUB_OUTPUT"
       # Un fichier rangé par le robot ne relance pas toujours la publication du site : on la demande.
       - name: Demander la mise à jour du site
         if: steps.ranger.outputs.range == 'oui'
@@ -140,7 +160,9 @@ jobs:
     runs-on: windows-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
       - name: Lancer construire_exe.bat comme sur un PC
         shell: cmd
         run: |

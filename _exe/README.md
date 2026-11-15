@@ -17,7 +17,9 @@ Le code du jeu et le `.exe` publiés sont dans [`assets/jeux/`](../assets/jeux/)
 
 ## Méthode 1 — automatique, rien à installer (recommandée)
 
-GitHub fabrique le `.exe` sur une vraie machine Windows, le teste, puis le range sur le site.
+GitHub fabrique le `.exe` sur une vraie machine Windows et le teste avec un jeton en lecture seule. Un job distinct, sans installation de dépendances ni exécution du jeu, télécharge l’artefact de la même exécution puis le range sur le site. Seul ce job de publication a des droits d’écriture. Les actions du workflow sont épinglées à des SHA complets.
+
+Si le code source change entre la compilation et la publication, la publication refuse le résultat périmé ; si la branche change après le checkout de publication, le push échoue sans rebase automatique. Relancer alors le workflow. Cela ne remplace pas une signature ni un contrôle antivirus du binaire.
 
 1. Sur GitHub, ouvre le dossier `assets/jeux/`.
 2. **Add file → Upload files**, dépose ton nouveau `FISSION_ARENA.py` (même nom de fichier), puis **Commit changes**.
