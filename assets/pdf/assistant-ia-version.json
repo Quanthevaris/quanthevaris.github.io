@@ -1,9 +1,9 @@
 {
   "version": "2.0",
   "date": "2026-11-14",
-  "pages": 49,
-  "pdf_octets": 545638,
-  "pdf_sha256": "166f6f7c32a9445cb91efb9571d5c8cd534dfc5d890bedfed18e331c9485fc06",
+  "pages": 50,
+  "pdf_octets": 572401,
+  "pdf_sha256": "1752df3573a6c06974599999bdc4ce9a3598ac80e82ee1c780bd1107eaf8452c",
   "kit_octets": 21781,
   "kit_sha256": "96153e1079e47e36566bff07eb1511896a4f0fd5a885466cbee6769447a5322d",
   "modele_reference": "llama3.2:1b",

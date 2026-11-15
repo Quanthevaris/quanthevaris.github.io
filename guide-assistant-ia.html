@@ -32,12 +32,12 @@
 <span>$</span> python serveur.py
 <span>→</span> http://127.0.0.1:5000
 
-Pixel est local. Les possibilités, elles, s’ouvrent.</pre></div>
+Ouvre cette adresse dans ton navigateur.</pre></div>
     <div class="cover-grid"><div><b>01 / COMPRENDRE</b><p>Une adaptation d’ELIZA, des règles et des tests déterministes.</p></div><div><b>02 / CONSTRUIRE</b><p>Pixel, une interface web et un modèle local. Aucune clé API.</p></div></div>
   </div>
   <div class="cover-bottom"><span>14 NOVEMBRE 2026 · KIT DE CODE INCLUS</span><span>QUANTHEVARIS.GITHUB.IO</span></div>
 </section>
-<nav class="chapitre sommaire" id="sommaire" aria-label="Sommaire"><p class="eyebrow">SE REPÉRER</p><h2>Ton parcours</h2><ol><li><a href="#avant-propos">Avant de commencer</a></li><li><a href="#ch1">1. ELIZA : comprendre l’illusion</a></li><li><a href="#ch2">2. Sous le capot : règles, modèle et contexte</a></li><li><a href="#ch3">3. Préparer un atelier propre</a></li><li><a href="#ch4">4. Installer Ollama et choisir le mode local</a></li><li><a href="#ch5">5. Projet n° 1 — programmer une petite ELIZA</a></li><li><a href="#ch6">6. Projet n° 2 — Pixel avec un modèle local</a></li><li><a href="#ch7">7. Personnaliser sans promettre l’impossible</a></li><li><a href="#ch8">8. GitHub : versionner, tester, publier la bonne chose</a></li><li><a href="#ch9">9. Confidentialité, sécurité et limites</a></li><li><a href="#ch10">10. Valider et continuer</a></li><li><a href="#annexe-a">Annexe A — ELIZA en Python et ses tests</a></li><li><a href="#annexe-b">Annexe B — ELIZA dans le navigateur</a></li><li><a href="#annexe-c">Annexe C — Le serveur local complet</a></li><li><a href="#annexe-interface">Annexe D — L’interface complète</a></li><li><a href="#annexe-tests">Annexe E — Tester le programme et la vraie installation</a></li><li><a href="#depannage">Annexe F — Dépannage</a></li><li><a href="#glossaire">Glossaire</a></li><li><a href="#mentions">Mentions et version</a></li></ol><p>Sommaire cliquable dans le HTML et le PDF. La pagination est générée à partir de cette édition, sans reprendre celle de l’ancien document.</p></nav>
+<nav class="chapitre sommaire" id="sommaire" aria-label="Sommaire"><p class="eyebrow">SE REPÉRER</p><h2>Ton parcours</h2><ol><li><a href="#avant-propos">Avant de commencer</a></li><li><a href="#ch1">1. ELIZA : comprendre l’illusion</a></li><li><a href="#ch2">2. Règles, modèle et contexte</a></li><li><a href="#ch3">3. Préparer le projet</a></li><li><a href="#ch4">4. Installer Ollama et choisir le mode local</a></li><li><a href="#ch5">5. Projet n° 1 — programmer une petite ELIZA</a></li><li><a href="#ch6">6. Projet n° 2 — Pixel avec un modèle local</a></li><li><a href="#ch7">7. Personnaliser Pixel</a></li><li><a href="#ch8">8. Partager le code et publier la démo ELIZA</a></li><li><a href="#ch9">9. Confidentialité, sécurité et limites</a></li><li><a href="#ch10">10. Valider et continuer</a></li><li><a href="#annexe-a">Annexe A — ELIZA en Python et ses tests</a></li><li><a href="#annexe-b">Annexe B — ELIZA dans le navigateur</a></li><li><a href="#annexe-c">Annexe C — Le serveur local complet</a></li><li><a href="#annexe-interface">Annexe D — L’interface complète</a></li><li><a href="#annexe-tests">Annexe E — Tester le code et le modèle installé</a></li><li><a href="#depannage">Annexe F — Dépannage</a></li><li><a href="#glossaire">Glossaire</a></li><li><a href="#mentions">Mentions légales et droits d’usage</a></li></ol><p>Sommaire cliquable dans le HTML et le PDF. La pagination est générée à partir de cette édition, sans reprendre celle de l’ancien document.</p></nav>
 <section class="chapitre" id="avant-propos"><h2>Avant de commencer</h2>
 <p><strong>Crée ton assistant IA personnalisé · Édition locale 2.0 · 14 novembre 2026</strong></p>
 <p>Ce guide remplace l’ancienne édition « avec GitHub ». Il conserve ses deux projets : découvrir un chatbot à règles inspiré d’ELIZA, puis construire Pixel, un assistant à modèle de langage. Le second projet fonctionne désormais <strong>sur ton ordinateur avec Ollama</strong>, sans API d’inférence GitHub et sans clé à créer.</p>
@@ -48,10 +48,10 @@ Pixel est local. Les possibilités, elles, s’ouvrent.</pre></div>
 <li>Une petite variante <code>eliza-web.html</code>, utilisable dans un navigateur, sans serveur.</li>
 <li>Pixel : une interface web, un serveur Python Flask et un modèle local <code>llama3.2:1b</code> exécuté par Ollama.</li>
 <li>Un kit complet : sources, styles, tests hors ligne, vérificateur d’inférence réelle et licence du code.</li>
-<li>Une méthode pour distinguer le programme, le modèle, les données et l’hébergement.</li>
+<li>Des explications sur le rôle du programme, du modèle et du serveur.</li>
 </ul>
-<p><strong>Statut honnête de cette édition.</strong> Le code est vérifié par des tests automatiques avec réponses simulées. Le parcours local est réécrit selon la documentation officielle d’Ollama. L’installation du modèle, sa vitesse et la qualité de ses réponses <strong>restent à valider sur ta machine</strong> avec <code>verifier_installation.py</code>, puis dans l’interface. Aucun modèle n’est inclus dans le PDF ou le ZIP. Les captures montrent l’interface, pas la preuve d’une inférence réelle.</p>
-<h3>Prévoir avant de commencer</h3>
+<p><strong>Tests et installation.</strong> Les tests fournis utilisent des réponses simulées pour vérifier le code. Pour essayer le modèle sur ton ordinateur, lance <code>verifier_installation.py</code>, puis teste l’interface (chapitre 6). La vitesse et la qualité des réponses dépendent de ta configuration. Le modèle se télécharge séparément ; les captures du guide ne montrent pas de réponse réellement générée.</p>
+<h3>Ce qu’il te faut</h3>
 <table>
 <thead>
 <tr>
@@ -74,7 +74,7 @@ Pixel est local. Les possibilités, elles, s’ouvrent.</pre></div>
 </tr>
 <tr>
 <td>Matériel</td>
-<td>Recommandation de l’atelier : 8 Go de RAM et 10 Go d’espace disque libres pour commencer. Ce n’est ni un minimum officiel universel ni une garantie de vitesse.</td>
+<td>Prévois environ 8 Go de RAM et 10 Go de disque libres pour cet exercice. Ces valeurs sont indicatives ; les besoins et la vitesse dépendent de ta configuration.</td>
 </tr>
 <tr>
 <td>Modèle</td>
@@ -102,12 +102,12 @@ Pixel est local. Les possibilités, elles, s’ouvrent.</pre></div>
 <section class="chapitre" id="ch1"><h2>1. ELIZA : comprendre l’illusion</h2>
 <h3>1.1 Un programme qui reformule</h3>
 <p>Au MIT, Joseph Weizenbaum développe ELIZA au milieu des années 1960. Son article de janvier 1966, publié dans <em>Communications of the ACM</em>, décrit un programme de dialogue en langage naturel. Son script le plus connu, DOCTOR, simule certaines reformulations d’un psychothérapeute rogérien.</p>
-<p>Le principe est aussi simple que surprenant : repérer des mots-clés, découper la phrase, transformer quelques pronoms, puis recomposer une réponse. Une phrase humaine devient le matériau d’une question qui paraît attentive.</p>
+<p>ELIZA repère des mots-clés, découpe la phrase, remplace certains pronoms et compose une réponse à partir d’un modèle de phrase.</p>
 <blockquote>
 <p>Utilisateur : My boyfriend made me come here.<br />
 ELIZA : Your boyfriend made you come here?</p>
 </blockquote>
-<p>Le programme n’a pas découvert qui est ce petit ami et ne connaît pas la vie de la personne. Il a seulement transformé « my » en « your » et « me » en « you ». L’exemple sert à comprendre un mécanisme, pas à proposer un accompagnement psychologique.</p>
+<p>Le programme remplace « my » par « your » et « me » par « you ». Il ne connaît pas la situation de la personne : cet exemple illustre une règle de transformation, pas un accompagnement psychologique.</p>
 <h3>1.2 L’effet ELIZA</h3>
 <p>L’<strong>effet ELIZA</strong> désigne notre tendance à attribuer de la compréhension ou de l’empathie à un système qui produit des échanges convaincants. Weizenbaum s’inquiétait déjà de la confiance que les utilisateurs accordaient à son programme. Son livre <em>Computer Power and Human Reason</em> (1976) développera cette critique.</p>
 <p>Cette mise en garde est toujours utile. Un ton chaleureux ne garantit ni une intention, ni une compréhension comparable à la nôtre, ni l’exactitude d’une réponse. Un assistant n’est pas une personne et ne remplace pas un professionnel de santé.</p>
@@ -138,11 +138,11 @@ ELIZA : Your boyfriend made you come here?</p>
 </tr>
 </tbody>
 </table>
-<p>Le deuxième projet n’est pas une version « magique » du premier. Il emploie une autre technique et possède d’autres limites. ELIZA est facile à inspecter ; le comportement d’un modèle de langage est beaucoup moins prévisible.</p>
-<h3>1.4 Ce que nous reconstruisons vraiment</h3>
+<p>Le deuxième projet utilise un modèle de langage plutôt que des règles écrites à la main. Son comportement est plus difficile à prévoir que celui d’ELIZA.</p>
+<h3>1.4 Notre version d’ELIZA</h3>
 <p>Le programme de ce guide est <strong>une adaptation pédagogique simplifiée</strong>, pas une reproduction intégrale du code MAD-SLIP de 1966. Il reprend les idées de règles, de réflexion et de petite mémoire. Les dialogues de l’adaptation sont en anglais parce que ses motifs le sont ; Pixel, lui, recevra une consigne de réponse en français.</p>
 <p><strong>Exercice.</strong> Écris deux phrases auxquelles un programme à règles pourrait répondre sans en comprendre le sens. Puis imagine une question factuelle qui mettrait ses limites en évidence. L’objectif n’est pas de tromper les utilisateurs, mais de rendre le mécanisme visible.</p></section>
-<section class="chapitre" id="ch2"><h2>2. Sous le capot : règles, modèle et contexte</h2>
+<section class="chapitre" id="ch2"><h2>2. Règles, modèle et contexte</h2>
 <h3>2.1 Mots-clés et expressions régulières</h3>
 <p>Une expression régulière décrit une famille de textes. Dans <code>r".*\bi need\b(.*)"</code>, le groupe <code>(.*)</code> capture ce qui suit « i need ». Le préfixe <code>r</code> empêche Python d’interpréter les antislashs comme des échappements ordinaires. <code>\b</code> désigne une frontière de mot.</p>
 <p>Pour « I need help with my computer », le programme capture « help with my computer », transforme les pronoms puis insère le résultat dans un gabarit comme « Why do you need {0}? ». Le programme ne sait pas réparer l’ordinateur : il manipule du texte.</p>
@@ -160,11 +160,11 @@ ELIZA : Your boyfriend made you come here?</p>
 <p>Un message de rôle <code>system</code> fournit un cadre : langue, ton, objectif et limites. Un message <code>user</code> représente une demande ; un message <code>assistant</code> représente une réponse antérieure. Le serveur recompose ces messages à chaque appel.</p>
 <p>Dans l’atelier, la conversation n’est pas apprise par le modèle. Elle est simplement renvoyée avec la question suivante. Fermer ou recharger l’onglet fait perdre son contexte. Il n’y a pas de mémoire persistante, de compte ou de base de conversations.</p>
 <p>L’interface conserve au plus six paires question/réponse. Elle peut en envoyer moins pour rester sous la limite de taille. La fenêtre de contexte du modèle reste limitée à 4 096 tokens dans notre requête ; de longs échanges peuvent donc perdre des détails, même si six tours sont affichés.</p>
-<h3>2.4 Petit modèle, grandes limites</h3>
+<h3>2.4 Les limites du modèle choisi</h3>
 <p><code>llama3.2:1b</code> est choisi pour la légèreté, pas parce qu’il serait le meilleur modèle en toutes circonstances. Sa fiche annonce le français parmi les langues prises en charge. Il peut néanmoins produire des erreurs de langue, mal suivre une consigne et inventer des faits. Les performances dépendent du processeur, de la RAM, du GPU et des autres logiciels ouverts.</p>
 <p>La <strong>température</strong> règle une partie de l’aléatoire ; elle ne mesure pas l’intelligence et ne garantit pas le déterminisme. <code>num_predict</code> limite le nombre de tokens de réponse, pas le nombre exact de mots ou de caractères. Aucune consigne système n’offre une garantie de sécurité absolue.</p>
 <p><strong>À retenir.</strong> Comprendre où s’exécute chaque composant permet de mieux interpréter une erreur, une promesse de confidentialité ou une limite matérielle.</p></section>
-<section class="chapitre" id="ch3"><h2>3. Préparer un atelier propre</h2>
+<section class="chapitre" id="ch3"><h2>3. Préparer le projet</h2>
 <h3>3.1 Vérifier Python</h3>
 <p>Installe Python depuis <a href="https://www.python.org/downloads/">python.org/downloads</a>. Sous Windows, le lanceur <code>py</code> est utilisé ci-dessous ; s’il n’est pas disponible, répare l’installation officielle ou adapte les commandes à un Python 3.11+ vérifié. Sous macOS/Linux, utilise <code>python3</code>.</p>
 <p><strong>PowerShell Windows :</strong></p>
@@ -220,7 +220,7 @@ ELIZA : Your boyfriend made you come here?</p>
 <pre><code class="language-text">ollama --version
 </code></pre>
 <p>Si la commande est inconnue, ne poursuis pas : vérifie l’installation et le PATH, puis rouvre le terminal. Si la version s’affiche, continue.</p>
-<h3>4.2 Télécharger explicitement le petit modèle</h3>
+<h3>4.2 Télécharger le modèle</h3>
 <pre><code class="language-text">ollama pull llama3.2:1b
 ollama list
 </code></pre>
@@ -258,7 +258,7 @@ print(&quot; &quot;.join(reflets.get(mot, mot) for mot in mots))
 # help you with your computer
 </code></pre>
 <p>C’est une technique volontairement limitée. Elle ne résout ni toute la grammaire anglaise, ni les ambiguïtés de « you », ni les accords d’une autre langue. Pour ajouter le français, il faut des règles et une réflexion adaptées, pas seulement traduire les réponses.</p>
-<h3>5.3 Le carnet de règles</h3>
+<h3>5.3 La liste des règles</h3>
 <p>Dans <code>REGLES</code>, chaque élément contient un motif et une liste de réponses. <code>re.match</code> cherche une correspondance ; les groupes capturés sont réfléchis, puis insérés dans les gabarits par <code>format</code>.</p>
 <pre><code class="language-python"># Exemple de règle, déjà présente dans le code complet.
 (r&quot;.*\bi need\b(.*)&quot;, [
@@ -267,7 +267,7 @@ print(&quot; &quot;.join(reflets.get(mot, mot) for mot in mots))
 ])
 </code></pre>
 <p>Les accolades <code>{0}</code> désignent le premier groupe capturé. Si tu veux une accolade littérale dans un gabarit formaté, écris <code>{{</code> ou <code>}}</code>. Teste une nouvelle règle avant de l’ajouter : un motif trop large masque ceux qui suivent.</p>
-<h3>5.4 Une mémoire minuscule, pas une compréhension</h3>
+<h3>5.4 Mémoriser une phrase</h3>
 <p>Quand une phrase correspond à « I remember… », le programme stocke le fragment réfléchi dans <code>MEMOIRE</code>. Il peut le ressortir plus tard avec une probabilité de 25 %. Cette liste est limitée à 20 éléments ; elle disparaît à l’arrêt du programme. Elle ne contient aucun apprentissage persistant.</p>
 <p>Exemple <strong>possible</strong>, non garanti à chaque exécution :</p>
 <blockquote>
@@ -276,7 +276,7 @@ ELIZA : Do you often think of your first video game?<br />
 Toi : Hello.<br />
 ELIZA : Earlier you said you remembered your first video game. Does that have anything to do with now?</p>
 </blockquote>
-<p>L’intérêt pédagogique est de voir une variable influencer une réponse ultérieure. N’utilise pas cet exemple comme outil thérapeutique.</p>
+<p>Cet exemple montre comment une variable peut modifier une réponse ultérieure. N’utilise pas cet exemple comme outil thérapeutique.</p>
 <h3>5.5 Des tests qui ne dépendent pas du hasard</h3>
 <p>Les tests du kit utilisent <code>unittest.mock.patch</code> pour choisir une réponse déterminée et contrôler le tirage de mémoire. Ils vident <code>MEMOIRE</code> avant et après chaque test. On ne peut pas exiger une réponse aléatoire précise sans maîtriser le hasard : ce serait un test intermittent.</p>
 <pre><code class="language-python">from unittest.mock import patch
@@ -286,7 +286,7 @@ eliza.MEMOIRE.clear()
 with patch(&quot;eliza.random.choice&quot;, side_effect=lambda choix: choix[0]):
     assert eliza.repondre(&quot;I need help&quot;) == &quot;Why do you need help?&quot;
 </code></pre>
-<p>Le fichier complet <code>test_eliza.py</code> figure dans l’annexe A et dans le kit. Lance l’ensemble des tests après chaque modification. Un test qui échoue ne se « corrige » pas en supprimant sa vérification : cherche d’abord quel comportement a changé.</p>
+<p>Le fichier complet <code>test_eliza.py</code> figure dans l’annexe A et dans le kit. Lance l’ensemble des tests après chaque modification. Si un test échoue, cherche quel comportement a changé avant de modifier le test.</p>
 <h3>5.6 Variante dans le navigateur</h3>
 <p>Ouvre <code>eliza-web.html</code> par double-clic. Cette variante statique reprend le principe avec moins de règles et des choix de réponses plus courts ; elle n’est <strong>pas strictement identique</strong> à la version Python. Aucun serveur ni modèle n’est nécessaire. C’est cette page que tu pourras publier sur GitHub Pages, avec une explication de ses limites.</p>
 <p><strong>Exercice.</strong> Ajoute une règle sur « I like… » dans une copie du projet. Écris un test qui impose le premier gabarit, puis vérifie le comportement avant de changer les autres règles.</p></section>
@@ -307,7 +307,7 @@ Flask renvoie {&quot;reponse&quot;: &quot;…&quot;, &quot;modele&quot;: &quot;l
 </code></pre>
 <p>Le navigateur ne contacte pas directement Ollama. La page et l’API de Pixel partagent la même origine. <strong>Pas de Flask-CORS, pas d’adresse d’API distante à coller dans le JavaScript.</strong> Un navigateur sur un autre appareil ne viserait pas ton ordinateur en utilisant <code>127.0.0.1</code> : la boucle locale désigne toujours l’appareil qui fait la requête.</p>
 <p>Le modèle est limité à deux tags locaux autorisés. Le nom par défaut, <code>llama3.2:1b</code>, ne requiert pas de clé API. Ne crée pas de jeton GitHub pour ce projet.</p>
-<h3>6.2 Vérifier une vraie inférence avant l’interface</h3>
+<h3>6.2 Tester le modèle avant d’ouvrir l’interface</h3>
 <p>Dans le dossier du kit, Ollama étant démarré et le modèle téléchargé :</p>
 <p><strong>PowerShell Windows :</strong></p>
 <pre><code class="language-powershell">.\.venv\Scripts\python.exe verifier_installation.py --rapport validation-locale.json
@@ -316,7 +316,7 @@ Flask renvoie {&quot;reponse&quot;: &quot;…&quot;, &quot;modele&quot;: &quot;l
 <pre><code class="language-sh">.venv/bin/python verifier_installation.py --rapport validation-locale.json
 </code></pre>
 <p>Ce script contacte réellement l’API Ollama locale. Il vérifie la présence du modèle puis demande une courte salutation en français. Il n’utilise pas les réponses simulées des tests. En cas de réussite, il affiche <code>INFERENCE LOCALE REELLE OK</code> et crée, si demandé, un rapport avec version Python, version Ollama, système, digest du modèle et réponse à la question de test.</p>
-<p><strong>Ne déclare pas le test validé si le script échoue.</strong> Une réponse non vide ne garantit pas sa qualité : lis-la. Un petit modèle peut être imprécis. Le fichier <code>validation-locale.json</code> est ignoré par Git ; il ne contient que le test fixe, pas tes conversations personnelles. Tu peux le garder pour identifier la configuration essayée.</p>
+<p>Si le script échoue, consulte le dépannage avant de continuer. Lis aussi la réponse obtenue : une réponse non vide peut être fausse. Un petit modèle peut être imprécis. Le fichier <code>validation-locale.json</code> est ignoré par Git ; il ne contient que le test fixe, pas tes conversations personnelles. Tu peux le garder pour identifier la configuration essayée.</p>
 <h3>6.3 Lancer le serveur de l’atelier</h3>
 <p><strong>PowerShell Windows :</strong></p>
 <pre><code class="language-powershell">.\.venv\Scripts\python.exe serveur.py
@@ -325,7 +325,7 @@ Flask renvoie {&quot;reponse&quot;: &quot;…&quot;, &quot;modele&quot;: &quot;l
 <pre><code class="language-sh">.venv/bin/python serveur.py
 </code></pre>
 <p>Laisse ce terminal ouvert et visite <strong>http://127.0.0.1:5000</strong> dans le navigateur du même ordinateur. Ne double-clique pas <code>assistant.html</code> ; ce fichier attend le serveur. Si le navigateur indique une adresse refusée, utilise bien cette URL exacte ou <code>http://localhost:5000</code> et ne change pas seulement le port.</p>
-<p>Le diagnostic en haut de la conversation consulte <code>/api/status</code>, qui vérifie l’existence du modèle via l’API <code>/api/tags</code> d’Ollama. « Prêt » signifie « modèle installé », <strong>pas « qualité de réponse certifiée »</strong>.</p>
+<p>Le diagnostic en haut de la conversation consulte <code>/api/status</code>, qui vérifie l’existence du modèle via l’API <code>/api/tags</code> d’Ollama. « Prêt » indique que le modèle est installé. Pour vérifier qu’il répond correctement, essaie quelques questions.</p>
 <h3>6.4 Ce qu’envoie le serveur</h3>
 <p>Extrait explicatif ; le fichier complet est en annexe C :</p>
 <pre><code class="language-python">resultat = appeler_ollama(&quot;/api/chat&quot;, {
@@ -340,7 +340,7 @@ Flask renvoie {&quot;reponse&quot;: &quot;…&quot;, &quot;modele&quot;: &quot;l
     &quot;keep_alive&quot;: &quot;5m&quot;,
 })
 </code></pre>
-<p>L’API native d’Ollama renvoie le texte dans <code>message.content</code>, pas dans le format d’un ancien client OpenAI. <code>stream: false</code> demande une seule réponse JSON plutôt qu’un flux de fragments. La taille de réponse et l’historique sont bornés, mais le contexte du modèle peut encore tronquer des détails.</p>
+<p>L’API native d’Ollama renvoie le texte dans <code>message.content</code>, pas dans le format d’un ancien client OpenAI. <code>stream: false</code> demande une seule réponse JSON plutôt qu’un flux de fragments. La longueur de la réponse et de l’historique est limitée. Un échange trop long peut dépasser le contexte du modèle.</p>
 <p>Le programme n’effectue pas de téléchargement automatique, ne lit aucun chemin fourni par le navigateur, ne suit pas les redirections de l’API locale et n’utilise pas de proxy système pour lui parler. Les modèles et le fichier de connaissances sont choisis côté serveur.</p>
 <h3>6.5 Essai dans l’interface</h3>
 <ol>
@@ -359,8 +359,8 @@ Flask renvoie {&quot;reponse&quot;: &quot;…&quot;, &quot;modele&quot;: &quot;l
 <li><code>ollama rm llama3.2:1b</code> supprime son téléchargement si tu veux libérer de l’espace. Tu devras le retélécharger pour le réutiliser.</li>
 </ul>
 <p>Le serveur intégré à Flask est ici un outil d’atelier local. Il n’a ni authentification utilisateur ni infrastructure de production. <strong>Ne le rends pas accessible sur Internet.</strong></p></section>
-<section class="chapitre" id="ch7"><h2>7. Personnaliser sans promettre l’impossible</h2>
-<h3>7.1 Donner une mission et un ton</h3>
+<section class="chapitre" id="ch7"><h2>7. Personnaliser Pixel</h2>
+<h3>7.1 Choisir un rôle et un ton</h3>
 <p>La constante <code>PERSONA</code> dans <code>serveur.py</code> définit Pixel : assistant pédagogique, réponse française et brève, limites clairement formulées. Modifie ce texte dans une copie, enregistre, puis <strong>arrête et relance Flask</strong>. Le mode debug et le rechargement automatique sont désactivés volontairement.</p>
 <p>Une bonne consigne précise : le rôle, le public, le domaine, le format et les limites. Par exemple :</p>
 <pre><code class="language-text">Tu aides un débutant à comprendre Python.
@@ -370,15 +370,15 @@ Si tu n’es pas sûr d’un fait, dis-le.
 N’affirme pas avoir exécuté le code ou consulté Internet.
 </code></pre>
 <p>Le modèle peut ne pas suivre la consigne parfaitement. Ce n’est ni une vérification des faits ni une barrière contre toutes les instructions malveillantes. Compare plusieurs réponses avec une petite liste de questions identiques avant et après modification.</p>
-<h3>7.2 Ajouter des repères, sans inventer un moteur de recherche</h3>
+<h3>7.2 Ajouter des informations au contexte</h3>
 <p><code>connaissances.txt</code> contient quelques faits sur le projet. Le serveur lit les 4 000 premiers caractères au démarrage et les ajoute au prompt. Modifie ce fichier en UTF-8 et relance Flask. N’y mets ni mots de passe ni informations personnelles.</p>
-<p>Ce mécanisme n’est <strong>pas un vrai RAG</strong> : il n’effectue ni recherche documentaire ni sélection par pertinence, et ne cite pas automatiquement des sources vérifiées. Un vrai RAG recherche des extraits, les associe à des sources et les fournit au modèle ; il exige ses propres tests et protections contre les instructions contenues dans les documents.</p>
-<p>Les faits du fichier doivent rester courts et contrôlables. Si le modèle invente un guide ou un lien, la présence du contexte ne rend pas cette invention vraie. Contrôle aussi les omissions et les réponses « je ne sais pas ».</p>
-<h3>7.3 Une mémoire courte et volontaire</h3>
-<p>Les six derniers échanges au maximum vivent dans une variable JavaScript, pas dans <code>localStorage</code>, un cookie ou un fichier. Le serveur vérifie l’alternance <code>user</code>, <code>assistant</code> et refuse un rôle <code>system</code> envoyé par le client. Il impose aussi 2 000 caractères à la question et 64 Kio au corps HTTP.</p>
-<p>L’interface peut retirer des paires plus anciennes pour rester sous la limite d’octets. La mémoire d’affichage ne doit donc pas être comprise comme une garantie de mémoire du modèle. « Nouvelle discussion » remet le contexte de l’onglet à zéro ; une requête en cours doit se terminer avant d’en démarrer une autre.</p>
+<p>Ce mécanisme n’est <strong>pas un système de recherche documentaire (RAG)</strong> : il n’effectue ni recherche documentaire ni sélection par pertinence, et ne cite pas automatiquement des sources vérifiées. Un système RAG recherche des extraits, les associe à des sources et les fournit au modèle ; il exige ses propres tests et protections contre les instructions contenues dans les documents.</p>
+<p>Ajoute des informations courtes que tu peux vérifier. Vérifie ensuite si le modèle les utilise correctement, sans inventer de lien ni omettre un élément important.</p>
+<h3>7.3 Limiter l’historique</h3>
+<p>Les six derniers échanges au maximum sont conservés dans une variable JavaScript, pas dans <code>localStorage</code>, un cookie ou un fichier. Le serveur vérifie l’alternance <code>user</code>, <code>assistant</code> et refuse un rôle <code>system</code> envoyé par le client. Il impose aussi 2 000 caractères à la question et 64 Kio au corps HTTP.</p>
+<p>L’interface peut retirer des paires plus anciennes pour rester sous la limite d’octets. Une réponse encore visible à l’écran n’est donc pas forcément envoyée au modèle. « Nouvelle discussion » remet le contexte de l’onglet à zéro ; une requête en cours doit se terminer avant d’en démarrer une autre.</p>
 <h3>7.4 Choisir un modèle plus grand, facultativement</h3>
-<p>Reste avec <code>llama3.2:1b</code> jusqu’à avoir un parcours fonctionnel. Pour essayer <code>llama3.2:3b</code>, vérifie d’abord sa fiche, sa licence, sa taille et ta mémoire disponible. Puis :</p>
+<p>Reste avec <code>llama3.2:1b</code> jusqu’à ce que le projet fonctionne. Pour essayer <code>llama3.2:3b</code>, vérifie d’abord sa fiche, sa licence, sa taille et ta mémoire disponible. Puis :</p>
 <pre><code class="language-text">ollama pull llama3.2:3b
 </code></pre>
 <p><strong>PowerShell, seulement pour ce terminal :</strong></p>
@@ -390,10 +390,10 @@ N’affirme pas avoir exécuté le code ou consulté Internet.
 </code></pre>
 <p>Pour revenir au petit modèle sous PowerShell, arrête Flask puis exécute <code>Remove-Item Env:PIXEL_MODEL -ErrorAction SilentlyContinue</code> avant de relancer. Sous macOS/Linux, relance simplement sans le préfixe. Le vérificateur fourni teste toujours le modèle de référence <code>llama3.2:1b</code> ; vérifie séparément tes essais avec le 3b dans l’interface.</p>
 <p>Aucun tag cloud n’est autorisé dans le serveur. Pour ajouter un autre modèle local, il faut modifier et revalider le programme, ses ressources, sa licence et la documentation. Un modèle plus gros ne rend pas automatiquement toutes les réponses fiables.</p>
-<h3>7.5 Outils, agents et voix : hors du parcours livré</h3>
+<h3>7.5 Fonctions non incluses : outils, agents et voix</h3>
 <p>Le modèle ne peut ni parcourir tes fichiers ni lancer des commandes. Le serveur ne lui donne aucun outil. N’ajoute pas <code>eval</code>, <code>exec</code> ou un appel shell basé sur une réponse de modèle. Toute extension d’agent doit avoir des actions autorisées explicitement, une validation des paramètres et une confirmation humaine avant des effets réels.</p>
 <p>La voix n’est pas implémentée non plus. Certaines fonctions vocales de navigateurs ou de fournisseurs envoient l’audio à un service distant : vérifie leur fonctionnement avant de promettre un usage local. Ici, le parcours livré est textuel, sans micro ni outil autonome.</p></section>
-<section class="chapitre" id="ch8"><h2>8. GitHub : versionner, tester, publier la bonne chose</h2>
+<section class="chapitre" id="ch8"><h2>8. Partager le code et publier la démo ELIZA</h2>
 <h3>8.1 GitHub est facultatif pour l’exécution</h3>
 <p>Git enregistre l’histoire d’un dossier ; GitHub héberge des dépôts et des services autour de ce code. Aucun compte n’est nécessaire pour lancer ELIZA ou Pixel sur ton ordinateur. Pour partager le projet, crée un compte GitHub, sécurise-le avec une authentification à deux facteurs et suis la procédure officielle d’authentification de Git ou de GitHub Desktop. Ce guide ne te demande pas de créer un jeton d’inférence.</p>
 <p>Si tu as déjà suivi l’ancienne édition, le jeton créé pour GitHub Models n’est plus utile à cet atelier. Tu peux le révoquer dans les paramètres GitHub. Vérifie d’abord qu’aucun autre projet légitime ne l’utilise ; ne copie pas sa valeur dans une capture, un message ou un dépôt.</p>
@@ -409,13 +409,13 @@ git commit -m &quot;Premier atelier ELIZA et Pixel local&quot;
 <p>Configure ton identité Git si l’outil le demande. Relis les fichiers proposés à l’enregistrement avant de publier. Un secret exposé doit être révoqué ; l’effacer du dernier fichier ne le retire pas de l’historique.</p>
 <h3>8.3 Tester sans télécharger un modèle dans Actions</h3>
 <p>Le kit contient <code>.github/workflows/tests.yml</code>. Si tu publies <strong>le contenu du kit à la racine de ton nouveau dépôt</strong>, le workflow installe Flask puis lance <code>python -m unittest -v</code> sur Python 3.11 et 3.13. Ces tests ne demandent ni GPU, ni poids de modèle, ni secret. Les droits du workflow sont limités à la lecture du contenu.</p>
-<p>Si tu places le kit dans un sous-dossier d’un autre dépôt, les chemins de ce workflow doivent être adaptés : ne suppose pas qu’un fichier <code>.github</code> imbriqué sera exécuté. Les tests GitHub peuvent consommer le quota de ton offre ; consulte ses conditions en vigueur. Ici, aucune vérification d’inférence en CI ne prétend remplacer ton essai matériel réel.</p>
+<p>Si tu places le kit dans un sous-dossier d’un autre dépôt, les chemins de ce workflow doivent être adaptés : ne suppose pas qu’un fichier <code>.github</code> imbriqué sera exécuté. Les tests GitHub peuvent consommer le quota de ton offre ; consulte ses conditions en vigueur. Ces tests automatisés ne remplacent pas un essai du modèle sur ton ordinateur.</p>
 <h3>8.4 Publier uniquement la démo statique d’ELIZA</h3>
 <p>Crée un dossier <code>docs</code> dans ton dépôt personnel. Copie <code>eliza-web.html</code> dedans <strong>sous le nom <code>index.html</code></strong>. Ajoute un texte expliquant qu’il s’agit d’une adaptation à règles en anglais, sans IA générative. Enregistre et publie ces fichiers.</p>
 <p>Dans les paramètres du dépôt, section Pages, choisis le mode de publication depuis une branche, puis la branche qui contient ta démo et le dossier <code>/docs</code>. Les libellés de l’interface GitHub peuvent évoluer. Attends la fin du déploiement avant de tester l’adresse publique donnée par GitHub. La disponibilité dépend de ton offre et de la visibilité du dépôt.</p>
-<p><strong>Ne publie pas <code>assistant.html</code> en prétendant qu’il s’agit d’un assistant public.</strong> Il attend <code>/api/chat</code> sur le serveur local. GitHub Pages ne lance ni Python, ni Flask, ni Ollama. Remplacer une URL par <code>localhost</code> dans une page publique ne lui donne pas accès à ton ordinateur : cela vise l’appareil de chaque visiteur et peut être bloqué par le navigateur.</p>
-<h3>8.5 Le cas d’un vrai assistant public</h3>
-<p>Un service accessible aux autres nécessiterait un serveur adapté, TLS, authentification, contrôle des ressources et des abus, politique de conservation, conditions du modèle et étude des données traitées. Ce n’est pas un changement de ligne dans le kit. Ne remplace pas l’écoute <code>127.0.0.1</code> par <code>0.0.0.0</code> et ne crée pas de tunnel public pour contourner ce travail.</p>
+<p><strong>La page <code>assistant.html</code> ne fonctionne pas seule sur GitHub Pages.</strong> Il attend <code>/api/chat</code> sur le serveur local. GitHub Pages ne lance ni Python, ni Flask, ni Ollama. Remplacer une URL par <code>localhost</code> dans une page publique ne lui donne pas accès à ton ordinateur : cela vise l’appareil de chaque visiteur et peut être bloqué par le navigateur.</p>
+<h3>8.5 Héberger un assistant public</h3>
+<p>Un service accessible aux autres nécessiterait un serveur adapté, TLS, authentification, contrôle des ressources et des abus, politique de conservation, conditions du modèle et étude des données traitées. Le kit n’est pas conçu pour cet hébergement. Ne remplace pas l’écoute <code>127.0.0.1</code> par <code>0.0.0.0</code> et ne crée pas de tunnel public pour contourner ce travail.</p>
 <p>Pour garder ton dépôt simple, conserve une branche principale et une branche de travail seulement lorsque nécessaire. Avant de supprimer une branche, vérifie que ses commits sont conservés ailleurs. Une pull request sert à relire un changement avant de l’intégrer ; elle n’est pas requise pour exécuter le projet local.</p></section>
 <section class="chapitre" id="ch9"><h2>9. Confidentialité, sécurité et limites</h2>
 <h3>9.1 Ce qui reste local et ce qui utilise le réseau</h3>
@@ -449,20 +449,20 @@ git commit -m &quot;Premier atelier ELIZA et Pixel local&quot;
 </tr>
 </tbody>
 </table>
-<p>Le code de l’atelier n’écrit pas les conversations, n’utilise pas de cookie ou de stockage navigateur et ne charge pas de script distant. Ce n’est pas une promesse « aucune trace n’existe » : navigateur, système, mémoire, sauvegardes et journaux propres à Ollama peuvent avoir leurs propres comportements. N’utilise pas ce projet pour manipuler des données sensibles. Si tu ajoutes un journal ou un service externe, cette description doit être revue.</p>
-<h3>9.2 Des protections raisonnables pour un atelier local</h3>
+<p>Le code fourni n’enregistre pas les conversations, n’utilise ni cookie ni stockage navigateur et ne charge pas de script distant. Le navigateur, le système, les sauvegardes et Ollama peuvent toutefois conserver des données techniques. N’utilise pas ce projet pour manipuler des données sensibles. Si tu ajoutes un journal ou un service externe, cette description doit être revue.</p>
+<h3>9.2 Les protections du serveur local</h3>
 <p>Le serveur refuse les hôtes et origines externes, les types de requêtes incorrects, les messages trop longs et les historiques mal formés. Il sert trois ressources déterminées et pas tout le dossier. Il ne retourne pas les exceptions détaillées du moteur au navigateur, désactive le mode debug et ne traite qu’une génération à la fois.</p>
 <p>L’interface affiche les réponses avec <code>textContent</code>, jamais comme HTML exécutable. Une réponse contenant <code>&lt;script&gt;</code> doit rester du texte. Les en-têtes limitent les ressources à la même origine et interdisent l’intégration dans un cadre. Ces mesures ne constituent pas un audit de sécurité ni une infrastructure de production.</p>
-<h3>9.3 Vérifier plutôt que croire</h3>
-<p>Un modèle peut inventer une fonction, une URL ou une explication très assurée. Pour du code, lis-le avant exécution, utilise un environnement isolé et ne lance jamais une commande destructrice simplement parce que Pixel la propose. Pour une affirmation factuelle, ouvre une source fiable et compare.</p>
+<h3>9.3 Vérifier les réponses</h3>
+<p>Un modèle peut inventer une fonction ou une URL, ou donner avec assurance une explication fausse. Pour du code, lis-le avant exécution, utilise un environnement isolé et ne lance jamais une commande destructrice simplement parce que Pixel la propose. Pour une affirmation factuelle, ouvre une source fiable et compare.</p>
 <p>Le petit modèle n’est pas approprié à une décision médicale, juridique, financière ou de sécurité. Les limites mentionnées dans le prompt ne suffisent pas à le rendre sûr pour ces usages. En cas de détresse ou de besoin de conseil professionnel, adresse-toi à une personne qualifiée.</p>
 <h3>9.4 Ressources et énergie</h3>
-<p>Le mode local supprime la dépendance à une facturation d’API, pas le coût d’exécution. Ferme les applications lourdes, commence avec le modèle 1b et des questions courtes. Un portable peut chauffer et utiliser sa batterie. Un GPU compatible peut accélérer le calcul mais n’est pas une promesse universelle de compatibilité.</p>
-<p>Un test de charge sur un serveur public n’est pas le même exercice que cette démonstration personnelle. N’expose pas l’atelier à des visiteurs pour « voir si ça tient ». Les limites de longueur et le verrou d’une seule génération ne remplacent pas un dimensionnement et une authentification.</p>
+<p>Le mode local supprime la dépendance à une facturation d’API, pas le coût d’exécution. Ferme les applications lourdes, commence avec le modèle 1b et des questions courtes. Un portable peut chauffer et utiliser sa batterie. Un GPU compatible peut accélérer le calcul ; consulte la liste du matériel pris en charge par Ollama.</p>
+<p>Ne rends pas ce serveur accessible au public pour tester ses performances. Ses limites de longueur et de requêtes simultanées ne remplacent pas l’authentification et les protections nécessaires à un service public.</p>
 <h3>9.5 Respecter les licences</h3>
 <p>Le code écrit pour les projets est sous MIT, avec sa notice dans le kit. Le texte et la maquette de ce guide restent © 2026 Quanthevaris, tous droits réservés ; usage personnel et éducatif autorisé. Python, Flask, Ollama et Llama gardent leurs licences et conditions respectives. Aucun poids ni logiciel tiers n’est inclus dans le ZIP. Le nom des marques ne signifie aucune affiliation.</p></section>
 <section class="chapitre" id="ch10"><h2>10. Valider et continuer</h2>
-<h3>10.1 La checklist de fin</h3>
+<h3>10.1 Les vérifications de fin</h3>
 <ul>
 <li>[ ] Je peux expliquer la différence entre règles, modèle, serveur et interface.</li>
 <li>[ ] J’ai lancé ELIZA et ses tests déterministes.</li>
@@ -473,15 +473,15 @@ git commit -m &quot;Premier atelier ELIZA et Pixel local&quot;
 <li>[ ] <code>verifier_installation.py</code> valide une <strong>inférence réelle</strong> sur ma machine.</li>
 <li>[ ] L’interface sur <code>http://127.0.0.1:5000</code> répond à deux questions successives.</li>
 <li>[ ] « Nouvelle discussion » efface le contexte de l’onglet.</li>
-<li>[ ] J’ai observé une erreur propre quand Ollama est arrêté, puis réessayé après redémarrage.</li>
-<li>[ ] J’ai relu des réponses dont je connais la vérité, sans prendre la fluidité pour une preuve.</li>
+<li>[ ] J’ai vérifié qu’un message d’erreur s’affiche quand Ollama est arrêté, puis réessayé après redémarrage.</li>
+<li>[ ] J’ai vérifié les réponses à des questions dont je connais la solution.</li>
 <li>[ ] Je sais arrêter Flask et décharger le modèle.</li>
 <li>[ ] Si je partage une démo, je ne publie que la variante statique d’ELIZA, pas ce serveur local.</li>
 </ul>
-<p>Cette checklist peut être reprise par l’éditeur avant une nouvelle diffusion du guide. Un rapport vert avec une simulation ne doit pas être présenté comme un test réel du modèle.</p>
+<p>Ces vérifications peuvent aussi servir avant de diffuser une nouvelle version du projet. Les tests simulés et l’essai réel du modèle doivent être distingués.</p>
 <h3>10.2 Améliorer progressivement</h3>
-<p>Choisis un seul changement à la fois : reformuler la personnalité, ajouter un repère vérifié ou comparer les deux modèles locaux autorisés. Note tes questions d’essai, les versions et les réponses obtenues. Garde un exemple où le modèle s’est trompé : il apprend souvent davantage sur ses limites qu’une capture réussie.</p>
-<p>Pour un vrai RAG, une mémoire persistante, des outils ou la voix, pars d’une nouvelle branche de travail et d’un besoin explicite. Définis quelles données seraient stockées ou envoyées, ce que le programme pourrait faire et comment l’utilisateur pourrait s’y opposer. Rien de cela n’est implicitement activé dans l’atelier actuel.</p>
+<p>Choisis un seul changement à la fois : reformuler la personnalité, ajouter un repère vérifié ou comparer les deux modèles locaux autorisés. Note tes questions d’essai, les versions et les réponses obtenues. Garde aussi les réponses erronées pour comparer les résultats après une modification.</p>
+<p>Pour ajouter une recherche documentaire, une mémoire persistante, des outils ou la voix, pars d’une nouvelle branche de travail et d’un besoin explicite. Définis quelles données seraient stockées ou envoyées, ce que le programme pourrait faire et comment l’utilisateur pourrait s’y opposer. Le projet fourni ne contient pas ces fonctions.</p>
 <h3>10.3 Ressources officielles à reconsulter</h3>
 <p>Documentation relue le 14 novembre 2026 ; logiciels, modèles et conditions évoluent.</p>
 <ul>
@@ -1174,7 +1174,7 @@ form{padding:0 12px 12px}
 .aide{font-size:10px}
 }
 </code></pre></section>
-<section class="chapitre" id="annexe-tests"><h2>Annexe E — Tester le programme et la vraie installation</h2>
+<section class="chapitre" id="annexe-tests"><h2>Annexe E — Tester le code et le modèle installé</h2>
 <h3>test_assistant.py : tests sans modèle</h3>
 <p>Ce fichier fait partie de <code>python -m unittest -v</code>. Les appels à Ollama sont remplacés par des simulations pour vérifier les cas de réussite et d’échec de manière reproductible. Il n’évalue pas la qualité d’un modèle de langage.</p>
 <pre><code class="language-text">&quot;&quot;&quot;Tests hors ligne : python -m unittest -v. Aucun modèle requis.&quot;&quot;&quot;
@@ -1446,7 +1446,7 @@ jobs:
 </tr>
 <tr>
 <td>La réponse est fausse ou mal écrite</td>
-<td>Une réponse HTTP valide n’est pas une réponse vraie. Vérifie les sources, simplifie la question et garde à l’esprit les limites du modèle 1b.</td>
+<td>Une requête réussie ne garantit pas l’exactitude de la réponse. Vérifie les sources, simplifie la question et garde à l’esprit les limites du modèle 1b.</td>
 </tr>
 <tr>
 <td>Une modification n’apparaît pas</td>
@@ -1559,7 +1559,7 @@ jobs:
 </tr>
 <tr>
 <td>Simulation de test</td>
-<td>Faux résultat contrôlé utilisé pour tester le programme, pas une vraie inférence.</td>
+<td>Réponse préparée pour tester le programme, sans exécuter de modèle.</td>
 </tr>
 <tr>
 <td>Température</td>
@@ -1575,14 +1575,34 @@ jobs:
 </tr>
 </tbody>
 </table></section>
-<section class="chapitre" id="mentions"><h2>Mentions et version</h2>
-<p><strong>Éditeur :</strong> Quanthevaris, publication non professionnelle, gratuite et sans but commercial. Contact : <a href="mailto:contact.quanthevaris@gmail.com">contact.quanthevaris@gmail.com</a>. Informations complètes : <a href="https://quanthevaris.github.io/mentions-legales.html">mentions légales du site</a> et <a href="https://quanthevaris.github.io/confidentialite.html">politique de confidentialité</a>.</p>
-<p><strong>Édition locale 2.0, 14 novembre 2026.</strong> Cette édition remplace le parcours GitHub Models par Ollama et son API native. Elle corrige la séparation entre site statique et serveur local, fournit les fichiers de code dans un kit unique, des tests hors ligne déterministes et une procédure de test matériel réelle. La pagination change : l’ancien nombre de pages ne désigne plus cette édition.</p>
-<p><strong>Périmètre de validation :</strong> vérifications automatisées du code et du contrat d’API avec un moteur simulé, tests d’interface et génération des fichiers. Le téléchargement des poids, une véritable inférence Ollama et la performance sur le matériel du lecteur ne sont pas certifiés par ces tests. Le vérificateur fourni permet d’effectuer cet essai localement. Ne présente pas une capture ou un test simulé comme la preuve d’une conversation réelle.</p>
-<p><strong>Droits :</strong> texte, pédagogie et maquette © 2026 Quanthevaris, tous droits réservés ; usage personnel et éducatif autorisé. Le code des projets est distribué sous licence MIT, avec sa notice dans le kit. Les composants tiers et les modèles gardent leurs propres licences. Les noms Python, Flask, Ollama, Llama, GitHub et Windows sont cités à titre d’identification, sans affiliation ni approbation. Aucun modèle ni installateur n’est embarqué dans le kit.</p>
-<p><strong>Prudence :</strong> le guide et le code sont fournis à titre pédagogique, en l’état. Les outils, liens, interfaces, conditions et exigences matérielles peuvent changer. Vérifie les réponses avant de les utiliser ; n’exécute pas de commande sans la comprendre. Aucune clause ne limite une responsabilité lorsque cette limitation est interdite par la loi. Le parcours n’est pas un service médical, juridique, financier ou de sécurité.</p>
-<p><strong>Partager le bon document :</strong> conserve le PDF complet de cette édition, avec ses limites et ses notices. Ne diffuse pas un ancien PDF qui décrit encore une API retirée comme opérationnelle. Pour une version plus récente, consulte <a href="https://quanthevaris.github.io/assistant-ia.html">la fiche du guide</a>.</p></section>
-<section class="dos"><p class="eyebrow">À TOI DE JOUER</p><h2>Moins de magie.<br>Plus de compréhension.</h2><p>Tu sais maintenant distinguer une règle, un modèle,<br>une interface et un serveur. C’est le vrai point de départ.</p><a href="https://quanthevaris.github.io/assistant-ia.html">quanthevaris.github.io/assistant-ia.html</a><p class="petit">Édition locale 2.0 · Code MIT · Guide © 2026 Quanthevaris<br>Validation du modèle et des performances à effectuer sur ton ordinateur.</p></section>
+<section class="chapitre" id="mentions"><h2>Mentions légales et droits d’usage</h2>
+<h3>Informations d’édition</h3>
+<ul>
+<li><strong>Titre :</strong> Crée ton assistant IA personnalisé — Python et Ollama.</li>
+<li><strong>Autoéditeur :</strong> Quanthevaris, France. Publication sous pseudonyme, à titre non professionnel.</li>
+<li><strong>Diffusion :</strong> publication numérique gratuite et non périodique, édition locale 2.0 du 14 novembre 2026.</li>
+<li><strong>Contact :</strong> <a href="mailto:contact.quanthevaris@gmail.com">contact.quanthevaris@gmail.com</a>.</li>
+<li><strong>ISBN :</strong> aucun numéro attribué à cette édition.</li>
+<li><strong>Mentions légales du site :</strong> <a href="https://quanthevaris.github.io/mentions-legales.html">quanthevaris.github.io/mentions-legales.html</a>.</li>
+<li><strong>Politique de confidentialité :</strong> <a href="https://quanthevaris.github.io/confidentialite.html">quanthevaris.github.io/confidentialite.html</a>.</li>
+</ul>
+<p>Cette édition remplace le projet fondé sur GitHub Models par un assistant exécuté en local avec Ollama. La version à jour est disponible sur <a href="https://quanthevaris.github.io/assistant-ia.html">la fiche du guide</a>.</p>
+<h3>Texte, illustrations et maquette</h3>
+<p>© 2026 Quanthevaris. Tous droits réservés, sauf éléments de tiers signalés comme tels. La lecture et l’usage personnel ou éducatif du guide sont autorisés. Sa redistribution, sa modification ou sa vente nécessitent l’accord préalable de l’éditeur, sous réserve des exceptions prévues par la loi. La gratuité du téléchargement ne vaut pas autorisation de redistribution.</p>
+<h3>Code source : licence MIT</h3>
+<p>Le code écrit pour les projets du guide est distribué sous licence MIT. Tu peux l’utiliser, le copier, le modifier et le redistribuer, y compris à des fins commerciales, à condition de conserver la notice de copyright et le texte de la licence. Cette autorisation concerne le code, pas le texte ni la maquette du guide.</p>
+<p>Le texte officiel anglais de la licence figure dans <code>LICENCE-MIT.txt</code>, fourni dans le kit et en pièce jointe de ce PDF (volet « Pièces jointes » des lecteurs compatibles). Il est aussi <a href="https://quanthevaris.github.io/assets/pdf/LICENCE-MIT.txt">téléchargeable sur le site</a>. Ce texte fait foi ; le paragraphe ci-dessus en est un résumé.</p>
+<h3>Logiciels, modèles et marques</h3>
+<p>Python, Flask, Ollama et les autres composants tiers conservent leurs licences. Les poids de <code>llama3.2</code> relèvent de la <strong>Llama 3.2 Community License</strong> et de sa politique d’utilisation, et non de la licence MIT du code. Consulte <a href="https://ollama.com/library/llama3.2:1b">la fiche du modèle et les conditions associées</a> avant de le télécharger ou de le redistribuer. Le kit ne contient ni poids de modèle ni installateur tiers.</p>
+<p>Les noms Python, Flask, Ollama, Llama, GitHub, Microsoft, Windows et Visual Studio Code sont cités pour identifier les outils utilisés. Ils appartiennent à leurs titulaires respectifs. Ce guide est indépendant et n’est ni affilié à ces éditeurs ni approuvé par eux. Notre version d’ELIZA est une adaptation pédagogique ; la référence au travail de Joseph Weizenbaum figure au chapitre 10.</p>
+<h3>Données personnelles et fonctionnement local</h3>
+<p>Le PDF se lit hors ligne une fois téléchargé. Sa consultation sur le site et son téléchargement restent soumis aux traitements décrits dans la politique de confidentialité, notamment aux journaux techniques de GitHub Pages.</p>
+<p>Dans la configuration décrite, les messages de Pixel passent du navigateur au serveur Flask, puis au modèle local d’Ollama sur le même ordinateur. Le code fourni n’enregistre pas les conversations et ne les transmet pas à Quanthevaris. L’installation et les téléchargements utilisent Internet ; le navigateur, le système et les logiciels tiers peuvent conserver leurs propres données techniques. N’utilise pas d’informations sensibles pour les exercices. Tout ajout d’un service distant ou d’un stockage nécessite de réexaminer ces conditions.</p>
+<h3>Usage pédagogique et responsabilité</h3>
+<p>Le guide et le code sont fournis en l’état, à des fins d’apprentissage. Les tests automatisés vérifient le code avec des réponses simulées ; ils ne certifient ni le fonctionnement du modèle sur chaque ordinateur, ni la qualité de ses réponses. Utilise <code>verifier_installation.py</code>, puis essaie l’interface sur ton matériel.</p>
+<p>Les logiciels, liens, licences et prérequis peuvent évoluer. Lis les commandes avant de les exécuter, sauvegarde tes fichiers et vérifie les réponses du modèle. Cet assistant ne remplace pas un avis médical, juridique, financier ou de sécurité. Le serveur est prévu pour un usage local : il ne doit pas être exposé sur Internet en l’état.</p>
+<p>L’éditeur ne garantit pas l’absence d’erreur ni la compatibilité avec toutes les configurations. Ces limites s’appliquent dans la mesure permise par la loi et n’excluent aucune responsabilité qui ne pourrait légalement l’être. Pour signaler une erreur, utilise l’adresse de contact en précisant la version du guide et la page concernée, sans transmettre de donnée sensible.</p></section>
+<section class="dos"><p class="eyebrow">POUR LA SUITE</p><h2>Modifier et tester<br>ton assistant.</h2><p>Change une consigne ou une règle, relance les tests,<br>puis compare les réponses obtenues.</p><a href="https://quanthevaris.github.io/assistant-ia.html">quanthevaris.github.io/assistant-ia.html</a><p class="petit">Édition locale 2.0 · Code MIT · Guide © 2026 Quanthevaris<br>Validation du modèle et des performances à effectuer sur ton ordinateur.</p></section>
 </main>
 </body>
 </html>

@@ -40,6 +40,7 @@ jobs:
           node --test _audience/test-audience.mjs
           python -m unittest discover -s assets/code/assistant-ia -v
           python _maintenance/test-livraison-ia.py
+          python _maintenance/test-editorial.py
           node --check js/audience.js
           node --check js/script.js
           node --check assets/code/assistant-ia/assistant.js

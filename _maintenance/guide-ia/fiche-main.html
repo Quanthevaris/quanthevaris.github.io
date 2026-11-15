@@ -18,7 +18,7 @@
             <source srcset="/assets/img/assistant-ia-preview.webp" type="image/webp">
             <img src="/assets/img/assistant-ia-preview.png" width="800" height="600" loading="eager" fetchpriority="high" decoding="async" alt="Interface de Pixel, l’atelier local Python et Ollama : panneau de conversation bleu nuit, accents cyan, bouton Nouvelle discussion.">
           </picture>
-          <figcaption>Aperçu de l’interface au repos, diagnostic simulé. Le modèle se vérifie sur ton ordinateur.</figcaption>
+          <figcaption>Interface de Pixel sans conversation. Le diagnostic affiché est simulé.</figcaption>
         </figure>
       </div>
     </div>
@@ -27,8 +27,8 @@
   <section class="section section-alt" id="actualisation" aria-labelledby="titre-edition">
     <div class="container">
       <div class="alert note">
-        <h2 id="titre-edition">Un nouveau parcours, entièrement local</h2>
-        <p>Édition du <time datetime="2026-11-14">14 novembre 2026</time> : Ollama remplace GitHub Models, retiré le 30 juillet 2026. Le guide, le code et les deux copies du PDF sont réécrits pour cette architecture. <a href="https://docs.github.com/en/github-models" target="_blank" rel="noopener noreferrer">Statut officiel de l’ancien service</a>.</p>
+        <h2 id="titre-edition">Un assistant qui fonctionne sur ton ordinateur</h2>
+        <p>Édition du <time datetime="2026-11-14">14 novembre 2026</time> : Ollama remplace GitHub Models, retiré le 30 juillet 2026. Le guide et le code utilisent désormais cette configuration locale. <a href="https://docs.github.com/en/github-models" target="_blank" rel="noopener noreferrer">Statut officiel de l’ancien service</a>.</p>
         <p><strong>Ce n’est pas un assistant public hébergé.</strong> Le serveur et le modèle tournent sur ton ordinateur. GitHub Pages sert seulement à partager une démo statique d’ELIZA ou une présentation.</p>
       </div>
     </div>
@@ -36,11 +36,11 @@
 
   <section class="section">
     <div class="container">
-      <div class="section-head"><p class="eyebrow">Comprendre en construisant</p><h2 class="section-title">Deux projets, deux façons de dialoguer</h2><p class="section-lead">Pour les débutants curieux : des explications progressives, le code complet en annexes et des fichiers prêts à décompresser.</p></div>
+      <div class="section-head"><p class="eyebrow">Dans le guide</p><h2 class="section-title">ELIZA, puis Pixel</h2><p class="section-lead">Les deux projets sont expliqués étape par étape. Le code est fourni dans les annexes et dans le ZIP.</p></div>
       <div class="grid grid-3">
-        <article class="card"><p class="card-label">01 · Comprendre</p><h3 class="card-title">ELIZA et les règles</h3><p>Une adaptation pédagogique d’ELIZA en Python, avec mots-clés, réflexion des pronoms et petite mémoire. Ses dialogues sont en anglais ; les tests contrôlent le hasard.</p></article>
+        <article class="card"><p class="card-label">01 · Comprendre</p><h3 class="card-title">ELIZA et les règles</h3><p>Un chatbot à règles en Python, qui repère des mots-clés et remplace des pronoms. Les exemples de dialogue sont en anglais.</p></article>
         <article class="card"><p class="card-label">02 · Construire</p><h3 class="card-title">Pixel, sur ton ordinateur</h3><p>Une interface web, Flask et le modèle local <code>llama3.2:1b</code> via Ollama. Pas de jeton d’inférence, pas de service de conversation Quanthevaris.</p></article>
-        <article class="card"><p class="card-label">03 · Personnaliser</p><h3 class="card-title">Un cadre clair</h3><p>Personnalité, repères textuels, contexte limité, erreurs et confidentialité. Tu apprends aussi ce qui n’est pas fourni : RAG, voix, outils autonomes ou hébergement public.</p></article>
+        <article class="card"><p class="card-label">03 · Personnaliser</p><h3 class="card-title">Personnaliser Pixel</h3><p>Modifie les consignes et les informations fournies au modèle. Le guide explique aussi la gestion de l’historique, des erreurs et des données personnelles.</p></article>
       </div>
     </div>
   </section>
@@ -71,8 +71,8 @@
 
   <section class="section">
     <div class="container"><div class="cta-band">
-      <p class="eyebrow">Du code au dialogue</p><h2>Le guide et les fichiers, ensemble</h2>
-      <p>Décompresse le kit, suis le chapitre de préparation, puis vérifie une vraie conversation sur ton ordinateur. Pas de clé API à créer, pas de serveur à exposer sur Internet.</p>
+      <p class="eyebrow">Téléchargements</p><h2>Le PDF et le code source</h2>
+      <p>Décompresse le ZIP, installe les logiciels indiqués, puis lance le projet sur ton ordinateur. Le chapitre 6 explique comment tester le modèle et ouvrir l’interface.</p>
       <div class="btn-row" style="justify-content:center"><a href="/assets/pdf/assistant-ia-guide.pdf" class="btn btn-download" download>Télécharger le guide (PDF)</a><a href="/assets/code/assistant-ia-kit.zip" class="btn btn-secondary" download>Télécharger le code (ZIP)</a></div>
     </div></div>
   </section>

@@ -2,3 +2,7 @@
 Markdown==3.10.2
 pypdf==7.1.0
 Pillow==12.1.1
+# Retouches du PDF Pygame existant (pas de dépendance pour les lecteurs).
+PyMuPDF==2.1
+fonttools==4.68.0
+brotli==1.2.1

@@ -14,6 +14,7 @@ def synchroniser():
     assert pdf == (ROOT / 'guide-assistant-ia.pdf').read_bytes()
     pages = len(PdfReader(ROOT / 'guide-assistant-ia.pdf').pages)
     taille = f'{len(pdf) / 1_000_000:.2f}'.replace('.', ',')
+    taille_jeu = f'{(ROOT / "assets/pdf/esquive-en-pixels-guide.pdf").stat().st_size / 1_000_000:.2f}'.replace('.', ',')
     p = ROOT / 'assistant-ia.html'
     fiche = p.read_text()
     principal = (ROOT / '_maintenance/guide-ia/fiche-main.html').read_text()
@@ -42,6 +43,7 @@ def synchroniser():
     # Les chemins historiques sans paramètre restent disponibles pour les anciens liens.
     ressources = (
         'assets/pdf/assistant-ia-guide.pdf', 'guide-assistant-ia.pdf',
+        'assets/pdf/esquive-en-pixels-guide.pdf',
         'assets/img/assistant-ia-preview.png', 'assets/img/assistant-ia-preview.webp',
         'assets/img/og-assistant-ia.png',
     )
@@ -51,6 +53,7 @@ def synchroniser():
         texte = p.read_text()
         texte = re.sub(r'(data-ia-pages>)\d+(</span>)', lambda m: m[1] + str(pages) + m[2], texte)
         texte = re.sub(r'(data-ia-size>)[\d,]+(</span>)', lambda m: m[1] + taille + m[2], texte)
+        texte = re.sub(r'(data-jeu-size>)[\d,]+(</span>)', lambda m: m[1] + taille_jeu + m[2], texte)
         texte = texte.replace('Guide Assistant IA — en actualisation', 'Guide Assistant IA — édition locale')
         for nom, empreinte in empreintes.items():
             texte = re.sub(re.escape('/' + nom) + r'(?:\?v=[\w.-]+)?(?=["\s>])',
