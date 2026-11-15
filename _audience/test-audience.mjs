@@ -170,7 +170,7 @@ test('fetch absent ou en erreur ne casse pas la page', async () => {
 });
 
 test('compte réel : chaque page canonique connue est comptée une fois, sans stockage', () => {
-  const pages = fs.readdirSync(root).filter((name) => name.endsWith('.html') && !['404.html', 'assistant-ia.html', 'guide-assistant-ia.html'].includes(name));
+  const pages = fs.readdirSync(root).filter((name) => name.endsWith('.html') && !['404.html', 'assistant-ia.html', 'guide-assistant-ia.html', 'google4068430e1e1eeb11.html'].includes(name));
   for (const page of pages) {
     const html = fs.readFileSync(path.join(root, page), 'utf8');
     const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)[1];
@@ -190,7 +190,7 @@ test('les pages IA restent exclues du comptage existant', () => {
 });
 
 test('les pages du site chargent le module une seule fois, hors guide imprimable', () => {
-  const pages = fs.readdirSync(root).filter((name) => name.endsWith('.html') && name !== 'guide-assistant-ia.html');
+  const pages = fs.readdirSync(root).filter((name) => name.endsWith('.html') && !['guide-assistant-ia.html', 'google4068430e1e1eeb11.html'].includes(name));
   assert.ok(pages.length >= 9);
   for (const page of pages) {
     const html = fs.readFileSync(path.join(root, page), 'utf8');
