@@ -54,6 +54,8 @@ def generer():
             info.external_attr = 0o100644 << 16
             archive.writestr(info, (KIT / nom).read_bytes())
     print('Guide HTML et kit ZIP générés depuis les mêmes fichiers de code.')
+    import runpy
+    runpy.run_path(str(ROOT / '_maintenance/securiser-pages.py'))['synchroniser']()
 
 
 if __name__ == '__main__':

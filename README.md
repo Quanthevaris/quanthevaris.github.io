@@ -154,6 +154,9 @@ L’ancien script d’estampillage d’archive est retiré : il ne faut pas le r
 
 ```bash
 python3 _maintenance/test-site.py
+python3 _maintenance/securiser-pages.py --check
+python3 _maintenance/test-securite.py
+node _maintenance/test-securite-navigateur.mjs
 node --test _audience/test-audience.mjs
 .venv/bin/pip install -r assets/code/assistant-ia/requirements.txt
 .venv/bin/python -m unittest discover -s assets/code/assistant-ia -v
@@ -202,6 +205,21 @@ Avec un clone sans cet historique, fournir une copie de cet original via `--sour
 Le fichier livré reste `assets/pdf/esquive-en-pixels-guide.pdf`. La synchronisation
 met à jour les tailles et les liens versionnés des deux guides. Ces outils et leurs
 dépendances ne sont pas nécessaires pour lire les guides ou lancer leurs projets.
+
+## Sécurité et maintenance
+
+Le bilan des protections appliquées, des contrôles et des réglages privés restant
+à vérifier est dans [`_maintenance/SECURISATION.md`](_maintenance/SECURISATION.md).
+Après modification d’un HTML ou d’un bloc JSON-LD, lancer
+`python3 _maintenance/securiser-pages.py` pour actualiser sa CSP ; les générateurs
+du guide le font automatiquement. Le fichier Google de validation ne doit pas être modifié.
+
+Les workflows du dépôt utilisent des actions épinglées à des SHA complets. Le job
+de compilation du jeu ne possède plus de droit d’écriture ; un job séparé publie
+l’artefact sans l’exécuter. Le workflow **Auditer les dépendances** contrôle
+hebdomadairement les paquets Python de maintenance/du kit IA et les outils npm,
+sans créer de branche. Réviser régulièrement les résultats dans l’onglet Actions.
+Ces protections ne remplacent pas la double authentification ni le contrôle des accès GitHub.
 
 ## Visibilité
 

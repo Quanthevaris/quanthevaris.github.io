@@ -67,6 +67,8 @@ def synchroniser():
                'validation_restante': 'Installer le modèle et tester une vraie conversation sur le matériel du lecteur.'}
     (ROOT / 'assets/pdf/assistant-ia-version.json').write_text(json.dumps(version, ensure_ascii=False, indent=2) + '\n')
     print(f'Fiche et compteurs synchronisés : {pages} pages, {taille} Mo, kit {len(kit)} octets.')
+    import runpy
+    runpy.run_path(str(ROOT / '_maintenance/securiser-pages.py'))['synchroniser']()
 
 
 if __name__ == '__main__':

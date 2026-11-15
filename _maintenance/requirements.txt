@@ -1,7 +1,8 @@
 # Génération HTML, mesures PDF et miniatures. Pas de dépendance côté site.
 Markdown==3.10.2
 pypdf==7.1.0
-Pillow==12.1.1
+# Correctifs des décodeurs d’images/polices signalés par l’audit de sécurité.
+Pillow==13.0.0
 # Retouches du PDF Pygame existant (pas de dépendance pour les lecteurs).
 PyMuPDF==2.1
 fonttools==4.68.0

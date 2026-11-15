@@ -2,6 +2,8 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'none'; object-src 'none'; script-src 'self'; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://quanthevaris.goatcounter.com; form-action 'none'; frame-src 'none'">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Crée ton assistant IA local — Python et Ollama | Quanthevaris</title>
 <meta name="description" content="Édition locale 2.0 : découvre ELIZA puis crée Pixel avec Python, Flask et Ollama. Sans clé API. Kit complet, tests et validation du modèle sur ton ordinateur.">
@@ -18,9 +20,10 @@
 @page{size:A4;margin:16mm 14mm 18mm;background:#070d19}
 @media print{html,body{background:var(--fond)}.guide-toolbar{display:none}.couverture,.chapitre,.sommaire,.dos{break-before:page;margin:0;padding:0;width:auto;box-shadow:none}.couverture{break-before:auto}a{color:#75e8ff}h2,h3{break-inside:avoid}pre{box-decoration-break:clone;-webkit-box-decoration-break:clone}.sommaire li{break-inside:avoid}}
 </style>
+<script src="/js/impression-guide.js" defer></script>
 </head>
 <body>
-<div class="guide-toolbar"><a href="/assistant-ia.html">← Fiche du guide</a><a href="/assets/code/assistant-ia-kit.zip" download>Kit de code (ZIP)</a><button type="button" onclick="window.print()">Imprimer / PDF</button></div>
+<div class="guide-toolbar"><a href="/assistant-ia.html">← Fiche du guide</a><a href="/assets/code/assistant-ia-kit.zip" download>Kit de code (ZIP)</a><button type="button" id="imprimer-guide">Imprimer / PDF</button></div>
 <main id="contenu">
 <section class="couverture" aria-labelledby="titre-guide">
   <div class="marque"><svg viewBox="0 0 32 32" width="32" height="32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#04101c"/><circle cx="16" cy="16" r="9.4" fill="none" stroke="#00d2ff" stroke-width="3.3"/><rect x="21.2" y="21.2" width="7" height="7" rx="1.8" fill="#ff5a5a"/></svg>Quanthevaris <span>GUIDE PRATIQUE · 2026</span></div>
