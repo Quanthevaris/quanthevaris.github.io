@@ -7,6 +7,8 @@ from collections import Counter
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urljoin, urlsplit
+from urllib.robotparser import RobotFileParser
+import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 ORIGIN = 'https://quanthevaris.github.io'
@@ -77,6 +79,36 @@ class SiteTests(unittest.TestCase):
         self.assertIn('PDF jeu : 25 pages', hero)
         self.assertIn(f'PDF IA : <span data-ia-pages>{version["pages"]}</span> pages', hero)
         self.assertIn('Code des guides sous licence MIT', hero)
+
+    def test_boutons_edition_locale_et_guide(self):
+        for nom in ('index.html', 'guides.html'):
+            self.assertRegex(self.texts[nom],
+                             r'<a href="/assistant-ia\.html"[^>]*>Découvrir l’édition locale et le guide ')
+
+    def test_fichier_validation_google_inchange(self):
+        nom = 'google4068430e1e1eeb11.html'
+        self.assertEqual((ROOT / nom).read_bytes(),
+                         ('google-site-verification: ' + nom).encode('ascii'))
+        self.assertNotIn(nom, (ROOT / 'sitemap.xml').read_text())
+
+    def test_indexabilite_statique_pages_du_sitemap(self):
+        robots = RobotFileParser()
+        robots.parse((ROOT / 'robots.txt').read_text().splitlines())
+        self.assertIn(ORIGIN + '/sitemap.xml', robots.site_maps())
+        sitemap = ET.parse(ROOT / 'sitemap.xml')
+        urls = [element.text for element in sitemap.findall('.//{http://www.sitemaps.org/schemas/sitemap/0.9}loc')]
+        self.assertEqual(len(urls), len(set(urls)))
+        self.assertIn(ORIGIN + '/', urls)
+        for url in urls:
+            with self.subTest(url=url):
+                self.assertEqual(urlsplit(url).netloc, 'quanthevaris.github.io')
+                nom = urlsplit(url).path.lstrip('/') or 'index.html'
+                self.assertIn(nom, self.texts)
+                self.assertTrue(robots.can_fetch('Googlebot', url))
+                self.assertNotRegex(self.pages[nom].meta.get('robots', '').lower(), r'\b(noindex|none)\b')
+                self.assertNotRegex(self.pages[nom].meta.get('googlebot', '').lower(), r'\b(noindex|none)\b')
+                self.assertIn(f'<link rel="canonical" href="{url}">', self.texts[nom])
+        self.assertNotIn(ORIGIN + '/404.html', urls)
 
     def test_identifiants_uniques(self):
         for name, page in self.pages.items():

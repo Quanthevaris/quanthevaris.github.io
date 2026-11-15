@@ -1,8 +1,8 @@
 # robots.txt — quanthevaris.github.io
-# Tout le site est public et indexable : aucune page à exclure.
+# Exploration des pages publiques autorisée. L’indexation dépend des moteurs.
 
 User-agent: *
 Allow: /
 
-# Sitemap déclaré (8 pages publiques)
+# Liste des pages publiques à explorer
 Sitemap: https://quanthevaris.github.io/sitemap.xml
