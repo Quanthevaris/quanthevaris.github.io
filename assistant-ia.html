@@ -40,7 +40,7 @@
   "description": "Édition locale 2.0 : ELIZA puis Pixel avec Python et Ollama. PDF et kit gratuits, sans clé API. Tests du code inclus ; modèle à valider sur ton ordinateur.",
   "inLanguage": "fr",
   "bookFormat": "https://schema.org/EBook",
-  "numberOfPages": 49,
+  "numberOfPages": 50,
   "author": {
     "@type": "Person",
     "name": "Quanthevaris",
@@ -106,10 +106,10 @@
           <h1>Crée ton assistant IA personnalisé</h1>
           <p class="hero-subtitle">D’ELIZA à Pixel : comprends les chatbots, programme en Python et fais tourner un modèle sur ton ordinateur. Sans clé API, avec un kit de code complet.</p>
           <div class="btn-row">
-            <a href="/assets/pdf/assistant-ia-guide.pdf?v=166f6f7c32a9" class="btn btn-download" download>Télécharger le guide (PDF)</a>
+            <a href="/assets/pdf/assistant-ia-guide.pdf?v=1752df3573a6" class="btn btn-download" download>Télécharger le guide (PDF)</a>
             <a href="/assets/code/assistant-ia-kit.zip" class="btn btn-secondary" download>Kit de code (ZIP)</a>
           </div>
-          <p class="hero-note"><span><span data-ia-pages>49</span> pages</span><span>Code MIT</span><span>Aucun compte pour le parcours local</span></p>
+          <p class="hero-note"><span><span data-ia-pages>50</span> pages</span><span>Code MIT</span><span>Aucun compte pour le parcours local</span></p>
           <p><a href="/guide-assistant-ia.html">Lire le guide en ligne →</a></p>
         </div>
         <figure class="img-card">
@@ -117,7 +117,7 @@
             <source srcset="/assets/img/assistant-ia-preview.webp?v=560b8bf04991" type="image/webp">
             <img src="/assets/img/assistant-ia-preview.png?v=4e676928e8e9" width="800" height="600" loading="eager" fetchpriority="high" decoding="async" alt="Interface de Pixel, l’atelier local Python et Ollama : panneau de conversation bleu nuit, accents cyan, bouton Nouvelle discussion.">
           </picture>
-          <figcaption>Aperçu de l’interface au repos, diagnostic simulé. Le modèle se vérifie sur ton ordinateur.</figcaption>
+          <figcaption>Interface de Pixel sans conversation. Le diagnostic affiché est simulé.</figcaption>
         </figure>
       </div>
     </div>
@@ -126,8 +126,8 @@
   <section class="section section-alt" id="actualisation" aria-labelledby="titre-edition">
     <div class="container">
       <div class="alert note">
-        <h2 id="titre-edition">Un nouveau parcours, entièrement local</h2>
-        <p>Édition du <time datetime="2026-11-14">14 novembre 2026</time> : Ollama remplace GitHub Models, retiré le 30 juillet 2026. Le guide, le code et les deux copies du PDF sont réécrits pour cette architecture. <a href="https://docs.github.com/en/github-models" target="_blank" rel="noopener noreferrer">Statut officiel de l’ancien service</a>.</p>
+        <h2 id="titre-edition">Un assistant qui fonctionne sur ton ordinateur</h2>
+        <p>Édition du <time datetime="2026-11-14">14 novembre 2026</time> : Ollama remplace GitHub Models, retiré le 30 juillet 2026. Le guide et le code utilisent désormais cette configuration locale. <a href="https://docs.github.com/en/github-models" target="_blank" rel="noopener noreferrer">Statut officiel de l’ancien service</a>.</p>
         <p><strong>Ce n’est pas un assistant public hébergé.</strong> Le serveur et le modèle tournent sur ton ordinateur. GitHub Pages sert seulement à partager une démo statique d’ELIZA ou une présentation.</p>
       </div>
     </div>
@@ -135,11 +135,11 @@
 
   <section class="section">
     <div class="container">
-      <div class="section-head"><p class="eyebrow">Comprendre en construisant</p><h2 class="section-title">Deux projets, deux façons de dialoguer</h2><p class="section-lead">Pour les débutants curieux : des explications progressives, le code complet en annexes et des fichiers prêts à décompresser.</p></div>
+      <div class="section-head"><p class="eyebrow">Dans le guide</p><h2 class="section-title">ELIZA, puis Pixel</h2><p class="section-lead">Les deux projets sont expliqués étape par étape. Le code est fourni dans les annexes et dans le ZIP.</p></div>
       <div class="grid grid-3">
-        <article class="card"><p class="card-label">01 · Comprendre</p><h3 class="card-title">ELIZA et les règles</h3><p>Une adaptation pédagogique d’ELIZA en Python, avec mots-clés, réflexion des pronoms et petite mémoire. Ses dialogues sont en anglais ; les tests contrôlent le hasard.</p></article>
+        <article class="card"><p class="card-label">01 · Comprendre</p><h3 class="card-title">ELIZA et les règles</h3><p>Un chatbot à règles en Python, qui repère des mots-clés et remplace des pronoms. Les exemples de dialogue sont en anglais.</p></article>
         <article class="card"><p class="card-label">02 · Construire</p><h3 class="card-title">Pixel, sur ton ordinateur</h3><p>Une interface web, Flask et le modèle local <code>llama3.2:1b</code> via Ollama. Pas de jeton d’inférence, pas de service de conversation Quanthevaris.</p></article>
-        <article class="card"><p class="card-label">03 · Personnaliser</p><h3 class="card-title">Un cadre clair</h3><p>Personnalité, repères textuels, contexte limité, erreurs et confidentialité. Tu apprends aussi ce qui n’est pas fourni : RAG, voix, outils autonomes ou hébergement public.</p></article>
+        <article class="card"><p class="card-label">03 · Personnaliser</p><h3 class="card-title">Personnaliser Pixel</h3><p>Modifie les consignes et les informations fournies au modèle. Le guide explique aussi la gestion de l’historique, des erreurs et des données personnelles.</p></article>
       </div>
     </div>
   </section>
@@ -156,7 +156,7 @@
           <tr><th scope="row">Matériel</th><td>Recommandation de départ : 8 Go de RAM et 10 Go de disque libres. Pas de garantie de vitesse ; ELIZA reste utilisable sans modèle.</td></tr>
           <tr><th scope="row">Téléchargement du modèle</th><td>Environ 1,3 Go pour <code>llama3.2:1b</code> à la date de rédaction, en plus des logiciels. Internet pour l’installation ; inférence locale ensuite.</td></tr>
           <tr><th scope="row">Compte et coût</th><td>Aucun compte requis pour le modèle local choisi. Pas de facturation d’API ; matériel, électricité et accès Internet restent à ta charge. GitHub est facultatif pour partager.</td></tr>
-          <tr><th scope="row">PDF et sources</th><td><span data-ia-pages>49</span> pages · <span data-ia-size>0,55</span> Mo ; kit ZIP avec sources, tests, licence et démarrage rapide. <a href="/guide-assistant-ia.html#sommaire">Voir le sommaire complet</a>.</td></tr>
+          <tr><th scope="row">PDF et sources</th><td><span data-ia-pages>50</span> pages · <span data-ia-size>0,57</span> Mo ; kit ZIP avec sources, tests, licence et démarrage rapide. <a href="/guide-assistant-ia.html#sommaire">Voir le sommaire complet</a>.</td></tr>
         </tbody>
       </table></div>
       <div class="alert" id="licence">
@@ -170,9 +170,9 @@
 
   <section class="section">
     <div class="container"><div class="cta-band">
-      <p class="eyebrow">Du code au dialogue</p><h2>Le guide et les fichiers, ensemble</h2>
-      <p>Décompresse le kit, suis le chapitre de préparation, puis vérifie une vraie conversation sur ton ordinateur. Pas de clé API à créer, pas de serveur à exposer sur Internet.</p>
-      <div class="btn-row" style="justify-content:center"><a href="/assets/pdf/assistant-ia-guide.pdf?v=166f6f7c32a9" class="btn btn-download" download>Télécharger le guide (PDF)</a><a href="/assets/code/assistant-ia-kit.zip" class="btn btn-secondary" download>Télécharger le code (ZIP)</a></div>
+      <p class="eyebrow">Téléchargements</p><h2>Le PDF et le code source</h2>
+      <p>Décompresse le ZIP, installe les logiciels indiqués, puis lance le projet sur ton ordinateur. Le chapitre 6 explique comment tester le modèle et ouvrir l’interface.</p>
+      <div class="btn-row" style="justify-content:center"><a href="/assets/pdf/assistant-ia-guide.pdf?v=1752df3573a6" class="btn btn-download" download>Télécharger le guide (PDF)</a><a href="/assets/code/assistant-ia-kit.zip" class="btn btn-secondary" download>Télécharger le code (ZIP)</a></div>
     </div></div>
   </section>
 </main>
@@ -207,7 +207,7 @@
           <li><a href="/mentions-legales.html">Mentions légales</a></li>
           <li><a href="/confidentialite.html">Confidentialité</a></li>
           <li><a href="/assistant-ia.html#actualisation">Guide Assistant IA — édition locale</a></li>
-          <li><a href="/assets/pdf/esquive-en-pixels-guide.pdf" download>Télécharger le guide Esquive en Pixels (PDF)</a></li>
+          <li><a href="/assets/pdf/esquive-en-pixels-guide.pdf?v=fd0fd7fd45d5" download>Télécharger le guide Esquive en Pixels (PDF)</a></li>
         </ul>
       </nav>
     </div>

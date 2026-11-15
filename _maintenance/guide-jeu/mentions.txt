@@ -1,0 +1,21 @@
+INFORMATIONS D’ÉDITION ET DROITS D’USAGE
+
+Titre : Esquive en Pixels — Guide Pratique Débutant (Édition Windows).
+Autoéditeur : Quanthevaris, France. Publication sous pseudonyme, à titre non professionnel.
+Diffusion : publication numérique gratuite et non périodique — version 1.0, octobre 2026.
+Contact : contact.quanthevaris@gmail.com
+ISBN : aucun numéro attribué à cette édition.
+Mentions légales : quanthevaris.github.io/mentions-legales.html
+Confidentialité : quanthevaris.github.io/confidentialite.html
+
+## Texte, illustrations et maquette
+© 2026 Quanthevaris. Tous droits réservés, sauf éléments de tiers signalés comme tels. Usage personnel et éducatif autorisé. Redistribution, modification ou vente du guide soumises à l’accord préalable de l’éditeur, sous réserve des exceptions prévues par la loi.
+
+## Code source : licence MIT
+Le code des projets peut être utilisé, copié, modifié et redistribué, y compris à des fins commerciales, à condition de conserver le copyright et le texte de la licence MIT. Cette autorisation ne concerne pas le texte ni la maquette du guide. Le texte officiel anglais fait foi : LICENCE-MIT.txt est joint à ce PDF et disponible sur le site, dans assets/pdf/LICENCE-MIT.txt.
+
+## Logiciels et marques
+Python, Pygame, Visual Studio Code, Microsoft et Windows sont cités pour identifier les outils utilisés. Leurs noms et marques appartiennent à leurs titulaires respectifs. Ce guide est indépendant, sans affiliation ni approbation de leur part. Les logiciels tiers conservent leurs propres licences.
+
+## Usage pédagogique et responsabilité
+Le guide et le code sont fournis en l’état, pour apprendre à programmer. Les versions des logiciels et leurs conditions peuvent évoluer ; la compatibilité avec toutes les configurations n’est pas garantie. Lis les commandes avant de les exécuter et sauvegarde tes fichiers. Aucune disposition ne limite une responsabilité qui ne pourrait légalement l’être. Pour signaler une erreur, indique la version du guide et la page concernée à l’adresse de contact, sans joindre de donnée sensible.

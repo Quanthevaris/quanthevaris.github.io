@@ -1,5 +1,6 @@
 /* npm ci --prefix _maintenance ; node _maintenance/exporter-guide-ia.mjs */
-import { writeFileSync } from 'node:fs';
+import { writeFileSync, existsSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import { resolve } from 'node:path';
 import { navigateur, servir, root } from './navigateur.mjs';
 
@@ -15,7 +16,10 @@ try {
     headerTemplate: '<div style="font:7px Arial;color:#8797ad;width:100%;padding:0 14mm;display:flex;justify-content:space-between"><span>QUANTHEVARIS / ASSISTANT IA</span><span>ÉDITION LOCALE 2.0 · 14 NOVEMBRE 2026</span></div>',
     footerTemplate: '<div style="font:7px Arial;color:#8797ad;width:100%;padding:0 14mm;display:flex;justify-content:space-between"><span>Python · Flask · Ollama</span><span><span class="pageNumber"></span> / <span class="totalPages"></span></span></div>'});
   for (const name of ['guide-assistant-ia.pdf', 'assets/pdf/assistant-ia-guide.pdf']) writeFileSync(resolve(root, name), pdf);
-  console.log('Deux copies PDF identiques générées :', pdf.length, 'octets.');
+  const venv = resolve(root, process.platform === 'win32' ? '.venv/Scripts/python.exe' : '.venv/bin/python');
+  const python = process.env.PYTHON || (existsSync(venv) ? venv : 'python3');
+  execFileSync(python, [resolve(root, '_maintenance/finaliser-pdf-ia.py')], {stdio: 'inherit'});
+  console.log('Export PDF terminé, avec la licence MIT en pièce jointe.');
 } finally {
   if (browser) await browser.close();
   await new Promise(resolve => server.close(resolve));

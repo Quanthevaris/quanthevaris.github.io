@@ -1,0 +1,262 @@
+[
+  {
+    "page": 1,
+    "avant": "Crée ton premier mini-jeu vidéo 2D, une mission à la fois.",
+    "apres": "Crée ton premier jeu 2D en Python, étape par étape."
+  },
+  {
+    "page": 1,
+    "avant": "Déplace le vaisseau bleu, esquive l'astéroïde rouge, accumule des points et tente de battre le record de session.",
+    "apres": "Déplace le carré bleu pour éviter l’obstacle rouge. Chaque obstacle évité rapporte un point."
+  },
+  {
+    "page": 1,
+    "avant": "Un jeu fluide et réactif, un code source Python de référence propre et tous les outils pour dépanner en autonomie.",
+    "apres": "Un jeu en Python, le code complet et des conseils pour résoudre les erreurs courantes."
+  },
+  {
+    "page": 2,
+    "avant": "BIENVENUE À BORD",
+    "apres": "LE SOMMAIRE"
+  },
+  {
+    "page": 2,
+    "avant": "Ta feuille de route",
+    "apres": "Les étapes du projet"
+  },
+  {
+    "page": 2,
+    "avant": "Ce guide t'accompagne pas à pas. Chaque mission s'appuie sur la précédente sans jamais sauter d'étape.",
+    "apres": "Suis les étapes dans l’ordre : chacune complète le code de la précédente."
+  },
+  {
+    "page": 2,
+    "avant": "La méthode la plus fiable",
+    "apres": "Comment suivre le guide"
+  },
+  {
+    "page": 2,
+    "avant": "Conçu pour le terminal PowerShell sous Windows 11 ou Windows 10 (64 bits). Garde cette fenêtre de guide à côté de ton écran d'éditeur.",
+    "apres": "Les commandes sont prévues pour PowerShell sous Windows 10 ou 11 (64 bits). Garde le guide ouvert à côté de VS Code."
+  },
+  {
+    "page": 3,
+    "avant": "Une mission à ta portée",
+    "apres": "Le jeu à créer"
+  },
+  {
+    "page": 3,
+    "avant": "Le jeu est un défi d'arcade en 2D en temps réel. Tu diriges un carré bleu clair au bas de l'écran pour éviter un carré rouge qui chute à vitesse croissante.",
+    "apres": "Tu déplaces un carré bleu en bas de l’écran pour éviter un carré rouge qui tombe. Sa vitesse augmente au fil des points."
+  },
+  {
+    "page": 3,
+    "avant": "Un ordinateur sous Windows 11 ou Windows 10 (64-bit architecture x86-64). Note système : le support standard de Windows 10 ayant pris fin le 14 octobre 2025, nous conseillons un système régulièrement mis à jour pour garantir la sécurité globale de ta machine.",
+    "apres": "Ce guide utilise Windows 10 ou 11, en 64 bits (x86-64). Le support standard de Windows 10 a pris fin le 14 octobre 2025 : utilise un système qui reçoit encore des mises à jour de sécurité."
+  },
+  {
+    "page": 4,
+    "avant": "Python est le moteur qui exécutera ton jeu. Suis précisément ces instructions pour installer la version officielle recommandée.",
+    "apres": "Python exécute le programme du jeu. Installe la version utilisée dans ce guide."
+  },
+  {
+    "page": 4,
+    "avant": "Vérification capitale du fichier : Choisis impérativement le lien « Windows installer (64-bit) » (architecture x86-64) pour Python 3.13.x. N'installe pas la version ARM64, ni les paquets \"embeddable zip\", ni les versions expérimentales dites \"free-threaded\".",
+    "apres": "Choisis « Windows installer (64-bit) » pour Python 3.13.x (x86-64). Pour ce guide, n’utilise ni la version ARM64, ni les paquets « embeddable zip », ni une version « free-threaded »."
+  },
+  {
+    "page": 4,
+    "avant": "Ouvre le fichier téléchargé. Coche impérativement la case « Add python.exe to PATH » tout en bas de la fenêtre d'accueil avant de cliquer sur « Install Now ». Patiente jusqu'au message de confirmation.",
+    "apres": "Ouvre le fichier téléchargé. Coche « Add python.exe to PATH », puis clique sur « Install Now ». Attends le message de confirmation."
+  },
+  {
+    "page": 4,
+    "avant": "Tu dois obtenir une réponse confirmant Python 3.13.x. Si ce message s'affiche, Python est prêt !",
+    "apres": "La commande doit afficher Python 3.13.x."
+  },
+  {
+    "page": 5,
+    "avant": "Visual Studio Code est l'éditeur de texte professionnel dans lequel tu vas structurer et coder ton jeu.",
+    "apres": "Visual Studio Code est l’éditeur dans lequel tu vas écrire le code du jeu."
+  },
+  {
+    "page": 5,
+    "avant": "Ouvre l'onglet Extensions (raccourci Ctrl + Maj + X), cherche Python publié par Microsoft et installe-la. Elle t'assure la coloration syntaxique et le repérage visuel des erreurs.",
+    "apres": "Ouvre Extensions (Ctrl + Maj + X) et installe l’extension Python publiée par Microsoft. Elle colore le code et signale certaines erreurs."
+  },
+  {
+    "page": 6,
+    "avant": "Installer Pygame 2.6.1 de manière déterministe",
+    "apres": "Installer Pygame 2.6.1"
+  },
+  {
+    "page": 6,
+    "avant": "Action essentielle : Dans VS Code, ouvre la palette de commandes avec Ctrl + Maj + P, tape Python: Select Interpreter, valide, puis clique sur l'interpréteur situé dans ton dossier local : .\\.venv\\Scripts\\python.exe. Ton éditeur est désormais parfaitement synchronisé avec ton projet.",
+    "apres": "Dans VS Code, ouvre la palette avec Ctrl + Maj + P, saisis Python: Select Interpreter, puis sélectionne .\\.venv\\Scripts\\python.exe. VS Code utilisera le Python de ce projet."
+  },
+  {
+    "page": 6,
+    "avant": "La commande doit répondre 2.6.1. Ton atelier de développement est fin prêt !",
+    "apres": "La commande doit afficher 2.6.1. Tu peux passer au code du jeu."
+  },
+  {
+    "page": 7,
+    "avant": "Les 4 piliers de notre programme",
+    "apres": "Quatre notions à connaître"
+  },
+  {
+    "page": 7,
+    "avant": "Associe une valeur modifiable à une étiquette :",
+    "apres": "Une variable permet de nommer une valeur :"
+  },
+  {
+    "page": 8,
+    "avant": "Ouvre jeu.py dans VS Code et écris l'ossature fondamentale du moteur :",
+    "apres": "Ouvre jeu.py dans VS Code et écris le programme suivant :"
+  },
+  {
+    "page": 8,
+    "avant": "Une fenêtre bleu nuit apparaît et tourne à 60 images par seconde. Ferme-la avec la croix.",
+    "apres": "Une fenêtre bleu nuit apparaît. La boucle est limitée à 60 images par seconde. Ferme-la avec la croix."
+  },
+  {
+    "page": 9,
+    "avant": "Nous ajoutons un rectangle bleu ciel contrôlable au clavier, confiné dans l'écran.",
+    "apres": "Ajoute un carré bleu que les flèches du clavier déplacent, sans sortir de l’écran."
+  },
+  {
+    "page": 10,
+    "avant": "Note pédagogique : Pour l'instant, l'obstacle traverse le joueur sans effet. La détection physique du contact sera implémentée lors de la mission 5.",
+    "apres": "Pour l’instant, l’obstacle traverse le joueur sans effet. Tu ajouteras la détection de collision à la mission 5."
+  },
+  {
+    "page": 11,
+    "avant": "Initialiser le compteur et la typographie",
+    "apres": "Créer les compteurs et la police de texte"
+  },
+  {
+    "page": 13,
+    "avant": "Nous prévenons le joueur avec un texte centré et visible dès que la défaite survient.",
+    "apres": "Affiche un texte au centre de la fenêtre quand le joueur touche l’obstacle."
+  },
+  {
+    "page": 13,
+    "avant": "Comprendre le centrage : LARGEUR // 2 effectue une division entière exacte pour calculer l'axe médian de la fenêtre sans générer de nombre flottant.",
+    "apres": "LARGEUR // 2 donne la moitié de la largeur, arrondie à l’entier inférieur. Cette valeur sert à centrer le texte."
+  },
+  {
+    "page": 14,
+    "avant": "Permettons de relancer une manche sans quitter la fenêtre, tout en garantissant la cohérence de la vitesse.",
+    "apres": "La touche R relance la partie dans la même fenêtre et rétablit la vitesse de départ."
+  },
+  {
+    "page": 16,
+    "avant": "Rends ton jeu unique",
+    "apres": "Modifier l’apparence du jeu"
+  },
+  {
+    "page": 16,
+    "avant": "Règle d'indentation capitale : Les lignes ci-dessous remplacent des instructions existantes. Conserve impérativement leur indentation d'origine : 4 espaces pour le fond et les rectangles dans la boucle de jeu ; 0 espace pour les variables définies avant la boucle.",
+    "apres": "Ces lignes remplacent des instructions existantes. Garde leur indentation : 4 espaces pour le fond et les rectangles dans la boucle ; aucun pour les variables définies avant la boucle."
+  },
+  {
+    "page": 19,
+    "avant": "Comment le moteur tourne en mémoire",
+    "apres": "Les étapes de la boucle de jeu"
+  },
+  {
+    "page": 19,
+    "avant": "Création des surfaces vidéo, paramétrage de l'horloge et allocation des objets géométriques et typographiques.",
+    "apres": "Création de la fenêtre, de l’horloge, des rectangles et des polices de texte."
+  },
+  {
+    "page": 19,
+    "avant": "02 · Collecte d'événements",
+    "apres": "02 · Lecture des événements"
+  },
+  {
+    "page": 19,
+    "avant": "Vidage de la file d'attente système : surveillance de la croix de fermeture et de la touche R.",
+    "apres": "Lecture des événements : fermeture de la fenêtre ou appui sur R."
+  },
+  {
+    "page": 19,
+    "avant": "03 · Simulation physique",
+    "apres": "03 · Déplacements"
+  },
+  {
+    "page": 19,
+    "avant": "Si la manche est active : lecture continue des touches, mise à jour des positions, test d'intersection AABB (colliderect).",
+    "apres": "Pendant la partie : lecture des flèches, déplacement des rectangles et test de collision avec colliderect."
+  },
+  {
+    "page": 19,
+    "avant": "Nettoyage de l'écran (fill), dessin des rectangles, projection des textes, et basculement du tampon mémoire (flip).",
+    "apres": "Le programme efface l’écran avec fill, dessine les rectangles et les textes, puis affiche l’image avec flip."
+  },
+  {
+    "page": 20,
+    "avant": "Vérifie l'architecture Windows téléchargée. Tu dois impérativement utiliser l'installateur Windows x86-64 et non la mouture ARM64.",
+    "apres": "Vérifie que Python 3.13 est installé. Pour ce guide, utilise l’installateur Windows x86-64, pas ARM64."
+  },
+  {
+    "page": 20,
+    "avant": "Attention aux noms interdits : Ne nomme jamais ton script pygame.py ou random.py, sous peine d'écraser les bibliothèques officielles de Python. Utilise toujours jeu.py.",
+    "apres": "N’appelle pas ton fichier pygame.py ou random.py : Python risquerait de l’importer à la place du module attendu. Utilise jeu.py."
+  },
+  {
+    "page": 21,
+    "avant": "La méthode d'investigation en 3 étapes",
+    "apres": "Trois étapes pour trouver l’erreur"
+  },
+  {
+    "page": 22,
+    "avant": "Définition exacte",
+    "apres": "Définition"
+  },
+  {
+    "page": 22,
+    "avant": "Emplacement mémoire nommé stockant une valeur",
+    "apres": "Nom associé à une valeur"
+  },
+  {
+    "page": 22,
+    "avant": "Structure mathématique représentant coordonnées et dimensions",
+    "apres": "Rectangle défini par sa position et sa taille"
+  },
+  {
+    "page": 22,
+    "avant": "Chevauchement géométrique de surfaces rectangulaires",
+    "apres": "Contact entre les rectangles du jeu"
+  },
+  {
+    "page": 22,
+    "avant": "Opérateurs logiques d'association et d'inversion.",
+    "apres": "and : les deux conditions ; not : l’inverse."
+  },
+  {
+    "page": 23,
+    "avant": "Encadrement strict : Pour rendre la vitesse indépendante des variations de FPS :",
+    "apres": "Pour que la vitesse ne dépende plus du nombre d’images par seconde :"
+  },
+  {
+    "page": 24,
+    "avant": "RECETTE DE VALIDATION",
+    "apres": "VÉRIFICATIONS"
+  },
+  {
+    "page": 24,
+    "avant": "Checklist de fin de projet",
+    "apres": "Vérifier le jeu terminé"
+  },
+  {
+    "page": 24,
+    "avant": "Sauvegarder son projet proprement",
+    "apres": "Sauvegarder le projet"
+  },
+  {
+    "page": 24,
+    "avant": "L'environnement se recrée en 10 secondes avec la commande vue en page 6.",
+    "apres": "Tu peux recréer l’environnement avec les commandes de la page 6."
+  }
+]

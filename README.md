@@ -124,6 +124,8 @@ Quanthevaris n’est utilisé. ELIZA fonctionne indépendamment du modèle.
 - Sources réellement livrées : `assets/code/assistant-ia/` ; kit téléchargeable
   `assets/code/assistant-ia-kit.zip` (sans environnement, cache, modèle ni logiciel tiers).
 - `guide-assistant-ia.html` est généré avec les listings de ces mêmes fichiers.
+- Les mentions légales sont dans la section `mentions` de la source éditoriale.
+  L’export joint automatiquement `assets/pdf/LICENCE-MIT.txt` au PDF, comme pour le guide Pygame.
 - Les deux PDF sont identiques ; `assets/pdf/assistant-ia-version.json` fournit le
   nombre de pages, les tailles et les empreintes PDF/ZIP. Ne pas les modifier à la main.
 - Tests du programme et du navigateur avec **moteur simulé**, pas une inférence réelle.
@@ -156,6 +158,9 @@ node --test _audience/test-audience.mjs
 .venv/bin/pip install -r assets/code/assistant-ia/requirements.txt
 .venv/bin/python -m unittest discover -s assets/code/assistant-ia -v
 .venv/bin/python _maintenance/test-livraison-ia.py
+.venv/bin/python _maintenance/test-editorial.py
+# Site statique : affichage responsive et téléchargement des deux PDF :
+node _maintenance/test-interface-site.mjs
 # Test HTTP et navigateur avec un faux moteur, nécessite les outils npm ci-dessus :
 .venv/bin/python _maintenance/test-parcours-ia.py
 # Mettre à jour les miniatures après une modification de l’interface (Linux + polices DejaVu) :
@@ -174,6 +179,29 @@ et les précautions de publication figurent dans
 [`_maintenance/POUR-TOI-ETAPES.md`](_maintenance/POUR-TOI-ETAPES.md).
 Le suivi de l’audit, y compris les vérifications privées de GoatCounter encore à faire,
 est dans [`_maintenance/SUIVI-AUDIT.md`](_maintenance/SUIVI-AUDIT.md).
+
+## Relecture du guide Esquive en Pixels
+
+Le dépôt ne contient pas la source de mise en page du premier guide. Les retouches
+sont donc appliquées au PDF original conservé dans Git, sans rasteriser les pages
+ni modifier les deux pages de code complet (empreintes contrôlées).
+
+- `_maintenance/guide-jeu/retouches.json` : passages à remplacer et nouveaux textes.
+- `_maintenance/guide-jeu/mentions.txt` : texte de la dernière page.
+- `_maintenance/relire-guide-jeu.py` : application des retouches, liens et licence jointe.
+
+```bash
+.venv/bin/python _maintenance/relire-guide-jeu.py
+.venv/bin/python _maintenance/synchroniser-ia.py
+.venv/bin/python _maintenance/test-editorial.py
+```
+
+Le script repart toujours du même original, pas du PDF déjà modifié. Il nécessite
+l’objet Git indiqué dans le script (commit `4fe4e50e2b37a8c2d20f136fde23c8194b124520`).
+Avec un clone sans cet historique, fournir une copie de cet original via `--source chemin.pdf`.
+Le fichier livré reste `assets/pdf/esquive-en-pixels-guide.pdf`. La synchronisation
+met à jour les tailles et les liens versionnés des deux guides. Ces outils et leurs
+dépendances ne sont pas nécessaires pour lire les guides ou lancer leurs projets.
 
 ## Visibilité
 
