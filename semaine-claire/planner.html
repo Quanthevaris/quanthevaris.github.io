@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; base-uri 'self'; object-src 'none'; script-src 'self'; script-src-attr 'none'; style-src 'self'; img-src 'self' data:; font-src 'self'; form-action 'none'; frame-src 'none'; connect-src 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ma semaine — Semaine Claire</title>
+<meta name="description" content="Planner scolaire local et gratuit : ajoute tes devoirs, choisis trois priorités, place-les dans la semaine et imprime ta feuille A4.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="./assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="./assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="./assets/img/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="./assets/img/apple-touch-icon.png">
+<link rel="stylesheet" href="./assets/css/site.css">
+<link rel="stylesheet" href="./assets/css/planner.css">
+</head>
+<body>
+<a class="skip-link" href="#contenu">Aller au contenu principal</a>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="./index.html" aria-label="Semaine Claire, accueil">
+      <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+        <rect width="64" height="64" rx="14" fill="#135BEA"/><rect x="17" y="11" width="34" height="42" rx="4" fill="#FFFFFF" stroke="#10233F" stroke-width="1.5"/>
+        <g fill="none" stroke="#10233F" stroke-width="2"><circle cx="17" cy="18" r="3"/><circle cx="17" cy="26" r="3"/><circle cx="17" cy="34" r="3"/><circle cx="17" cy="42" r="3"/></g>
+        <g stroke="#9BBDF8" stroke-width="2" stroke-linecap="round"><path d="M26 22h19"/><path d="M26 31h19"/><path d="M26 40h14"/></g>
+      </svg>
+      Semaine <strong>Claire</strong>
+    </a>
+    <nav aria-label="Navigation principale">
+      <ul class="nav-links">
+        <li><a href="./index.html">Accueil</a></li>
+        <li><a href="./index.html#methode">Méthode</a></li>
+        <li><a href="./planner.html" aria-current="page">Mon planner</a></li>
+        <li><a href="./assets/pdf/kit-semaine-claire.pdf" download>Kit PDF</a></li>
+        <li><a href="./confidentialite.html">Données</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-primary header-cta" href="./index.html#kit">Voir le kit</a>
+  </div>
+</header>
+
+<main class="planner-shell" id="contenu">
+  <section class="planner-top" aria-labelledby="planner-titre">
+    <div>
+      <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> Espace de travail · gratuit</p>
+      <h1 id="planner-titre">Ma semaine, étape par étape.</h1>
+      <p class="week-range" id="week-range">Semaine en cours</p>
+    </div>
+    <div class="planner-actions">
+      <button class="btn btn-secondary" type="button" id="print-btn">Imprimer / PDF</button>
+      <button class="btn btn-ghost" type="button" id="export-btn">Sauvegarder</button>
+      <label class="btn btn-ghost" for="import-file">Importer</label>
+      <input class="visually-hidden" type="file" id="import-file" accept="application/json,.json">
+    </div>
+  </section>
+
+  <aside class="week-banner" id="week-banner" hidden>
+    <p>Une nouvelle semaine a commencé. Tu peux archiver ton bilan et repartir avec une page vide.</p>
+    <button class="btn btn-secondary" type="button" id="banner-new-week-btn">Démarrer la nouvelle semaine</button>
+  </aside>
+
+  <p class="notice-planner" id="storage-warning" hidden>Le stockage local de ce navigateur est indisponible : tes modifications resteront visibles jusqu’au rechargement de la page. Utilise « Sauvegarder » pour conserver une copie.</p>
+
+  <section class="progress-panel" aria-labelledby="progress-title">
+    <h2 id="progress-title">Où j’en suis</h2>
+    <div class="progress-bar-wrap">
+      <progress id="progress-bar" max="100" value="0">0 %</progress>
+      <p id="progress-label">Aucune tâche pour le moment.</p>
+    </div>
+    <div class="stats" aria-label="Statistiques de la semaine">
+      <div class="stat"><strong id="stat-total">0</strong><span>Tâches</span></div>
+      <div class="stat"><strong id="stat-focus">0</strong><span>Priorités</span></div>
+      <div class="stat"><strong id="stat-done">0</strong><span>Terminées</span></div>
+    </div>
+  </section>
+
+  <nav class="step-nav" aria-label="Étapes du rituel">
+    <a href="#etape-1"><b>1</b> Vider</a>
+    <a href="#etape-2"><b>2</b> Choisir</a>
+    <a href="#etape-3"><b>3</b> Placer</a>
+    <a href="#etape-4"><b>4</b> Vérifier</a>
+  </nav>
+
+  <section class="step-card" id="etape-1" aria-labelledby="titre-etape-1">
+    <div class="step-heading">
+      <span class="step-number">1</span>
+      <div>
+        <h2 id="titre-etape-1">Vider ma tête</h2>
+        <p>Note un devoir à la fois. Pas besoin de trouver le bon ordre maintenant.</p>
+      </div>
+    </div>
+    <form id="task-form" novalidate>
+      <div class="form-grid">
+        <div class="field field-large">
+          <label for="task-title">Devoir, contrôle ou projet</label>
+          <input id="task-title" name="title" type="text" maxlength="120" autocomplete="off" placeholder="Ex. : terminer l’exercice 4 de maths" required>
+        </div>
+        <div class="field">
+          <label for="task-subject">Matière</label>
+          <input id="task-subject" name="subject" type="text" maxlength="40" autocomplete="off" placeholder="Maths">
+        </div>
+        <div class="field">
+          <label for="task-due">Date limite</label>
+          <input id="task-due" name="dueDate" type="date">
+        </div>
+        <div class="field">
+          <label for="task-duration">Durée estimée</label>
+          <select id="task-duration" name="duration">
+            <option value="15">15 min</option>
+            <option value="30" selected>30 min</option>
+            <option value="45">45 min</option>
+            <option value="60">1 h</option>
+            <option value="90">1 h 30</option>
+            <option value="120">2 h</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="task-priority">Priorité</label>
+          <select id="task-priority" name="priority">
+            <option value="1">Urgent</option>
+            <option value="2" selected>Important</option>
+            <option value="3">Plus tard</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="task-day">Jour prévu</label>
+          <select id="task-day" name="day">
+            <option value="lundi">Lundi</option>
+            <option value="mardi">Mardi</option>
+            <option value="mercredi">Mercredi</option>
+            <option value="jeudi">Jeudi</option>
+            <option value="vendredi">Vendredi</option>
+            <option value="samedi">Samedi</option>
+            <option value="dimanche">Dimanche</option>
+          </select>
+        </div>
+      </div>
+      <p class="form-errors" id="form-errors" role="alert" hidden></p>
+      <div class="form-actions">
+        <button class="btn btn-primary" type="submit">Ajouter à ma semaine</button>
+        <button class="btn btn-texte" type="button" id="sample-btn">Charger un exemple</button>
+        <span class="field-aide">Tout reste sur cet appareil.</span>
+      </div>
+    </form>
+  </section>
+
+  <section class="step-card" id="etape-2" aria-labelledby="titre-etape-2">
+    <div class="step-heading">
+      <span class="step-number">2</span>
+      <div>
+        <h2 id="titre-etape-2">Choisir l’essentiel</h2>
+        <p>Trois priorités maximum. Si tout est prioritaire, rien ne l’est.</p>
+      </div>
+    </div>
+    <div class="focus-list" id="focus-list" aria-live="polite"></div>
+    <button class="btn btn-secondary" type="button" id="auto-focus-btn">Choisir automatiquement les 3 plus urgentes</button>
+  </section>
+
+  <section class="step-card" id="etape-3" aria-labelledby="titre-etape-3">
+    <div class="step-heading">
+      <span class="step-number">3</span>
+      <div>
+        <h2 id="titre-etape-3">Placer dans la semaine</h2>
+        <p>Une colonne par jour. Tu peux déplacer une tâche sans la ressaisir.</p>
+      </div>
+    </div>
+    <div class="week-board" id="week-board" aria-live="polite"></div>
+  </section>
+
+  <section class="step-card" id="etape-4" aria-labelledby="titre-etape-4">
+    <div class="step-heading">
+      <span class="step-number">4</span>
+      <div>
+        <h2 id="titre-etape-4">Vérifier et préparer la suite</h2>
+        <p>Deux minutes suffisent : regarde ce qui est fait, puis note une seule amélioration.</p>
+      </div>
+    </div>
+    <form class="review-grid" id="review-form">
+      <div class="field">
+        <label for="review-good">Ce qui a marché</label>
+        <textarea id="review-good" name="good" maxlength="600" placeholder="Une chose qui m’a aidé…"></textarea>
+      </div>
+      <div class="field">
+        <label for="review-hard">Ce qui a bloqué</label>
+        <textarea id="review-hard" name="hard" maxlength="600" placeholder="Un moment difficile…"></textarea>
+      </div>
+      <div class="field">
+        <label for="review-next">Une amélioration pour la semaine prochaine</label>
+        <textarea id="review-next" name="next" maxlength="600" placeholder="Une seule chose à changer…"></textarea>
+      </div>
+    </form>
+    <div class="danger-zone">
+      <p>Le bouton « Nouvelle semaine » archive uniquement un résumé du bilan, puis vide les tâches.</p>
+      <div class="btn-group">
+        <button class="btn btn-secondary" type="button" id="new-week-btn">Nouvelle semaine</button>
+        <button class="btn btn-danger" type="button" id="clear-btn">Tout effacer</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <section class="print-sheet" id="print-sheet" aria-hidden="true"></section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <a class="brand" href="./index.html">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <rect width="64" height="64" rx="14" fill="#135BEA"/><rect x="17" y="11" width="34" height="42" rx="4" fill="#FFFFFF" stroke="#10233F" stroke-width="1.5"/>
+          <g fill="none" stroke="#10233F" stroke-width="2"><circle cx="17" cy="18" r="3"/><circle cx="17" cy="26" r="3"/><circle cx="17" cy="34" r="3"/><circle cx="17" cy="42" r="3"/></g>
+          <g stroke="#9BBDF8" stroke-width="2" stroke-linecap="round"><path d="M26 22h19"/><path d="M26 31h19"/><path d="M26 40h14"/></g>
+        </svg>
+        Semaine <strong>Claire</strong>
+      </a>
+      <p>Nom de travail · version de démonstration. Les données du planner restent dans ce navigateur.</p>
+    </div>
+    <div>
+      <h3>Produit</h3>
+      <ul>
+        <li><a href="./index.html">Accueil</a></li>
+        <li><a href="./index.html#methode">La méthode</a></li>
+        <li><a href="./assets/pdf/kit-semaine-claire.pdf" download>Kit PDF A4</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Informations</h3>
+      <ul>
+        <li><a href="./contact.html">Contact</a></li>
+        <li><a href="./confidentialite.html">Données et confidentialité</a></li>
+        <li><a href="./A-FINALISER.md">Éléments à finaliser</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-note">
+    <span>Gratuit · sans compte · sans traceur publicitaire.</span>
+    <span>Identité et mentions légales à finaliser avant publication officielle.</span>
+  </div>
+</footer>
+
+<script type="module" src="./assets/js/planner.mjs"></script>
+</body>
+</html>

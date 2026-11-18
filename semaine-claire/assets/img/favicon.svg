@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="titre">
+  <title id="titre">Carnet Semaine Claire</title>
+  <rect width="64" height="64" rx="14" fill="#135BEA"/>
+  <rect x="17" y="11" width="34" height="42" rx="4" fill="#FFFFFF" stroke="#10233F" stroke-width="1.5"/>
+  <g fill="none" stroke="#10233F" stroke-width="2">
+    <circle cx="17" cy="18" r="3"/><circle cx="17" cy="26" r="3"/>
+    <circle cx="17" cy="34" r="3"/><circle cx="17" cy="42" r="3"/>
+  </g>
+  <g stroke="#9BBDF8" stroke-width="2" stroke-linecap="round">
+    <path d="M26 22h19"/><path d="M26 31h19"/><path d="M26 40h14"/>
+  </g>
+</svg>
