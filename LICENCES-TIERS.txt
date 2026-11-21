@@ -6,10 +6,11 @@ Adresse publique : https://quanthevaris.github.io/LICENCES-TIERS.txt
 
 1. PÉRIMÈTRE
 
-Le code HTML, CSS et JavaScript du site et le code Python du guide « Esquive en Pixels »
-sont sous licence MIT : https://quanthevaris.github.io/assets/pdf/LICENCE-MIT.txt
-Le texte, les illustrations et la maquette du guide ne sont pas sous MIT. FISSION ARENA
-a ses propres conditions : https://quanthevaris.github.io/fission-arena.html#licence
+Le code HTML, CSS et JavaScript du site et le code des programmes des guides « Esquive en
+Pixels » et « Crée ton assistant IA personnalisé — Python et Ollama » sont sous licence MIT
+(texte standard) : https://quanthevaris.github.io/LICENSE
+Le texte, les illustrations et la maquette des guides ne sont pas sous MIT.
+FISSION ARENA a ses propres conditions : https://quanthevaris.github.io/assets/jeux/LICENCE-FISSION-ARENA.txt
 Les composants du jeu sont décrits séparément dans :
 https://quanthevaris.github.io/assets/jeux/LICENCES-TIERS.txt
 

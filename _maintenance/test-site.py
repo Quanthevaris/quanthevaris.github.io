@@ -8,6 +8,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urljoin, urlsplit
 from urllib.robotparser import RobotFileParser
+from zipfile import ZipFile
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -188,19 +189,18 @@ class SiteTests(unittest.TestCase):
         self.assertIn('consentement préalable valable', policy)
 
     def test_licence_du_code_et_lien_vers_le_depot(self):
-        # GitHub ne détecte la licence que si le texte MIT standard commence le fichier.
+        # GitHub ne détecte « MIT » que si LICENSE contient le texte MIT standard,
+        # sans ajout : tout commentaire de périmètre irait dans la documentation.
         licence = (ROOT / 'LICENSE').read_text()
+        standard = (ROOT / 'assets/pdf/LICENSE-MIT-CODE.txt').read_text()
+        self.assertEqual(licence, standard, 'LICENSE doit rester le texte MIT exact')
         self.assertTrue(licence.startswith('MIT License\n\nCopyright (c) 2026 Quanthevaris\n'))
-        for extrait in ('Permission is hereby granted, free of charge',
-                        'THE SOFTWARE IS PROVIDED "AS IS"',
-                        'Périmètre — la licence MIT ci-dessus ne couvre que le code source',
-                        'Non couvert', 'FISSION ARENA', 'assets/pdf/LICENCE-MIT.txt'):
-            self.assertIn(extrait, licence)
-        # Le bloc anglais de LICENSE est identique, octet pour octet, à celui joint aux PDF.
-        debut = licence.index('MIT License\n\nCopyright (c) 2026 Quanthevaris')
-        fin = licence.index('SOFTWARE.') + len('SOFTWARE.')
-        self.assertIn(licence[debut:fin], (ROOT / 'assets/pdf/LICENCE-MIT.txt').read_text())
-        # La licence jointe aux deux guides et au kit reste intacte et identique.
+        self.assertNotIn('Périmètre', licence)
+        self.assertLess(len(licence.encode()), 1200, 'trop long pour la détection GitHub')
+        # Le texte joint aux PDF commencent par une note de périmètre, puis le texte exact.
+        jointe = (ROOT / 'assets/pdf/LICENCE-MIT.txt').read_text()
+        self.assertTrue(jointe.endswith(licence))
+        self.assertIn('FISSION ARENA', jointe.split('MIT License\n', 1)[0])
         self.assertEqual((ROOT / 'assets/pdf/LICENCE-MIT.txt').read_bytes(),
                          (ROOT / 'assets/code/assistant-ia/LICENCE-MIT.txt').read_bytes())
         depot = 'https://github.com/Quanthevaris/quanthevaris.github.io'
@@ -215,6 +215,42 @@ class SiteTests(unittest.TestCase):
         self.assertIn(f'<a href="{depot}/blob/main/LICENSE">LICENSE</a>',
                       self.texts['mentions-legales.html'])
         self.assertIn('[`LICENSE`](LICENSE)', (ROOT / 'README.md').read_text())
+
+    def test_coherence_des_licences_du_depot(self):
+        """Une seule formulation par périmètre : code, guides, jeu, composants tiers."""
+        jeu = (ROOT / 'assets/jeux/LICENCE-FISSION-ARENA.txt').read_text()
+        for extrait in ("FISSION ARENA est un jeu gratuit, mais ce n'est pas un logiciel libre",
+                        'Copyright (c) 2026 Quanthevaris. Tous droits réservés.',
+                        'CE QUE TU PEUX FAIRE, GRATUITEMENT ET SANS AUTORISATION',
+                        "CE QUI DEMANDE L'ACCORD ÉCRIT DE L'AUTEUR",
+                        'pygame (GNU LGPL 2.1)', 'FreeSansBold (GPL)',
+                        'trois ans', 'jeu gratuit'):
+            self.assertIn(extrait, jeu)
+        # Le jeu n'est cité dans aucun document sous licence MIT.
+        for nom in ('LICENSE', 'assets/pdf/LICENCE-MIT.txt', 'assets/code/assistant-ia/LICENCE-MIT.txt'):
+            texte = (ROOT / nom).read_text()
+            section_mit = texte[texte.index('MIT License'):]
+            self.assertNotIn('FISSION ARENA', section_mit, nom)
+        # Le code du site n'est jamais annoncé sous une autre licence que MIT.
+        for nom, texte in self.texts.items():
+            if 'FISSION ARENA' not in texte:
+                continue
+            for phrase in re.findall(r'[^.]*MIT[^.]*\.', texte):
+                if 'FISSION ARENA' in phrase:
+                    self.assertRegex(phrase, r"n'est pas sous licence MIT|ne couvre ni|ni le jeu",
+                                     (nom, phrase))
+        # La page du jeu renvoie vers le fichier de licence et vers le kit.
+        page = self.texts['fission-arena.html']
+        self.assertIn('/assets/jeux/LICENCE-FISSION-ARENA.txt', page)
+        self.assertIn('/assets/jeux/FISSION_ARENA-kit.zip', page)
+        self.assertIn('/assets/jeux/LICENCE-FISSION-ARENA.txt', self.texts['mentions-legales.html'])
+        # Le kit du jeu contient sa licence, identique au fichier publié.
+        with ZipFile(ROOT / 'assets/jeux/FISSION_ARENA-kit.zip') as archive:
+            self.assertEqual(archive.read('FISSION_ARENA-kit/LICENCE-FISSION-ARENA.txt'),
+                             (ROOT / 'assets/jeux/LICENCE-FISSION-ARENA.txt').read_bytes())
+            for nom in ('fabriquer_exe.py', 'construire_exe.bat', 'fission-arena.ico', 'LIRE-MOI.txt'):
+                self.assertEqual(archive.read('FISSION_ARENA-kit/' + nom),
+                                 (ROOT / '_exe' / nom).read_bytes(), nom)
 
 
 if __name__ == '__main__':

@@ -9,9 +9,12 @@ Pour utiliser ta propre version de pygame, installe-la dans cet environnement Py
 et lance : python fabriquer_exe.py --help
 Consulte les options avant de lancer la fabrication.
 
-Le code du jeu reste soumis aux conditions de sa page. Ce kit ne place pas le jeu
-sous licence MIT. Il permet notamment les opérations de modification et de
-remplacement de pygame prévues par la licence LGPL de cette bibliothèque.
+Le code du jeu reste soumis aux conditions du jeu, jointes à ce kit dans le fichier
+LICENCE-JEU.txt et publiées à cette adresse :
+https://quanthevaris.github.io/assets/jeux/LICENCE-FISSION-ARENA.txt
+Ce kit ne place pas le jeu sous licence MIT. Il permet notamment les opérations de
+modification et de remplacement de pygame prévues par la licence LGPL de cette
+bibliothèque.
 
 Les bibliothèques installées pendant la fabrication conservent leurs licences.
 Celles du .exe publié (pygame 2.6.1, police FreeSansBold sous GPL, Python, SDL,

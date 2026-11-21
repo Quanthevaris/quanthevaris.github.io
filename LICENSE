@@ -19,22 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
--------------------------------------------------------------------------------
-Périmètre — la licence MIT ci-dessus ne couvre que le code source.
-  Couvert : HTML, CSS et JavaScript du site (pages, js/, css/, scripts de
-  _maintenance/ et _exe/) et code des programmes des guides « Esquive en
-  Pixels » et « Crée ton assistant IA personnalisé — Python et Ollama »
-  (assets/code/assistant-ia/).
-
-  Non couvert (© 2026 Quanthevaris, tous droits réservés) : le texte, les
-  illustrations et la maquette des deux guides, y compris leurs versions HTML
-  et PDF ; le jeu FISSION ARENA (exécutable, code source, nom, images, sons,
-  musique), gratuit mais non librement redistribuable.
-
-  Les composants de tiers (police Inter sous SIL OFL, icônes Lucide / Feather,
-  logiciels embarqués dans le .exe du jeu) gardent leurs propres licences,
-  reproduites dans LICENCES-TIERS.txt, assets/fonts/ et assets/jeux/.
-
-  Texte intégral joint aux guides : assets/pdf/LICENCE-MIT.txt.
-  Détail : https://quanthevaris.github.io/mentions-legales.html#propriete-intellectuelle

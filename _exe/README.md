@@ -10,6 +10,10 @@ Ce dossier `_exe/` contient tout le nécessaire ; il n'est pas publié sur le si
 | `fabriquer_exe.py` | Le script qui fait le travail (utilisé par le `.bat` **et** par GitHub). |
 | `fission-arena.ico` | L'icône du `.exe` (la même que celle de la fenêtre du jeu). |
 | `LIRE-MOI.txt` | Notice du kit ZIP : conditions du jeu, licences et versions utilisées pour la publication. |
+| `LICENCE-JEU.txt` | Copie de `assets/jeux/LICENCE-FISSION-ARENA.txt`, jointe au kit ZIP sous le nom `LICENCE-FISSION-ARENA.txt`. |
+
+Le kit public `assets/jeux/FISSION_ARENA-kit.zip` est fabriqué à partir de ce dossier :
+`python3 _maintenance/construire-kit-jeu.py` (et `--check` pour vérifier qu'il est à jour).
 
 Le code du jeu et le `.exe` publiés sont dans [`assets/jeux/`](../assets/jeux/).
 
