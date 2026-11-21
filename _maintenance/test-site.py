@@ -239,6 +239,9 @@ class SiteTests(unittest.TestCase):
                 if 'FISSION ARENA' in phrase:
                     self.assertRegex(phrase, r"n'est pas sous licence MIT|ne couvre ni|ni le jeu",
                                      (nom, phrase))
+        # Aucune page ne limite la licence MIT au seul guide « Esquive en Pixels ».
+        for nom, texte in self.texts.items():
+            self.assertNotRegex(texte, r"guide « Esquive en Pixels »[^.]*MIT", nom)
         # La page du jeu renvoie vers le fichier de licence et vers le kit.
         page = self.texts['fission-arena.html']
         self.assertIn('/assets/jeux/LICENCE-FISSION-ARENA.txt', page)
