@@ -1,0 +1,135 @@
+FISSION ARENA — conditions d'utilisation
+=======================================
+
+Version 1.0 · 21 novembre 2026
+Adresse publique de ce document : https://quanthevaris.github.io/assets/jeux/LICENCE-FISSION-ARENA.txt
+Page du jeu : https://quanthevaris.github.io/fission-arena.html#licence
+Contact : contact.quanthevaris@gmail.com
+
+
+1. CE QUE COUVRE CE DOCUMENT
+---------------------------
+
+FISSION ARENA est un jeu gratuit, mais ce n'est pas un logiciel libre : il reste la
+propriété de son auteur. Ces conditions s'appliquent à :
+
+  - le programme FISSION_ARENA.exe ;
+  - son code source FISSION_ARENA.py ;
+  - le kit de fabrication FISSION_ARENA-kit.zip ;
+  - son nom, ses images, ses sons et sa musique.
+
+Auteur et titulaire des droits : Quanthevaris (pseudonyme).
+Copyright (c) 2026 Quanthevaris. Tous droits réservés.
+
+Ce document ne s'applique pas au code du site ni au code des programmes des guides
+« Esquive en Pixels » et « Crée ton assistant IA personnalisé — Python et Ollama »,
+qui sont distribués sous licence MIT (voir https://quanthevaris.github.io/LICENSE).
+
+
+2. CE QUE TU PEUX FAIRE, GRATUITEMENT ET SANS AUTORISATION
+----------------------------------------------------------
+
+  a) Télécharger le jeu, le copier sur tes ordinateurs et y jouer, pour ton usage
+     personnel.
+
+  b) Lire son code source et le modifier pour ton usage personnel, y compris en
+     analysant le fonctionnement du programme (rétro-ingénierie) pour mettre au
+     point tes modifications.
+
+  c) Refabriquer le .exe avec le kit fourni, y compris avec une version de pygame
+     différente de celle du fichier publié — c'est le droit que prévoit la licence
+     LGPL 2.1 de pygame (voir section 5).
+
+  d) Faire connaître le jeu en partageant l'adresse de sa page :
+     https://quanthevaris.github.io/fission-arena.html
+
+  e) Sauvegarder et conserver tes fichiers de progression, qui sont écrits sur ton
+     propre ordinateur et ne sont jamais transmis.
+
+
+3. CE QUI DEMANDE L'ACCORD ÉCRIT DE L'AUTEUR
+-------------------------------------------
+
+  a) Redistribuer le jeu ou son code : le remettre en ligne ailleurs, l'inclure dans
+     une compilation, dans un pack ou dans un support distribué, le vendre ou le
+     joindre à une offre payante.
+
+  b) Diffuser une version modifiée du jeu, sous quelque forme que ce soit.
+
+  c) Réutiliser son code, son nom, ses images, ses sons ou sa musique dans un autre
+     projet diffusé au public.
+
+  d) Utiliser le nom « FISSION ARENA » ou « Quanthevaris » pour laisser croire à une
+     affiliation, un partenariat ou une approbation qui n'existent pas.
+
+Pour demander cet accord : contact.quanthevaris@gmail.com. Indique précisément ce
+que tu souhaites faire. Un accord donné pour un projet ne vaut pas pour un autre.
+
+Aucune clause de ce document ne limite les droits que la loi t'accorde de façon
+impérative, notamment les exceptions au droit d'auteur (citation, courte citation,
+interopérabilité, copie privée) prévues par le code de la propriété intellectuelle.
+
+
+4. GARANTIE ET RESPONSABILITÉ
+-----------------------------
+
+Le jeu est fourni gratuitement, « en l'état », sans garantie d'aucune sorte : ni de
+bon fonctionnement sur un ordinateur donné, ni d'absence d'erreur. Tu le télécharges
+et l'utilises sous ta responsabilité. Dans les limites autorisées par la loi, l'auteur
+ne peut pas être tenu responsable des dommages directs ou indirects liés à son
+téléchargement, à son utilisation ou à son impossibilité d'utilisation.
+
+Le fichier .exe n'est pas signé numériquement : Windows affiche un avertissement au
+premier lancement, et un antivirus peut le signaler à tort. Sa taille, son empreinte
+SHA-256 et les vérifications effectuées avant publication figurent dans sa fiche :
+https://quanthevaris.github.io/assets/jeux/FISSION_ARENA-fiche.txt
+
+Avertissement santé : le jeu affiche des stimulations lumineuses (éclairs, explosions,
+formes géométriques en mouvement rapide). La mise en garde prévue par l'annexe I du
+décret n° 96-360 du 23 avril 1996 s'affiche au premier lancement ; elle est à lire
+avant de jouer.
+
+
+5. LOGICIELS ET RESSOURCES DE TIERS CONTENUS DANS LE .exe
+---------------------------------------------------------
+
+Pour fonctionner d'un simple double-clic, FISSION_ARENA.exe contient des logiciels
+libres écrits par d'autres personnes : le langage Python, la bibliothèque de jeu
+pygame (GNU LGPL 2.1), la bibliothèque SDL, la police FreeSansBold (GPL) et d'autres
+composants. Ils y sont inclus sans modification, restent la propriété de leurs auteurs
+et conservent leurs propres licences. Ces licences ne s'appliquent pas au jeu
+lui-même, et les conditions ci-dessus ne restreignent pas les droits qu'elles
+t'accordent.
+
+  - Liste complète, auteurs, textes des licences et moyens d'obtenir les codes
+    sources : https://quanthevaris.github.io/assets/jeux/LICENCES-TIERS.txt
+
+  - pygame (LGPL 2.1). Tu peux utiliser le jeu avec une autre version de pygame, même
+    modifiée par toi : soit en lançant directement le code source FISSION_ARENA.py,
+    soit en refabriquant le .exe avec le kit :
+    https://quanthevaris.github.io/assets/jeux/FISSION_ARENA-kit.zip
+
+  - Code source de pygame et de la police FreeSansBold : il est disponible aux
+    adresses indiquées dans LICENCES-TIERS.txt. Sur demande à l'adresse de contact,
+    il t'est aussi envoyé gratuitement par voie électronique. Cette offre écrite vaut
+    pour toute personne qui en fait la demande, pendant trois ans à compter de la
+    dernière mise à disposition du .exe concerné sur le site.
+
+  - Fichiers d'exécution de Microsoft (vcruntime140.dll, ucrtbase.dll…) : présents
+    dans le .exe, ils restent soumis aux conditions de Microsoft. Ils ne doivent pas
+    être extraits, modifiés ni réutilisés séparément.
+
+  - Le fichier FISSION_ARENA.py seul ne contient aucun de ces composants : il
+    nécessite seulement pygame installé sur ton ordinateur.
+
+
+6. MARQUES CITÉES
+-----------------
+
+Python, pygame, SDL, PyInstaller, Microsoft et Windows sont des noms ou des marques de
+leurs propriétaires respectifs. FISSION ARENA est un projet indépendant, sans
+affiliation, partenariat ni approbation de leur part.
+
+Ce document est rédigé en français. En cas de divergence avec un résumé publié
+ailleurs sur le site, ce document fait foi, sous réserve des dispositions légales
+impératives applicables.

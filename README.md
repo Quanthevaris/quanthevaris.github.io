@@ -20,7 +20,8 @@ Une mesure d'audience agrégée GoatCounter est configurée, sans profil individ
 ├── 404.html                    Page introuvable (gérée par GitHub Pages)
 ├── site.webmanifest            Manifeste (icônes / thème)
 ├── LICENCES-TIERS.txt          Notices du site (Inter, Lucide / Feather)
-├── LICENSE                     Licence MIT du code, avec son périmètre (texte intégral : assets/pdf/LICENCE-MIT.txt)
+├── LICENSE                     Licence MIT du code seul (texte standard, détecté par GitHub)
+│                                Le périmètre est expliqué dans assets/pdf/LICENCE-MIT.txt
 ├── robots.txt · sitemap.xml    Référencement
 ├── css/style.css               Styles du site (design system complet)
 ├── js/script.js                Menu mobile + année du pied de page
@@ -45,7 +46,10 @@ La licence MIT du code est résumée ici et détaillée dans [`LICENSE`](LICENSE
 - **Jeu FISSION ARENA** (`assets/jeux/FISSION_ARENA.py`, `FISSION_ARENA.exe`, nom, images, sons) :
   © 2026 Quanthevaris, tous droits réservés. Jeu gratuit, mais **pas sous licence MIT** : usage personnel
   libre, redistribution ou diffusion d'une version modifiée seulement avec l'accord de l'auteur.
-  Conditions complètes : <https://quanthevaris.github.io/fission-arena.html#licence>.
+  Conditions complètes : [`assets/jeux/LICENCE-FISSION-ARENA.txt`](assets/jeux/LICENCE-FISSION-ARENA.txt)
+  et <https://quanthevaris.github.io/fission-arena.html#licence>.
+- **Le jeu FISSION ARENA a un fichier de conditions** : `assets/jeux/LICENCE-FISSION-ARENA.txt`,
+  joint au kit de fabrication. Il est publié sur la page du jeu et dans les mentions légales.
 - **Logiciels de tiers contenus dans le `.exe`** (Python, pygame, SDL…) : leurs propres licences,
   reproduites dans `assets/jeux/LICENCES-TIERS.txt`.
 - **Police Inter** : SIL Open Font License (`assets/fonts/Inter-LICENSE.txt`).
@@ -83,6 +87,8 @@ Créer une page dédiée, ajouter une carte à `jeux.html`, une URL au sitemap e
 3. Reporter le nouveau numéro de version et la taille du fichier dans `fission-arena.html`,
    `index.html` et `jeux.html`.
 4. Si la fabrication signale une bibliothèque non décrite, compléter `assets/jeux/LICENCES-TIERS.txt`.
+5. Si `_exe/LIRE-MOI.txt` ou `LICENCE-JEU.txt` change, reconstruire le kit public :
+   `python3 _maintenance/construire-kit-jeu.py` (le workflow vérifie sa cohérence avec `_exe/`).
 
 Le détail est dans [`_exe/README.md`](_exe/README.md).
 

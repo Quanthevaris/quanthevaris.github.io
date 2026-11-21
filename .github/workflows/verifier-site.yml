@@ -41,6 +41,7 @@ jobs:
           python _maintenance/test-securite.py
           python _maintenance/securiser-pages.py --check
           python _maintenance/test-site.py
+          python _maintenance/construire-kit-jeu.py --check
           node --test _audience/test-audience.mjs
           python -m unittest discover -s assets/code/assistant-ia -v
           python _maintenance/test-livraison-ia.py
