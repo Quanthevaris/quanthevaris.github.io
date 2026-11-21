@@ -187,6 +187,35 @@ class SiteTests(unittest.TestCase):
         self.assertIn('ne signifie pas automatiquement exempté de consentement', policy)
         self.assertIn('consentement préalable valable', policy)
 
+    def test_licence_du_code_et_lien_vers_le_depot(self):
+        # GitHub ne détecte la licence que si le texte MIT standard commence le fichier.
+        licence = (ROOT / 'LICENSE').read_text()
+        self.assertTrue(licence.startswith('MIT License\n\nCopyright (c) 2026 Quanthevaris\n'))
+        for extrait in ('Permission is hereby granted, free of charge',
+                        'THE SOFTWARE IS PROVIDED "AS IS"',
+                        'Périmètre — la licence MIT ci-dessus ne couvre que le code source',
+                        'Non couvert', 'FISSION ARENA', 'assets/pdf/LICENCE-MIT.txt'):
+            self.assertIn(extrait, licence)
+        # Le bloc anglais de LICENSE est identique, octet pour octet, à celui joint aux PDF.
+        debut = licence.index('MIT License\n\nCopyright (c) 2026 Quanthevaris')
+        fin = licence.index('SOFTWARE.') + len('SOFTWARE.')
+        self.assertIn(licence[debut:fin], (ROOT / 'assets/pdf/LICENCE-MIT.txt').read_text())
+        # La licence jointe aux deux guides et au kit reste intacte et identique.
+        self.assertEqual((ROOT / 'assets/pdf/LICENCE-MIT.txt').read_bytes(),
+                         (ROOT / 'assets/code/assistant-ia/LICENCE-MIT.txt').read_bytes())
+        depot = 'https://github.com/Quanthevaris/quanthevaris.github.io'
+        for name in ('index.html', 'guides.html', 'assistant-ia.html', 'esquive-en-pixels.html',
+                     'jeux.html', 'fission-arena.html', 'contact.html', 'confidentialite.html',
+                     'mentions-legales.html', '404.html'):
+            with self.subTest(page=name):
+                self.assertIn(f'<a href="{depot}">Code source du site sur GitHub</a>',
+                              self.texts[name])
+        # La portée de la licence est expliquée sur la page des mentions légales.
+        self.assertIn('id="propriete-intellectuelle"', self.texts['mentions-legales.html'])
+        self.assertIn(f'<a href="{depot}/blob/main/LICENSE">LICENSE</a>',
+                      self.texts['mentions-legales.html'])
+        self.assertIn('[`LICENSE`](LICENSE)', (ROOT / 'README.md').read_text())
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
