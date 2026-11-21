@@ -20,6 +20,7 @@ Une mesure d'audience agrégée GoatCounter est configurée, sans profil individ
 ├── 404.html                    Page introuvable (gérée par GitHub Pages)
 ├── site.webmanifest            Manifeste (icônes / thème)
 ├── LICENCES-TIERS.txt          Notices du site (Inter, Lucide / Feather)
+├── LICENSE                     Licence MIT du code, avec son périmètre (texte intégral : assets/pdf/LICENCE-MIT.txt)
 ├── robots.txt · sitemap.xml    Référencement
 ├── css/style.css               Styles du site (design system complet)
 ├── js/script.js                Menu mobile + année du pied de page
@@ -35,6 +36,9 @@ Une mesure d'audience agrégée GoatCounter est configurée, sans profil individ
 ```
 
 ## Licences
+
+La licence MIT du code est résumée ici et détaillée dans [`LICENSE`](LICENSE), à la racine du dépôt
+(périmètre explicite). Le texte intégral joint aux guides reste `assets/pdf/LICENCE-MIT.txt`.
 
 - **Code du site** (HTML, CSS, JavaScript) et programmes des guides « Esquive en Pixels » et « Crée ton assistant IA personnalisé — Python et Ollama » : licence MIT.
 - **Texte et maquette des guides** « Esquive en Pixels » et « Crée ton assistant IA personnalisé — Python et Ollama » : © 2026 Quanthevaris, tous droits réservés.
