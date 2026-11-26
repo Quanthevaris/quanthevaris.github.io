@@ -41,4 +41,4 @@ Les textes retirés de la fiche IA lors des demandes précédentes ne sont pas r
 
 Le README décrit l’ordre de génération. Le guide IA garde sa source Markdown. Le premier guide n’a pas de source de mise en page dans le dépôt : les retouches sont listées et appliquées au PDF original conservé dans Git, sans transformer ses pages en images. Les textes anciens sont retirés, pas simplement masqués.
 
-Publication demandée par l’éditeur après la relecture. Les modifications sont regroupées sur la branche `arena/145162de-quanthevaris-github-io`, puis proposées à `main` par pull request. Les contrôles GitHub et le déploiement Pages permettent de suivre la mise en ligne.
+Publication demandée par l’éditeur après la relecture. Les modifications sont proposées à `main` par pull request. Les contrôles GitHub et le déploiement Pages permettent de suivre la mise en ligne.
