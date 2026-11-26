@@ -95,16 +95,7 @@ Les sorties brutes volumineuses d’audit sont temporaires dans `.cache/securite
 
 ## Nettoyage des branches effectué
 
-Aucune PR ouverte lors du contrôle. Avant chaque suppression, l’API de comparaison a confirmé que le commit de la branche était ancêtre de `main` (`behind_by: 0` dans la comparaison branche…main). Huit anciennes branches entièrement intégrées ont été supprimées sur GitHub :
-
-- `arena/b0a9382c-quanthevaris-github-io`
-- `arena/cfe7536e-quanthevaris-github-io`
-- `arena/0c8c90ae-quanthevaris-github-io`
-- `arena/2a1eae6a-quanthevaris-github-io`
-- `arena/8b1ddbf4-quanthevaris-github-io`
-- `arena/55b4bd4a-quanthevaris-github-io`
-- `arena/145162de-quanthevaris-github-io`
-- `arena/244229b1-quanthevaris-github-io`
+Aucune PR ouverte lors du contrôle. Avant chaque suppression, l’API de comparaison a confirmé que le commit de la branche était ancêtre de `main` (`behind_by: 0` dans la comparaison branche…main). Huit anciennes branches entièrement intégrées ont été supprimées sur GitHub.
 
 Mise à jour du nettoyage : les anciennes branches restantes ont également été supprimées sur demande explicite de l’éditeur. Conserver `main` comme branche publiée et uniquement la branche de session nécessaire pendant une intervention. Aucun changement ni réécriture de l’historique de `main` n’a été effectué.
 

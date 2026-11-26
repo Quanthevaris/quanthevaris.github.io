@@ -2,41 +2,41 @@
   "date": "2026-11-14",
   "repository": "Quanthevaris/quanthevaris.github.io",
   "main_sha": "0a4c9ce3011a52a83fa4bdbe24e03c342d153c62",
-  "local_session_branch_preserved": "arena/b0a9382c-quanthevaris-github-io",
+  "local_session_branch_preserved": "nom retiré",
   "branches_before": 7,
   "branches": [
     {
-      "name": "arena/ba50916e-quanthevaris-github-io",
+      "name": "nom retiré",
       "sha": "d394453af005d4018eaeb5836f9dd26a8a2318be",
       "all_commits_reachable_from_main": true,
       "deleted": true
     },
     {
-      "name": "arena/bfbc75f3-quanthevaris-github-io",
+      "name": "nom retiré",
       "sha": "bcc0ab575932e3f162ed621e9026d0af45949f66",
       "all_commits_reachable_from_main": true,
       "deleted": true
     },
     {
-      "name": "arena/c8f3cf47-quanthevaris-github-io",
+      "name": "nom retiré",
       "sha": "a874a53c34dae6bccb465f171847b0c80e0d7e72",
       "all_commits_reachable_from_main": true,
       "deleted": true
     },
     {
-      "name": "arena/ce704f52-quanthevaris-github-io",
+      "name": "nom retiré",
       "sha": "f886626a1d78fcd4c956e2980bfc4d0198686038",
       "all_commits_reachable_from_main": true,
       "deleted": true
     },
     {
-      "name": "arena/9abb3b59-quanthevaris-github-io",
+      "name": "nom retiré",
       "sha": "0bf4316f068494d38ede8a58482ddadd178ad5f2",
       "all_commits_reachable_from_main": true,
       "deleted": true
     },
     {
-      "name": "arena/13f38a62-quanthevaris-github-io",
+      "name": "nom retiré",
       "sha": "e6ffbf2d1fc6b2526e3c67d4cfc09b21e5af6477",
       "all_commits_reachable_from_main": true,
       "deleted": true
@@ -47,5 +47,6 @@
       "name": "main",
       "sha": "0a4c9ce3011a52a83fa4bdbe24e03c342d153c62"
     }
-  ]
+  ],
+  "note": "Noms des anciennes branches retirés ; empreintes conservées pour le suivi."
 }

@@ -136,16 +136,16 @@ Si tu changes le code du kit ou la source du guide après relecture, régénère
 
 ## 8. Publier les changements du site
 
-La branche de cette session est **arena/b0a9382c-quanthevaris-github-io**. Les corrections y sont préparées ; elles ne sont pas encore en ligne. Quand l’essai réel et la relecture sont satisfaisants :
+Pour publier de futures corrections, après l’essai réel et la relecture :
 
-1. Fais enregistrer et publier cette branche de travail, puis ouvrir une pull request vers `main` (ou utilise l’action de publication proposée par Arena). Il n’est pas nécessaire de créer une autre branche.
+1. Fais enregistrer et publier cette branche de travail, puis ouvrir une pull request vers `main`. Il n’est pas nécessaire de créer une autre branche.
 2. Relis le différentiel : le site, le nouveau guide, les deux copies PDF, le kit et les images doivent être inclus ensemble. Les dossiers `.venv`, `node_modules`, `.cache` et les modèles ne doivent pas être publiés.
 3. Après vérifications, fusionne la pull request dans `main`.
 4. Attends la réussite du déploiement **GitHub Pages** dans l’onglet Actions.
 5. Ouvre le site public sans cache. Vérifie l’accueil, la fiche Assistant IA, le PDF, le ZIP et le guide HTML. Les deux anciennes adresses PDF doivent servir la nouvelle édition.
 6. Ne supprime la branche de cette session qu’une fois son travail intégré et la session terminée ; tu pourras alors revenir à une seule branche distante `main`.
 
-**Aucune de ces étapes de publication n’a été exécutée automatiquement pendant cette intervention.** Tu peux me demander de préparer la pull request une fois le test réel terminé.
+Vérifie l’état de la pull request et du déploiement avant de considérer une modification comme publiée.
 
 ## 9. Vérification restante issue de l’audit : GoatCounter
 
