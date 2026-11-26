@@ -212,8 +212,25 @@ class SiteTests(unittest.TestCase):
                               self.texts[name])
         # La portée de la licence est expliquée sur la page des mentions légales.
         self.assertIn('id="propriete-intellectuelle"', self.texts['mentions-legales.html'])
-        self.assertIn(f'<a href="{depot}/blob/main/LICENSE">LICENSE</a>',
+        self.assertIn('<a href="/assets/pdf/LICENSE-MIT-CODE.txt" download>LICENSE-MIT-CODE.txt</a>',
                       self.texts['mentions-legales.html'])
+        self.assertEqual((ROOT / 'assets/pdf/LICENSE-MIT-CODE.txt').read_bytes(),
+                         (ROOT / 'LICENSE').read_bytes())
+
+    def test_telechargement_des_licences_pages_principales(self):
+        for name in ('index.html', 'guides.html', 'assistant-ia.html', 'esquive-en-pixels.html',
+                     'jeux.html', 'fission-arena.html', 'contact.html', 'confidentialite.html',
+                     'mentions-legales.html', '404.html'):
+            for attrs, target in re.findall(r'<a\s+([^>]*href="([^"]*(?:LICENCE|LICENSE)[^"]*)"[^>]*)>',
+                                            self.texts[name], re.I):
+                with self.subTest(page=name, lien=target):
+                    self.assertIn('download', attrs)
+                    self.assertTrue(target.startswith('/'))
+                    self.assertTrue(target.endswith('.txt'))
+                    self.assertTrue((ROOT / target.lstrip('/')).is_file())
+        llama = (ROOT / 'assets/licences/LLAMA-3.2-LICENCE.txt').read_text()
+        self.assertIn('LLAMA 3.2 COMMUNITY LICENSE AGREEMENT', llama)
+        self.assertIn('Acceptable Use Policy', llama)
         self.assertIn('[`LICENSE`](LICENSE)', (ROOT / 'README.md').read_text())
 
     def test_coherence_des_licences_du_depot(self):
